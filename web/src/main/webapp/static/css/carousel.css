@@ -1,0 +1,244 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+
+ .header-container{
+  margin-top: 70px;
+  margin-left: 0px;
+  margin-bottom: 5px;
+}
+
+.header-container .col-md-3 img {
+  margin-left: 90px;
+}
+
+/*首页电影小卡片*/
+.movie-card .img-rounded {
+  border-radius: 3px;
+}
+
+.movie-card .thumbnail {
+  display: block;
+  padding: 0px;
+  margin-bottom: 0px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  width: 150px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+
+/*首页导航左边块**/
+.bs-callout{padding:2px 2px 2px 10px; margin-bottom:15px;border-left:1px solid #eee;border-left-width:5px;border-radius:3px}
+.bs-callout h4{margin-top:2;margin-bottom:5px}
+.bs-callout p:last-child{margin-bottom:0}
+.bs-callout code{border-radius:3px}
+.bs-callout+.bs-callout{margin-top:-5px}
+.bs-callout-danger{border-left-color:#d9534f}
+.bs-callout-danger h3{color:#d9534f}
+.bs-callout-danger h3 a {
+  font-size: 18px;
+  color:#333;
+}
+
+.bs-callout-warning{border-left-color:#f0ad4e}
+.bs-callout-warning h4{color:#f0ad4e}
+.bs-callout-info{border-left-color:#5bc0de}
+.bs-callout-info h4{color:#5bc0de}
+
+/**鼠标移入或停在上面显示内容*/
+
+nav-pills > li > a:hover,
+nav-pills > li > a:focus {
+  .tab-content > .tab-pane {
+    display: none;
+  }
+  .tab-content > .active {
+    display: block;
+  }
+}
+
+/*图片大小*/
+.tab-pic-md-1 > div > a img {
+  width: 150px;
+  height: 85px; 
+}
+.tab-pic-md-2 > div > a img {
+  width: 190px;
+  height: 270px; 
+}
+
+/**喜欢这部电影的人也喜允*/
+.guest-like-movies .col-md-2 {
+  width: 20%;
+}
+/*图片变亮*/
+.row > div > a:hover img,
+.row > div > a:focus img{
+    opacity:.8;
+}
+
+.row-pic-space {
+  margin-top: 8px;
+}
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+.navbar {
+  margin-bottom: 0px;
+}
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #ef5b30;
+  background-color: transparent;
+}
+
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  margin-left: 50px;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  width: 100%;
+  padding: 0px;
+}
+.navbar-wrapper .navbar {
+  padding: 0px;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 500px;
+  margin-bottom: 10px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 40px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 0px;
+  }
+
+  .navbar-wrapper .container {
+    padding: 0px;
+  }
+
+  .navbar-wrapper .navbar {
+    padding: 0px;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    margin-top: 0px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+
+  .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: 50px;
+  }
+  
+  /**喜欢这部电影的人也喜允*/
+  .guest-like-movies .col-md-2 {
+    width: 20%;
+  }
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}

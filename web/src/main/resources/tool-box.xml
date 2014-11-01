@@ -1,0 +1,15 @@
+<tools>
+	<toolbox scope="application">
+		<tool>
+			<key>DateTool</key>
+			<class>org.apache.velocity.tools.generic.DateTool</class>
+		</tool>
+	</toolbox>
+	
+	<toolbox scope="application">
+		<tool>
+			<key>escapeTool</key>
+			<class>org.apache.commons.lang.StringEscapeUtils</class>
+		</tool>
+	</toolbox>
+</tools>

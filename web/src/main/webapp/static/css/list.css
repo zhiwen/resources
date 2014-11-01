@@ -1,0 +1,78 @@
+.list-nav-md-1 > li > a {
+	padding : 5px 5px;
+}
+
+.list-nav-md-1 > li:first-child > a {
+	font-size: 18px;
+	color: #000;
+	border: 0px;
+}
+.list-nav-md-1 > li:first-child > a:hover{
+	color: #000;
+}
+
+.list-nav-md-1 > li:first-child > a {
+  border-radius: 0px;
+}
+
+.list-nav-md-1 > li:first-child > a,
+.list-nav-md-1 > li:first-child > a:hover,
+.list-nav-md-1 > li:first-child > a:focus {
+  color: #000;
+  background-color: #fff;
+}
+
+
+/**列表页电影标题*/
+.media-heading {
+	margin-top: 2px;
+	margin-bottom: 15px;
+}
+
+/*douban的星级**/
+.bigstar50,.bigstar45,.bigstar40,.bigstar35,.bigstar30,.bigstar25,.bigstar20,.bigstar15,.bigstar10,.bigstar05,.bigstar00 
+{
+  display:inline-block;*display:inline;zoom:1;width:75px;height:14px;
+  background:url("http://img3.douban.com/f/shire/86fa85a1fe1a9cf55b804c871cc7a79a73f6bf73/pics/movie/bigstars.gif") no-repeat;
+  margin:1px 0 0 0;overflow:hidden
+}
+
+.bigstar50{background-position:0 0}.bigstar45{background-position:0 -14px}.bigstar40{background-position:0 -28px}
+.bigstar35{background-position:0 -42px}.bigstar30{background-position:0 -56px}.bigstar25{background-position:0 -70px}
+.bigstar20{background-position:0 -84px}.bigstar15{background-position:0 -98px}.bigstar10{background-position:0 -112px}
+.bigstar05{background-position:0 -126px}.bigstar00{background-position:0 -140px}
+
+.allstar50,.allstar50,.allstar45,.allstar40,.allstar35,.allstar30,.allstar25,.allstar20,.allstar15,.allstar10,.allstar05
+{
+  display:inline-block;*display:inline;zoom:1;width:55px;height:11px;
+  background:url("http://img3.douban.com/f/shire/5cb30ab98d8deb43ff321ef2c64493cbd2d6c057/pics/movie/midstars.gif") no-repeat;
+  margin:0 3px 0 0;overflow:hidden
+}
+.allstar50{background-position:0 0}.allstar45{background-position:0 -11px}.allstar40{background-position:0 -22px}.allstar35{background-position:0 -33px}
+.allstar30{background-position:0 -44px}.allstar25{background-position:0 -55px}.allstar20{background-position:0 -66px}.allstar15{background-position:0 -77px}
+.allstar10{background-position:0 -88px}.allstar05{background-position:0 -99px}
+.starstop,.stars{display:inline-block;*display:inline;zoom:1;width:45px;height:9px;
+  background:url("http://img3.douban.com/f/shire/ef82a60983df6252e9a43fd8d051347e89aa6753/pics/movie/smlstars.gif") no-repeat;
+  margin:3px 3px 0 0;overflow:hidden}.stars5{background-position:0 0}.stars4{background-position:0 -9px}.stars3{background-position:0 -18px}
+.stars2{background-position:0 -27px}.stars1{background-position:0 -36px}
+
+.rating_num{color:red;font-size:14px;line-height:18px;padding:0 0 0 8px}
+.rating_nums {
+	color: #ff5138;
+	font-size: 10px;
+	padding: 0 5px 0 0;
+}
+
+
+/**详情页标签*/
+.move-tags > li > a {
+	padding: 2px;
+}
+
+.move-tags > li > a:hover,
+.move-tags > li > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+

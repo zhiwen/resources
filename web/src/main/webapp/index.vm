@@ -1,0 +1,455 @@
+#parse("common/header.vm")
+
+<body>
+	#parse("common/navigation.vm")
+	#parse("common/carousel_md.vm")
+
+	<div class="container marketing">
+      <!-- Nav tabs -->
+      <div class="bs-callout bs-callout-danger">
+        <ul class="nav nav-pills">
+          <li><a data-toggle="tab" data-url="http://www.qq.com" href="#hot-movie">热门电影 &raquo;</a></li>
+          <li><a data-toggle="tab" data-url="http://www.baidu.com" href="#china-movie">中国</a></li>
+          <li><a data-toggle="tab" data-url="http://www.qq.com" href="#hg-movie">韩国</a></li>
+          <li><a data-toggle="tab" data-url="http://www.qq.com" href="#usa-movie">美国</a></li>
+          <li><a data-toggle="tab" data-url="http://www.bing.com" href="#usa-movie">更多 &raquo;</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-10">
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="hot-movie">
+              <div class="row row-pic-space tab-pic-md-1">
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-pic-space">
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <div class="tab-pane" id="china-movie">..1.</div>
+            <div class="tab-pane" id="hg-movie">..2.</div>
+            <div class="tab-pane" id="usa-movie">..3.</div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="list-group">
+            <a href="#" class="list-group-item active">热播电影 &raquo;</a>
+            <a href="#" class="list-group-item list-group-item-danger">Dapibus ac  in</a>
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
+            <a href="#" class="list-group-item list-group-item-info">Vestibulum at eros</a>
+            <a href="#" class="list-group-item list-group-item-success">Vestibulum at eros</a>
+          </div>
+        </div>
+      </div><!-- /.row -->
+
+      <!-- Nav tabs -->
+      <div class="bs-callout bs-callout-danger">
+        <ul class="nav nav-pills" role="tablist" id="nav-tab-pic">
+          <li class="active"><a href="#home" data-url="http://www.baidu.com" role="tab" data-toggle="tab">精选美图</a></li>
+          <li><a href="#superStart" role="tab" data-url="http://www.baidu.com" data-toggle="tab">明星</a></li>
+          <li><a href="#beautifulGirl" role="tab" data-url="http://www.baidu.com" data-toggle="tab">美女</a></li>
+          <li><a href="#picWall" role="tab" data-url="http://www.baidu.com" data-toggle="tab">壁纸</a></li>
+          <li><a href="#funny" role="tab" data-url="http://www.baidu.com" data-toggle="tab">搞笑</a></li>
+          <li><a href="#animationPic" role="tab" data-url="http://www.baidu.com" data-toggle="tab">动漫</a></li>
+          <li><a href="#" role="tab" data-url="http://www.qq.com" data-toggle="tab">更多 &raquo;</a></li>
+        </ul>
+      </div>
+      <div class="row featurette">
+        <div class="col-md-12">
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+              <div class="row row-pic-space tab-pic-md-2">
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/ac4bd11373f08202d5f4f94a48fbfbedab641b64.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/d62a6059252dd42a0ccc1826013b5bb5c8eab871.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/0823dd54564e9258c2ee3dcd9f82d158ccbf4e3e.jpg">
+                  </a>
+                  
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/e824b899a9014c08e87288ab097b02087bf4f477.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images//fsdctgsjfkkkk.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/d1a20cf431adcbef3764647cafaf2edda3cc9f73.jpg">
+                  </a>
+                </div>
+              </div>
+              <div class="row row-pic-space tab-pic-md-2">
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/ac4bd11373f08202d5f4f94a48fbfbedab641b64.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/562c11dfa9ec8a13a55f007af503918fa1ecc0e7.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/0823dd54564e9258c2ee3dcd9f82d158ccbf4e3e.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/77c6a7efce1b9d16bb83e9a3f1deb48f8d5464af.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/6c224f4a20a446235c1c73119b22720e0df3d7eb.jpg">
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="${staticDomain}/images/d1a20cf431adcbef3764647cafaf2edda3cc9f73.jpg">
+                  </a>
+                </div>
+              </div>
+            </div> 
+            <div class="tab-pane" id="superStart">..1.</div>
+            <div class="tab-pane" id="beautifulGirl">..2.</div>
+            <div class="tab-pane" id="picWall">..3.</div>
+            <div class="tab-pane" id="funny">..4.</div>
+            <div class="tab-pane" id="animationPic">..5.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- taobao adv -->
+      <div class="row row-pic-space">
+        <div class="col-md-12">
+          <iframe src="http://biz5.sandai.net/portal/tempupload/20140521165206/index.html" frameborder="no" scrolling="no" style="border:0;width:1000px;height:90px;text-align:center;margin:0 auto;float:left;"></iframe>
+          <a href="">
+            <img src="http://20141024.biz5.sandai.net/portal/image/33/n1411357320333.jpg" style="margin-left:5px; width: 135px; height: 90px;">
+          </a>
+        </div>
+      </div>
+
+	  <!-- 视频 -->
+      <p class="featurette-divider"></p>
+      <!-- Nav tabs -->
+      <div class="bs-callout bs-callout-danger">
+        <ul class="nav nav-pills">
+          <li><a data-toggle="tab" data-url="http://www.qq.com" href="#hot-movie">热门电影 &raquo;</a></li>
+          <li><a data-toggle="tab" data-url="http://www.baidu.com" href="#china-movie">中国</a></li>
+          <li><a data-toggle="tab" data-url="http://www.qq.com" href="#hg-movie">韩国</a></li>
+          <li><a data-toggle="tab" data-url="http://www.qq.com" href="#usa-movie">美国</a></li>
+          <li><a data-toggle="tab" data-url="http://www.bing.com" href="#usa-movie">更多 &raquo;</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-10">
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="hot-movie">
+              <div class="row row-pic-space tab-pic-md-1">
+                <div class="col-md-2">
+                  <a href="#">
+                    <img src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-pic-space">
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <a href="#">
+                    <img class="img-rounded" src="http://i2.kankan.kanimg.com/gallery2/block/2014/10/23/ac3f52b71e47c5c3043c03d8f0458b46.jpg">
+                  </a>
+                  <div class="caption">
+                    <h6>
+                      <a href="#">hahahahah</a>
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <div class="tab-pane" id="china-movie">..1.</div>
+            <div class="tab-pane" id="hg-movie">..2.</div>
+            <div class="tab-pane" id="usa-movie">..3.</div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="list-group">
+            <a href="#" class="list-group-item active">最新视频 &raquo;</a>
+            <a href="#" class="list-group-item list-group-item-danger">Dapibus ac  in</a>
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
+            <a href="#" class="list-group-item list-group-item-info">Vestibulum at eros</a>
+            <a href="#" class="list-group-item list-group-item-success">Vestibulum at eros</a>
+          </div>
+        </div>
+      </div><!-- /.row -->
+
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+
+      #parse("common/footer.vm")
+
+    </div><!-- /.container -->
+
+	#parse("common/script.vm")
+	<script type="text/javascript">
+      /**
+       * 鼠标划过就展开子菜单，免得需要点击才能展开
+       */
+      $(document).on('mouseover.bs.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+      })
+      $(document).on('click.bs.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
+        e.preventDefault();
+        var url = $(this)[0].attributes['data-url'].value;
+        if (url == "" || url == undefined) {
+          return false;
+        };
+        window.open(url);
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config description="自动配置">
+	
+	<group name="host">
+		<property name="domain" defaultValue="http://resource.com" description="域名" />
+		<property name="static.domain" defaultValue="http://static.resource.com" description="static-resource" />
+	</group>
+	
+	<group name="path">
+		<property name="template.path" defaultValue="/Users/zhiwenmizw/work/movie/web/src/main/webapp" description="template-path" />
+		<property name="static.path" defaultValue="/Users/zhiwenmizw/work/movie/web/src/main/webapp/static" description="js/css-path" />
+	</group>	
+	<group name="log-config">
+		<property name="log.home" defaultValue="/Users/zhiwenmizw/work/movie/output" description="log-output-path" />
+	</group>
+	
+	<group name="db-config">
+		<property name="jdbc.url" defaultValue="jdbc:mysql://127.0.0.1:3306/resources?characterEncoding=utf8" description="dburl" />
+		<property name="jdbc.username" defaultValue="resources" description="数据庘用户名" />
+		<property name="jdbc.password" defaultValue="resources" description="数据庘密码" />
+	</group>
+	
+	<script>
+		<generate template="config.properties.vm" destfile="WEB-INF/config.properties" charset="UTF-8" />		
+		<generate template="logback.xml" destfile="WEB-INF/logback.xml" charset="UTF-8" />
+	</script>
+	
+</config>
