@@ -55,6 +55,8 @@ public class IndexManager {
          * </pre>
          */
         List<ResourceInfoDO> resourceInfoList = resourceInfoService.getOrderResourceInfoByViews(0, BizType.MOVIE, 0, 10);
+
+        model.addAttribute("resourceInfoList", resourceInfoList);
         return "index";
     }
 }

@@ -8,7 +8,7 @@
            http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc.xsd
        "
 	default-autowire="byName">
-
+ 
 	<context:annotation-config/>
 	
 	<context:property-placeholder ignore-resource-not-found="false" file-encoding="utf-8" location="/WEB-INF/config.properties"/>

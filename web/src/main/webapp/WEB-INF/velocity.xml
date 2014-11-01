@@ -10,10 +10,9 @@
 	<!-- velocity -->
 	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="preferFileSystemAccess" value="false" />
+		<property name="resourceLoaderPath" value="${template.path}" />
 		<property name="velocityProperties">
 			<map>
-				<entry key="resource.loader" value="file"/>
-				<entry key="file.resource.loader.path" value="${template.path}"/>
 				<entry key="velocimacro.library.autoreload" value="true" />
 				<entry key="file.resource.loader.cache" value="false" />
 				<entry key="input.encoding" value="UTF-8" />

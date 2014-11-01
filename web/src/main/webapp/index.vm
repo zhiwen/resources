@@ -1,5 +1,5 @@
 #parse("common/header.vm")
-
+$resourceInfoList
 <body>
 	#parse("common/navigation.vm")
 	#parse("common/carousel_md.vm")
@@ -182,65 +182,65 @@
               <div class="row row-pic-space tab-pic-md-2">
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/ac4bd11373f08202d5f4f94a48fbfbedab641b64.jpg">
+                    <img src="${staticDomain}/static/images/ac4bd11373f08202d5f4f94a48fbfbedab641b64.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/d62a6059252dd42a0ccc1826013b5bb5c8eab871.jpg">
+                    <img src="${staticDomain}/static/images/d62a6059252dd42a0ccc1826013b5bb5c8eab871.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/0823dd54564e9258c2ee3dcd9f82d158ccbf4e3e.jpg">
+                    <img src="${staticDomain}/static/images/0823dd54564e9258c2ee3dcd9f82d158ccbf4e3e.jpg">
                   </a>
                   
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/e824b899a9014c08e87288ab097b02087bf4f477.jpg">
+                    <img src="${staticDomain}/static/images/e824b899a9014c08e87288ab097b02087bf4f477.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images//fsdctgsjfkkkk.jpg">
+                    <img src="${staticDomain}/static/images//fsdctgsjfkkkk.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/d1a20cf431adcbef3764647cafaf2edda3cc9f73.jpg">
+                    <img src="${staticDomain}/static/images/d1a20cf431adcbef3764647cafaf2edda3cc9f73.jpg">
                   </a>
                 </div>
               </div>
               <div class="row row-pic-space tab-pic-md-2">
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/ac4bd11373f08202d5f4f94a48fbfbedab641b64.jpg">
+                    <img src="${staticDomain}/static/images/ac4bd11373f08202d5f4f94a48fbfbedab641b64.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/562c11dfa9ec8a13a55f007af503918fa1ecc0e7.jpg">
+                    <img src="${staticDomain}/static/images/562c11dfa9ec8a13a55f007af503918fa1ecc0e7.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/0823dd54564e9258c2ee3dcd9f82d158ccbf4e3e.jpg">
+                    <img src="${staticDomain}/static/images/0823dd54564e9258c2ee3dcd9f82d158ccbf4e3e.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/77c6a7efce1b9d16bb83e9a3f1deb48f8d5464af.jpg">
+                    <img src="${staticDomain}/static/images/77c6a7efce1b9d16bb83e9a3f1deb48f8d5464af.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/6c224f4a20a446235c1c73119b22720e0df3d7eb.jpg">
+                    <img src="${staticDomain}/static/images/6c224f4a20a446235c1c73119b22720e0df3d7eb.jpg">
                   </a>
                 </div>
                 <div class="col-md-2">
                   <a href="#">
-                    <img src="${staticDomain}/images/d1a20cf431adcbef3764647cafaf2edda3cc9f73.jpg">
+                    <img src="${staticDomain}/static/images/d1a20cf431adcbef3764647cafaf2edda3cc9f73.jpg">
                   </a>
                 </div>
               </div>
