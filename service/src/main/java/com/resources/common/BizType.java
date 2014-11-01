@@ -21,7 +21,15 @@ public enum BizType {
     /**
      * 帖子类型
      */
-    THREAD(4);
+    THREAD(4),
+    /**
+     * 游戏
+     */
+    GAME(5),
+    /**
+     * 软件
+     */
+    SOFTWARE(6);
 
     private final int type;
 

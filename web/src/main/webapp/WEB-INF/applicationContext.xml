@@ -36,6 +36,8 @@
 	<mvc:resources location="${static.path}/css/" mapping="/css/**" />
 	<mvc:resources location="${static.path}/js/" mapping="/js/**" />
 	<mvc:resources location="${static.path}/images/" mapping="/images/**" />
+	<mvc:resources location="${static.path}/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="${static.path}/assets/" mapping="/assets/**" />
 	
 	<import resource="velocity.xml" />
 	<import resource="classpath:service.xml" />
