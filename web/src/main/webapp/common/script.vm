@@ -1,7 +1,26 @@
-<!-- Bootstrap core JavaScript================================================== -->
+<!-- Bootstrap core JavaScript
+================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="${staticDomain}/static/js/jquery.min.js"></script>
-<script src="${staticDomain}/static/js/bootstrap.js"></script>
-<script src="${staticDomain}/static/js/docs.min.js"></script>
+<script src="${staticDomain}/js/jquery.min.js"></script>
+<script src="${staticDomain}/js/bootstrap.js"></script>
+<script type="text/javascript">
+  /**
+   * 鼠标划过就展开子菜单，免得需要点击才能展开
+   */
+  $(document).on('mouseover.bs.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })
+  $(document).on('click.bs.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
+    e.preventDefault();
+    var url = $(this)[0].attributes['data-url'].value;
+    if (url == "" || url == undefined) {
+      return false;
+    };
+    window.open(url);
+  })
+
+</script>
+<script src="${staticDomain}/js/docs.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="${staticDomain}/static/js/ie10-viewport-bug-workaround.js"></script>
+<script src="${staticDomain}/js/ie10-viewport-bug-workaround.js"></script>

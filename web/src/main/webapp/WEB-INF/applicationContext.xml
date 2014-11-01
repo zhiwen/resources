@@ -33,7 +33,9 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<mvc:resources location="${static.path}" mapping="/static/**" />
+	<mvc:resources location="${static.path}/css/" mapping="/css/**" />
+	<mvc:resources location="${static.path}/js/" mapping="/js/**" />
+	<mvc:resources location="${static.path}/images/" mapping="/images/**" />
 	
 	<import resource="velocity.xml" />
 	<import resource="classpath:service.xml" />
