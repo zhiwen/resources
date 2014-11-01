@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.VelocityContext;
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
 import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 
@@ -27,7 +25,9 @@ import com.resources.service.ResourceInfoService;
 @Controller
 public class IndexManager {
 
-    private final static Logger  log = LoggerFactory.getLogger(IndexManager.class);
+    private final static Logger  log              = LoggerFactory.getLogger(IndexManager.class);
+
+    public final static String   buildedIndexPath = "$builded_index_path";
 
     @Resource
     private ResourceInfoService  resourceInfoService;
@@ -41,14 +41,8 @@ public class IndexManager {
     @Resource
     private VelocityViewResolver viewResolver;
 
-    @Resource
-    HttpServletResponse          response;
-
     @RequestMapping(value = { "/", "/index", "/index.htm", "/index.html" }, method = { RequestMethod.GET })
-    public @ResponseBody
-    String goHome() {
-        log.error(response.toString());
-
+    public String goHome() {
         return "index";
     }
 
@@ -57,7 +51,7 @@ public class IndexManager {
      * 
      * @return
      */
-    @RequestMapping(value = "/index_build", method = { RequestMethod.GET })
+    @RequestMapping(value = "/index_source", method = { RequestMethod.GET })
     public String buildHome(Model model) {
 
         /**
@@ -88,11 +82,13 @@ public class IndexManager {
         model.addAttribute("hotGameDLResList", hotGameDLResList);
         model.addAttribute("hotSoftwareDLResList", hotSoftwareDLResList);
 
+        model.addAttribute(buildedIndexPath, "/Users/zhiwenmizw/work/resources/output/index.vm");
+
         VelocityContext context = new VelocityContext();
 
         viewResolver.getAttributesMap();
 
-        return "index";
+        return "index_source";
     }
 
     protected void renderPage(VelocityContext context) {

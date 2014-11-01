@@ -24,8 +24,9 @@
 	</bean>
 
 	<bean id="escapeTool" class="org.apache.commons.lang.StringEscapeUtils" />
-	
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+
+	<bean id="viewResolver" class="com.resources.web.controller.index.IndexVelocityViewResolver">
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver"> -->
 		<property name="cache" value="false" />
 		<property name="prefix" value="" />
 		<property name="suffix" value=".vm" />
