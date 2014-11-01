@@ -8,6 +8,8 @@
 
 	<context:component-scan base-package="com.resources.service" />
 	
+	<context:property-placeholder location="com/resources/dal/mapper/test/config.properties"/>
+
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 		<!-- 基本属性 url、user、password -->

@@ -1,11 +1,13 @@
 package com.resources.dal.module;
 
+import java.util.Date;
+
 /***
  * 影片描述
  * 
  * @author zhiwenmizw
  */
-public class MovieDO {
+public class MovieDO extends BaseDO {
 
     /**
      * 资源的唯一key
@@ -79,11 +81,9 @@ public class MovieDO {
     // @Column(name = "star_level")
     private int    starLevel;
 
-    // @Column(name = "created_time", nullable = false)
-    private long   createdTime;
+    private Date   createdTime;
 
-    // @Column(name = "modified_time", nullable = false)
-    private long   modifiedTime;
+    private Date   modifiedTime;
 
     public long getResId() {
         return resId;
@@ -181,19 +181,23 @@ public class MovieDO {
         this.starLevel = starLevel;
     }
 
-    public long getCreatedTime() {
+    @Override
+    public Date getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(long createdTime) {
+    @Override
+    public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
 
-    public long getModifiedTime() {
+    @Override
+    public Date getModifiedTime() {
         return modifiedTime;
     }
 
-    public void setModifiedTime(long modifiedTime) {
+    @Override
+    public void setModifiedTime(Date modifiedTime) {
         this.modifiedTime = modifiedTime;
     }
 
