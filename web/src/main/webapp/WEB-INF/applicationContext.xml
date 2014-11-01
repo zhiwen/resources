@@ -8,10 +8,10 @@
            http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc.xsd
        "
 	default-autowire="byName">
-	
-	<context:property-placeholder file-encoding="utf-8" location="/WEB-INF/config.properties"/>
 
 	<context:annotation-config/>
+	
+	<context:property-placeholder ignore-resource-not-found="false" file-encoding="utf-8" location="/WEB-INF/config.properties"/>
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -35,7 +35,7 @@
 
 	<mvc:resources location="${static.path}" mapping="/static/**" />
 	
-	<import resource="/WEB-INF/velocity.xml" />
+	<import resource="velocity.xml" />
 	<import resource="classpath:service.xml" />
 
 </beans>

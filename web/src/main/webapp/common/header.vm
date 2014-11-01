@@ -25,4 +25,5 @@
 
     <!-- Custom styles for this template -->
     <link href="${static.domain}/static/css/carousel.css" rel="stylesheet">
+		${escapeTool}
   </head>

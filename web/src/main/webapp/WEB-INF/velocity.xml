@@ -10,7 +10,6 @@
 	<!-- velocity -->
 	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="preferFileSystemAccess" value="false" />
-		<!-- <property name="resourceLoaderPath" value="${template.path}" /> -->
 		<property name="velocityProperties">
 			<map>
 				<entry key="resource.loader" value="file"/>
