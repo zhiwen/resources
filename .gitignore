@@ -1,6 +1,10 @@
+service/target/*
+spider/target/*
+web/target/*
 
 output/*
 
+service/.project
 service/.classpath
 
 *.prefs
