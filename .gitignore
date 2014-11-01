@@ -1,0 +1,14 @@
+
+output/myApp.log-2014-10-31.log
+
+service/.classpath
+
+*.prefs
+
+spider/.classpath
+
+spider/.project
+
+web/.classpath
+
+web/.project
