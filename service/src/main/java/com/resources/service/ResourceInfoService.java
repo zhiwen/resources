@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.resources.dal.mapper.ResourceInfoMapper;
 import com.resources.dal.module.ResourceInfoDO;
 
-@Service("resourceInfoService")
+@Service
 public class ResourceInfoService {
 
     @Resource

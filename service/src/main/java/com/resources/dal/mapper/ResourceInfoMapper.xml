@@ -30,7 +30,19 @@
 	
 	
 	<update id="updateResourceInfo" parameterType="resourceInfoDO">
-		update resource_info set name = #{name} where id = #{id}
+		update resource_info
+		<set>
+			<if test="title != null">title=#{title},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="cid != 0">cid=#{cid},</if>
+			<if test="bizType != 0">biz_type=#{bizType},</if>
+			<if test="attachment != null">attachment=#{attachment},</if>
+			<if test="viewCounts != 0">view_counts=#{viewCounts},</if>
+			<if test="downloadCounts != 0">download_counts=#{downloadCounts},</if>
+			<if test="status != 0">status=#{status},</if>
+			<if test="modifiedTime != null">modified_time=#{modifiedTime},</if>		
+		</set>
+		where id = #{id}
 	</update>
 	
 	
@@ -43,7 +55,7 @@
 	<!-- 查询所有记录 -->
 	<select id="getResourceInfoByIds" resultType="resourceInfoDO">
 		select * from resource_info where id in
-		<foreach collection="list" item="item" open="(" close=")">
+		<foreach collection="list" item="item" separator="," open="(" close=")">
 			#{item}
 		</foreach>
 	</select>

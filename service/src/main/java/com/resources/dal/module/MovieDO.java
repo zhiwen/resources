@@ -1,6 +1,5 @@
 package com.resources.dal.module;
 
-import java.util.Date;
 
 /***
  * 影片描述
@@ -80,10 +79,6 @@ public class MovieDO extends BaseDO {
      */
     // @Column(name = "star_level")
     private int    starLevel;
-
-    private Date   createdTime;
-
-    private Date   modifiedTime;
 
     public long getResId() {
         return resId;
@@ -180,25 +175,4 @@ public class MovieDO extends BaseDO {
     public void setStarLevel(int starLevel) {
         this.starLevel = starLevel;
     }
-
-    @Override
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    @Override
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    @Override
-    public Date getModifiedTime() {
-        return modifiedTime;
-    }
-
-    @Override
-    public void setModifiedTime(Date modifiedTime) {
-        this.modifiedTime = modifiedTime;
-    }
-
 }

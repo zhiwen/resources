@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.resources.dal.mapper.MovieMapper">
+	
+	<sql id="allColumns">
+		res_id,cover,director,screenwriter,performer,cid,country,language,show_time,movie_length,star_level,created_time,modified_time
+	</sql>
+	
+	<resultMap type="com.resources.dal.module.MovieDO" id="movieDO">
+		<result property="resId" column="res_id"/>
+		<result property="cover" column="cover"/>
+		<result property="director" column="director"/>
+		<result property="screenwriter" column="screenwriter"/>
+		<result property="performer" column="performer"/>
+		<result property="cid" column="cid"/>
+		<result property="country" column="country"/>
+		<result property="language" column="language"/>
+		
+		<result property="showTime" column="show_time"/>
+		<result property="movieLength" column="movie_length"/>
+		<result property="starLevel" column="star_level"/>
+		
+		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+		<result property="modifiedTime" column="modified_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	</resultMap>
+
+	<insert id="addMovie" parameterType="movieDO" useGeneratedKeys="true" keyProperty="id">
+		insert into resource_movie
+		(res_id,cover,director,screenwriter,performer,cid,country,language,show_time,movie_length,star_level,created_time,modified_time) 
+		values(#{resId},#{cover},#{director},#{screenwriter},#{performer},#{cid},#{country},#{language},
+		#{showTime},#{movieLength},#{starLevel},#{createdTime},#{modifiedTime})
+	</insert>
+	
+	<delete id="deleteMovie" parameterType="long">
+		delete from resource_movie where id = #{id}
+	</delete>
+	
+	<update id="updateMovie" parameterType="movieDO">
+		update resource_movie
+		<set>
+			<if test="cid != 0">cid=#{cid},</if>
+			<if test="starLevel != 0">star_level=#{starLevel},</if>
+			<if test="modifiedTime != null">modified_time=#{modifiedTime},</if>		
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 查询单条记录 -->
+	<select id="getMovie" parameterType="long" resultMap="movieDO">
+		select * from resource_movie where id = #{id}
+	</select>
+</mapper>  

@@ -2,6 +2,8 @@ package com.resources.dal.module;
 
 import java.util.Date;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class BaseDO {
 
     private long id;
@@ -34,4 +36,8 @@ public class BaseDO {
         this.modifiedTime = modifiedTime;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }
