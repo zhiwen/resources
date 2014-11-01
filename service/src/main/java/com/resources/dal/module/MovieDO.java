@@ -1,6 +1,5 @@
 package com.resources.dal.module;
 
-
 /***
  * 影片描述
  * 
@@ -11,74 +10,62 @@ public class MovieDO extends BaseDO {
     /**
      * 资源的唯一key
      */
-    // @Column(name = "res_id", unique = true, nullable = false)
     private long   resId;
 
     /**
      * 电影封面
      */
-    // @Column(name = "cover", length = 256, nullable = false)
     private String cover;
 
     /**
      * 导演(JSON)
      */
-    // @Column(name = "director", length = 512)
     private String director;
 
     /**
      * 编剧(JSON)
      */
-    // @Column(name = "screenwriter", length = 512)
     private String screenwriter;
 
     /**
      * 演员(JSON)
      */
-    // @Column(name = "performer", length = 512)
     private String performer;
 
     /**
      * 电影类型，动作/冒险
      */
-    // @Column(name = "cid")
     private long   cid;
 
     /**
      * 制片国家/地区: 美国
      */
-    // @Column(name = "country", length = 40)
     private int    country;
 
     /**
      * (语言: 英语)
      */
-    // @Column(name = "language")
     private int    language;
 
     /**
      * 上映日期: 2014-10-21(中国大陆) / 2014-07-25(美国)
      */
-    // @Column(name = "show_time")
     private long   showTime;
 
     /**
      * 片长: 98分钟
      */
-    // @Column(name = "movie_length")
     private int    movieLength;
 
     /**
      * 电影别名
      */
-    // @Column(name = "alias_name", length = 512)
     private String aliasName;
 
     /**
      * 电影星级
      */
-    // @Column(name = "star_level")
-    private int    starLevel;
+    private float  starLevel;
 
     public long getResId() {
         return resId;
@@ -168,11 +155,12 @@ public class MovieDO extends BaseDO {
         this.aliasName = aliasName;
     }
 
-    public int getStarLevel() {
+    public float getStarLevel() {
         return starLevel;
     }
 
-    public void setStarLevel(int starLevel) {
+    public void setStarLevel(float starLevel) {
         this.starLevel = starLevel;
     }
+
 }

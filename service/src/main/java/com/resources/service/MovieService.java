@@ -1,14 +1,31 @@
 package com.resources.service;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.resources.dal.mapper.MovieMapper;
 import com.resources.dal.module.MovieDO;
 
-public interface MovieService {
+@Service
+public class MovieService {
 
-    public long addMovie(MovieDO movieDO);
+    @Resource
+    private MovieMapper movieMapper;
 
-    public long deleteMovie(long resId);
+    public long addMovie(MovieDO movieDO) {
+        return movieMapper.addMovie(movieDO);
+    }
 
-    public int updateMovie(MovieDO movieDO);
+    public int deleteMovie(long resId) {
+        return movieMapper.deleteMovie(resId);
+    }
 
-    public MovieDO getMovie(long resId);
+    public int updateMovie(MovieDO movieDO) {
+        return movieMapper.updateMovie(movieDO);
+    }
+
+    public MovieDO getMovie(long resId) {
+        return movieMapper.getMovie(resId);
+    }
 }

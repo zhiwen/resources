@@ -8,7 +8,7 @@ public interface ResourceInfoMapper {
 
     public long addResourceInfo(ResourceInfoDO resourceInfo);
 
-    public long deleteResourceInfo(long resId);
+    public int deleteResourceInfo(long resId);
 
     public int updateResourceInfo(ResourceInfoDO resourceInfo);
 

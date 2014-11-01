@@ -22,7 +22,7 @@
 	
 	<script>
 		<generate template="config.properties.vm" destfile="WEB-INF/config.properties" charset="UTF-8" />		
-		<generate template="logback.xml" destfile="WEB-INF/logback.xml" charset="UTF-8" />
+		<generate template="logback.xml" destfile="logback.xml" charset="UTF-8" />
 	</script>
 	
 </config>

@@ -27,7 +27,7 @@
 		<result property="modifiedTime" column="modified_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
 
-	<insert id="addMovie" parameterType="movieDO" useGeneratedKeys="true" keyProperty="id">
+	<insert id="addMovie" parameterType="movieDO">
 		insert into resource_movie
 		(res_id,cover,director,screenwriter,performer,cid,country,language,show_time,movie_length,star_level,created_time,modified_time) 
 		values(#{resId},#{cover},#{director},#{screenwriter},#{performer},#{cid},#{country},#{language},
@@ -35,7 +35,7 @@
 	</insert>
 	
 	<delete id="deleteMovie" parameterType="long">
-		delete from resource_movie where id = #{id}
+		delete from resource_movie where res_id = #{resId}
 	</delete>
 	
 	<update id="updateMovie" parameterType="movieDO">
@@ -45,11 +45,11 @@
 			<if test="starLevel != 0">star_level=#{starLevel},</if>
 			<if test="modifiedTime != null">modified_time=#{modifiedTime},</if>		
 		</set>
-		where id = #{id}
+		where res_id = #{resId}
 	</update>
 	
 	<!-- 查询单条记录 -->
 	<select id="getMovie" parameterType="long" resultMap="movieDO">
-		select * from resource_movie where id = #{id}
+		select * from resource_movie where res_id = #{id}
 	</select>
 </mapper>  

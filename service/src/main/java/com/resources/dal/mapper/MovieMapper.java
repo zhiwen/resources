@@ -6,7 +6,7 @@ public interface MovieMapper {
 
     public long addMovie(MovieDO movieDO);
 
-    public long deleteMovie(long resId);
+    public int deleteMovie(long resId);
 
     public int updateMovie(MovieDO movieDO);
 

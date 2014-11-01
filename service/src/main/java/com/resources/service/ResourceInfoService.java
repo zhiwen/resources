@@ -20,7 +20,7 @@ public class ResourceInfoService {
         return resourceInfoMapper.addResourceInfo(resourceInfo);
     }
 
-    public long deleteResourceInfo(long resId) {
+    public int deleteResourceInfo(long resId) {
         return resourceInfoMapper.deleteResourceInfo(resId);
     }
 
