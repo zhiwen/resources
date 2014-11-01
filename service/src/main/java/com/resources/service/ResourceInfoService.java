@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.resources.common.BizType;
 import com.resources.dal.mapper.ResourceInfoMapper;
 import com.resources.dal.module.ResourceInfoDO;
 
@@ -51,7 +52,7 @@ public class ResourceInfoService {
      * @param limit
      * @return
      */
-    public List<ResourceInfoDO> getOrderResourceInfoByViews(long cid, long bizType, int offset, int limit) {
+    public List<ResourceInfoDO> getOrderResourceInfoByViews(long cid, BizType bizType, int offset, int limit) {
         return null;
     }
 
@@ -64,7 +65,7 @@ public class ResourceInfoService {
      * @param limit
      * @return
      */
-    public List<ResourceInfoDO> getOrderResourceInfoByDownloads(long cid, long bizType, int offset, int limit) {
+    public List<ResourceInfoDO> getOrderResourceInfoByDownloads(long cid, BizType bizType, int offset, int limit) {
         return null;
     }
 }

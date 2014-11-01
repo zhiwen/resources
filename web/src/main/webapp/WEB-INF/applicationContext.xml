@@ -35,7 +35,7 @@
 
 	<mvc:resources location="${static.path}" mapping="/static/**" />
 	
-	<import resource="classpath:velocity.xml" />
+	<import resource="/WEB-INF/velocity.xml" />
 	<import resource="classpath:service.xml" />
 
 </beans>
