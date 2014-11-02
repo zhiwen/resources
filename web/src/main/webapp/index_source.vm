@@ -62,46 +62,12 @@
             </div>
             <div class="panel-body resources-item">
               <ul>
+				#foreach($item in $hotMovieDLResList)
                 <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">2341243</span>
+                  <a href="#"> $!{item.title}</a>
+                  <span href="#">$!{item.downloadCounts}</span>
                 </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">201</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">32</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">0</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">4321</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">54343</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">4325432</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">43214321</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">3243</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">500</span>
-                </li>
+				#end
               </ul>
             </div>
             <!-- <div class="panel-footer">Panel footer</div> -->
@@ -117,46 +83,12 @@
             </div>
             <div class="panel-body resources-item">
               <ul>
+				#foreach($item in $hotGameDLResList)
                 <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">2341243</span>
+                  <a href="#"> $!{item.title}</a>
+                  <span href="#">$!{item.downloadCounts}</span>
                 </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">201</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">32</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">0</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">4321</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">54343</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">4325432</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">43214321</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">3243</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">500</span>
-                </li>
+				#end
               </ul>
             </div>
           </div>
@@ -171,46 +103,12 @@
             </div>
             <div class="panel-body resources-item">
               <ul>
+                #foreach($item in $hotSoftwareDLResList)
                 <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">2341243</span>
+                  <a href="#"> $!{item.title}</a>
+                  <span href="#">$!{item.downloadCounts}</span>
                 </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">201</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">32</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">0</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">4321</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">54343</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">4325432</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">43214321</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">3243</span>
-                </li>
-                <li>
-                  <a href="#">2011韩国剧情喜剧 百度云 576</a>
-                  <span href="#">500</span>
-                </li>
+				#end
               </ul>
             </div>
           </div>
