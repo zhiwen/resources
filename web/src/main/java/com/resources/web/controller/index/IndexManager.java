@@ -19,9 +19,9 @@ import com.resources.service.ResourceInfoService;
 @Controller
 public class IndexManager {
 
-    private final static Logger log              = LoggerFactory.getLogger(IndexManager.class);
+    private final static Logger log                 = LoggerFactory.getLogger(IndexManager.class);
 
-    public final static String  buildedIndexPath = "$builded_index_path";
+    public final static String  buildedTemplatePath = "$builded_template_path";
 
     @Resource
     private ResourceInfoService resourceInfoService;
@@ -70,7 +70,7 @@ public class IndexManager {
         model.addAttribute("hotGameDLResList", hotGameDLResList);
         model.addAttribute("hotSoftwareDLResList", hotSoftwareDLResList);
 
-        model.addAttribute(buildedIndexPath, "/Users/zhiwenmizw/work/resources/output/index.vm");
+        model.addAttribute(buildedTemplatePath, "/Users/zhiwenmizw/work/resources/output/index.vm");
 
         return "index_source";
     }

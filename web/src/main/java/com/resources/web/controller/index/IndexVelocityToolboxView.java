@@ -18,7 +18,7 @@ public class IndexVelocityToolboxView extends VelocityToolboxView {
     @Override
     protected void mergeTemplate(Template template, Context context, HttpServletResponse response) throws Exception {
 
-        String targetPath = (String) context.get(IndexManager.buildedIndexPath);
+        String targetPath = (String) context.get(IndexManager.buildedTemplatePath);
 
         if (StringUtils.isBlank(targetPath)) {
             super.mergeTemplate(template, context, response);
@@ -53,5 +53,4 @@ public class IndexVelocityToolboxView extends VelocityToolboxView {
             }
         }
     }
-
 }
