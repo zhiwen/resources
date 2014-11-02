@@ -1,6 +1,8 @@
 #parse("common/header.vm")
 <link href="${staticDomain}/css/carousel.css" rel="stylesheet">
 <link href="${staticDomain}/css/list.css" rel="stylesheet">
+</head>
+
   <body>
     #parse("common/navigation.vm")
 	#parse("common/search.vm")

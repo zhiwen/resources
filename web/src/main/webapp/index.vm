@@ -2,6 +2,8 @@
 #parse("common/carousel_md.vm")
 <!-- Custom styles for this template -->
 <link href="${staticDomain}/css/index.css" rel="stylesheet">
+</head>
+
 <body>
 
 	#parse("common/navigation.vm")

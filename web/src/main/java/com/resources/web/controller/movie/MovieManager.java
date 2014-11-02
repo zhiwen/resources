@@ -36,9 +36,9 @@ public class MovieManager {
     @Resource
     private MovieService        movieService;
 
-    // @RequestMapping(value = "list", method = { RequestMethod.GET })
+    @RequestMapping(value = "list", method = { RequestMethod.GET })
     public String list(Model model) {
-        return this.list(model, 0, 0, 0, 0);
+        return this.list(model, 0, 0, 0, 1);
     }
 
     @RequestMapping(value = "list/{cid}/{showTime}/{country}/{page}", method = { RequestMethod.GET })
