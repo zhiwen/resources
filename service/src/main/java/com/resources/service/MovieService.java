@@ -41,7 +41,7 @@ public class MovieService {
         params.put("showTime", showTime);
         params.put("offset", Math.max(offset, 0));
         params.put("limit", Math.max(limit, 0));
-        params.put(Constant.ORDERBY_COLUMNS, "created_time");
+        params.put(Constant.ORDERBY_COLUMNS, "modified_time");
         return movieMapper.getMovieOrderByColumn(params);
     }
 

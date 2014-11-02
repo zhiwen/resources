@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.resources.common.BizType;
 import com.resources.dal.module.MovieDO;
@@ -43,7 +42,7 @@ public class MovieManager {
     }
 
     @RequestMapping(value = "list/{cid}/{showTime}/{country}/{page}", method = { RequestMethod.GET })
-    public String list(Model model, @RequestParam("cid") long cid, @PathVariable("showTime") long showTime,
+    public String list(Model model, @PathVariable("cid") long cid, @PathVariable("showTime") long showTime,
                        @PathVariable("country") int country, @PathVariable("page") int page) {
 
         int offset = (Math.max(page, 1) - 1) * pageSize;

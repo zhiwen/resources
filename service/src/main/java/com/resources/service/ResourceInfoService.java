@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.resources.common.BizType;
+import com.resources.common.Constant;
 import com.resources.dal.mapper.ResourceInfoMapper;
 import com.resources.dal.module.ResourceInfoDO;
 
@@ -62,7 +63,7 @@ public class ResourceInfoService {
         params.put("bizType", bizType.getType());
         params.put("offset", offset);
         params.put("limit", limit);
-        params.put("orderColumns", "view_counts");
+        params.put(Constant.ORDERBY_COLUMNS, "view_counts");
         return resourceInfoMapper.getOrderResourceInfoByColumns(params);
     }
 
@@ -82,7 +83,7 @@ public class ResourceInfoService {
         params.put("bizType", bizType.getType());
         params.put("offset", offset);
         params.put("limit", limit);
-        params.put("orderColumns", "download_counts");
+        params.put(Constant.ORDERBY_COLUMNS, "download_counts");
         return resourceInfoMapper.getOrderResourceInfoByColumns(params);
     }
 
@@ -93,7 +94,7 @@ public class ResourceInfoService {
         params.put("bizType", bizType.getType());
         params.put("offset", offset);
         params.put("limit", limit);
-        params.put("orderColumns", "created_time");
+        params.put(Constant.ORDERBY_COLUMNS, "modified_time");
         return resourceInfoMapper.getOrderResourceInfoByColumns(params);
     }
 }

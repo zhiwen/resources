@@ -1,6 +1,7 @@
 package com.resources.dal.mapper.test;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -76,4 +77,11 @@ public class MovieMapperTest extends TestCase {
         MovieDO movieDO = movieService.getMovie(1);
         Assert.assertTrue(movieDO != null);
     }
+
+    @Test
+    public void testGetMovieOrderByCreatedTest() {
+        List<MovieDO> list = movieService.getMovieOrderByCreated(2, 2, 2, 0, 10);
+        Assert.assertTrue(list.size() > 1);
+    }
+
 }

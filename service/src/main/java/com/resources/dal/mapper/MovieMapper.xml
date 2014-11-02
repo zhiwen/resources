@@ -56,12 +56,11 @@
 	<select id="getMovieOrderByColumn" parameterType="java.util.HashMap" resultMap="movieDO">
 		select * from resource_movie 
 		<where>
-			<if test="cid != 0">cid=#{cid},</if>
+			<if test="cid != 0">cid=#{cid}</if>
 			<if test="country != 0">and country=#{country}</if>
 			<if test="showTime != 0">and show_time=#{showTime}</if>
 		</where>
-		order by #{order_columns} desc limit #{offset}, #{limit}
+		order by ${order_column} desc limit #{offset}, #{limit}
 	</select>
-	
 	
 </mapper>  
