@@ -10,10 +10,10 @@
 
     <title>Carousel Template for Bootstrap</title>
 
-    <link href="${staticDomain}/css/bootstrap.min.css" rel="stylesheet">
 	<!--
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.css" rel="stylesheet">
+    <link href="${staticDomain}/css/bootstrap.min.css" rel="stylesheet">
 	-->
+	<link href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->

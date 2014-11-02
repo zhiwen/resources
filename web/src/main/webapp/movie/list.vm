@@ -18,28 +18,24 @@
       <div class="row">
         <div class="col-md-2">
           <span>排序：</span>
-          <a href="">最新</a>
-          <a href="">最热</a>
-          <a href="">好评</a>
+          <a href="${domain}/movie/list/${cid}/${country}/${showTime}/${page}/1">最新</a>
+          <a href="${domain}/movie/list/${cid}/${country}/${showTime}/${page}/2">最热</a>
+          <a href="${domain}/movie/list/${cid}/${country}/${showTime}/${page}/3">好评</a>
           <p>&nbsp;</p>
         </div>
-        
-        <!-- <ul class="nav nav-pills pull-right" role="tablist">
-          <li class="active"><a href="#bestNew">最新</a></li>
-          <li><a href="#bestHot">最热</a></li>
-          <li><a href="#nice">好评</a></li>
-        </ul> -->
       </div><!-- /.row -->
       
       <div class="row">
         <div class="col-md-8">
+		  #foreach($item in $movieList)
+		  #set($resourceInfo = $mappingedResource.get($item.resId))
           <div class="media">
             <a class="pull-left" href="#">
               <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
             </a>
             <div class="media-body">
-              <h5 class="media-heading"><a href="#">第六感 / 灵异第六感 / 鬼眼 [可播放]</a></h5>
-              1999-08-06 / 布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·克莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格 / 美国 / M·奈特·沙马兰 / 107分钟 / 第六感 / 剧情 / 悬疑 / 惊悚 / 恐怖 / M. Night Shyamalan / 英语 / 拉丁语 / 西班牙语
+              <h5 class="media-heading"><a href="#">$resourceInfo.title</a></h5>
+              $resourceInfo.description
               <h5>
                 <span class="allstar45"></span>
                 <span class="rating_nums">8.8</span>
@@ -47,104 +43,7 @@
               </h5>
             </div>
           </div>
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
-            </a>
-            <div class="media-body">
-              <h5 class="media-heading"><a href="#">第六感 / 灵异第六感 / 鬼眼 [可播放]</a></h5>
-              1999-08-06 / 布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·克莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格 / 美国 / M·奈特·沙马兰 / 107分钟 / 第六感 / 剧情 / 悬疑 / 惊悚 / 恐怖 / M. Night Shyamalan / 英语 / 拉丁语 / 西班牙语
-              <h5>
-                <span class="allstar45"></span>
-                <span class="rating_nums">8.8</span>
-                <span>(154913人评价)</span>
-              </h5>
-            </div>
-          </div>
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
-            </a>
-            <div class="media-body">
-              <h5 class="media-heading"><a href="#">第六感 / 灵异第六感 / 鬼眼 [可播放]</a></h5>
-              1999-08-06 / 布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·克莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格 / 美国 / M·奈特·沙马兰 / 107分钟 / 第六感 / 剧情 / 悬疑 / 惊悚 / 恐怖 / M. Night Shyamalan / 英语 / 拉丁语 / 西班牙语
-              <h5>
-                <span class="allstar45"></span>
-                <span class="rating_nums">8.8</span>
-                <span>(154913人评价)</span>
-              </h5>
-            </div>
-          </div>
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
-            </a>
-            <div class="media-body">
-              <h5 class="media-heading"><a href="#">第六感 / 灵异第六感 / 鬼眼 [可播放]</a></h5>
-              1999-08-06 / 布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·克莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格 / 美国 / M·奈特·沙马兰 / 107分钟 / 第六感 / 剧情 / 悬疑 / 惊悚 / 恐怖 / M. Night Shyamalan / 英语 / 拉丁语 / 西班牙语
-              <h5>
-                <span class="allstar45"></span>
-                <span class="rating_nums">8.8</span>
-                <span>(154913人评价)</span>
-              </h5>
-            </div>
-          </div>
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
-            </a>
-            <div class="media-body">
-              <h5 class="media-heading"><a href="#">第六感 / 灵异第六感 / 鬼眼 [可播放]</a></h5>
-              1999-08-06 / 布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·克莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格 / 美国 / M·奈特·沙马兰 / 107分钟 / 第六感 / 剧情 / 悬疑 / 惊悚 / 恐怖 / M. Night Shyamalan / 英语 / 拉丁语 / 西班牙语
-              <h5>
-                <span class="allstar45"></span>
-                <span class="rating_nums">8.8</span>
-                <span>(154913人评价)</span>
-              </h5>
-            </div>
-          </div>
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
-            </a>
-            <div class="media-body">
-              <h5 class="media-heading"><a href="#">第六感 / 灵异第六感 / 鬼眼 [可播放]</a></h5>
-              1999-08-06 / 布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·克莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格 / 美国 / M·奈特·沙马兰 / 107分钟 / 第六感 / 剧情 / 悬疑 / 惊悚 / 恐怖 / M. Night Shyamalan / 英语 / 拉丁语 / 西班牙语
-              <h5>
-                <span class="allstar45"></span>
-                <span class="rating_nums">8.8</span>
-                <span>(154913人评价)</span>
-              </h5>
-            </div>
-          </div>
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
-            </a>
-            <div class="media-body">
-              <h5 class="media-heading"><a href="#">第六感 / 灵异第六感 / 鬼眼 [可播放]</a></h5>
-              1999-08-06 / 布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·克莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格 / 美国 / M·奈特·沙马兰 / 107分钟 / 第六感 / 剧情 / 悬疑 / 惊悚 / 恐怖 / M. Night Shyamalan / 英语 / 拉丁语 / 西班牙语
-              <h5>
-                <span class="allstar45"></span>
-                <span class="rating_nums">8.8</span>
-                <span>(154913人评价)</span>
-              </h5>
-            </div>
-          </div>
-          <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
-            </a>
-            <div class="media-body">
-              <h5 class="media-heading"><a href="#">第六感 / 灵异第六感 / 鬼眼 [可播放]</a></h5>
-              1999-08-06 / 布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·克莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格 / 美国 / M·奈特·沙马兰 / 107分钟 / 第六感 / 剧情 / 悬疑 / 惊悚 / 恐怖 / M. Night Shyamalan / 英语 / 拉丁语 / 西班牙语
-              <h5>
-                <span class="allstar45"></span>
-                <span class="rating_nums">8.8</span>
-                <span>(154913人评价)</span>
-              </h5>
-            </div>
-          </div>
+		  #end
         </div>
         <div class="col-md-4">
           <div class="panel panel-success">

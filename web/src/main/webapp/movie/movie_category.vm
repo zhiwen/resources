@@ -4,7 +4,9 @@
       <ul class="nav nav-pills list-nav-md-1">
         <li><a href="#">按类型 &nbsp;</a></li>
         #foreach($item in $movieTypes.entrySet())
-		<li><a href="${domain}/movie/list/${item.key}/${showTime}/${country}/${page}">${item.value}</a></li>
+		<li #if($cid == ${item.key}) class="active"#end>
+			<a href="${domain}/movie/list/${item.key}/${country}/${showTime}/${page}/${order}">${item.value}</a>
+		</li>
 		#end
       </ul>
     </div>
@@ -15,7 +17,9 @@
       <ul class="nav nav-pills list-nav-md-1">
         <li><a href="#">按地区 &nbsp;</a></li>
         #foreach($item in $movieCountrys.entrySet())
-		<li><a href="${domain}/movie/list/${cid}/${showTime}/${item.key}/${page}">${item.value}</a></li>
+		<li #if($country == ${item.key}) class="active"#end>
+			<a href="${domain}/movie/list/${cid}/${item.key}/${showTime}/${page}/${order}">${item.value}</a>
+		</li>
 		#end
       </ul>
     </div>
@@ -26,7 +30,9 @@
       <ul class="nav nav-pills list-nav-md-1">
         <li><a href="#">按年份 &nbsp;</a></li>
         #foreach($item in $movieShowTimes.entrySet())
-		<li><a href="${domain}/movie/list/${cid}/${item.key}/${country}/${page}">${item.value}</a></li>
+		<li #if($showTime == ${item.key}) class="active"#end>
+			<a href="${domain}/movie/list/${cid}/${country}/${item.key}/${page}/${order}">${item.value}</a>
+		</li>
 		#end
         <li><a href="http://www.qq.com">更早 &raquo;</a></li>
       </ul>

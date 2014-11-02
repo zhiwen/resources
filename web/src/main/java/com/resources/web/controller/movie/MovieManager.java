@@ -38,12 +38,13 @@ public class MovieManager {
 
     @RequestMapping(value = "list", method = { RequestMethod.GET })
     public String list(Model model) {
-        return this.list(model, 0, 0, 0, 1);
+        return this.list(model, 0, 0, 0, 1, 0);
     }
 
-    @RequestMapping(value = "list/{cid}/{showTime}/{country}/{page}", method = { RequestMethod.GET })
+    @RequestMapping(value = "list/{cid}/{showTime}/{country}/{page}/{order}", method = { RequestMethod.GET })
     public String list(Model model, @PathVariable("cid") long cid, @PathVariable("showTime") long showTime,
-                       @PathVariable("country") int country, @PathVariable("page") int page) {
+                       @PathVariable("country") int country, @PathVariable("page") int page,
+                       @PathVariable("order") int order) {
 
         int offset = (Math.max(page, 1) - 1) * pageSize;
 
@@ -91,6 +92,7 @@ public class MovieManager {
         }
 
         Map<String, String> movieShowTimes = new LinkedHashMap<String, String>();
+        movieShowTimes.put("0", "全部");
         result.put("movieShowTimes", movieShowTimes);
         for (int i = 2014; i > 1997; i--) {
             String item = String.valueOf(i);
