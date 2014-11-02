@@ -1,6 +1,7 @@
 package com.resources.dal.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.resources.dal.module.ResourceInfoDO;
 
@@ -25,7 +26,7 @@ public interface ResourceInfoMapper {
      * @param limit
      * @return
      */
-    public List<ResourceInfoDO> getOrderResourceInfoByViews(long cid, long bizType, int offset, int limit);
+    public List<ResourceInfoDO> getOrderResourceInfoByViews(Map<String, Object> params);
 
     /**
      * 获取按下载数倒序的资源
@@ -36,6 +37,6 @@ public interface ResourceInfoMapper {
      * @param limit
      * @return
      */
-    public List<ResourceInfoDO> getOrderResourceInfoByDownloads(long cid, long bizType, int offset, int limit);
+    public List<ResourceInfoDO> getOrderResourceInfoByDownloads(Map<String, Object> params);
 
 }

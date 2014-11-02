@@ -21,7 +21,7 @@
 		<property name="initialSize" value="1" />
 		<property name="minIdle" value="1" />
 		<property name="maxActive" value="20" />
-
+ 
 		<!-- 配置获取连接等待超时的时间 -->
 		<property name="maxWait" value="60000" />
 

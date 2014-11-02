@@ -45,19 +45,35 @@
 		where id = #{id}
 	</update>
 	
-	
-	<!-- 查询单条记录 -->
 	<select id="getResourceInfo" parameterType="long" resultMap="resourceInfoDO">
 		select * from resource_info where id = #{id}
 	</select>
-	<!-- 修改记录 -->
 	
-	<!-- 查询所有记录 -->
 	<select id="getResourceInfoByIds" resultType="resourceInfoDO">
 		select * from resource_info where id in
 		<foreach collection="list" item="item" separator="," open="(" close=")">
 			#{item}
 		</foreach>
 	</select>
+	
+        
+	<select id="getOrderResourceInfoByViews" parameterType="java.util.HashMap" resultMap="resourceInfoDO">
+		select * from resource_info
+		<where>
+			<if test="cid != 0">cid=#{cid}</if>
+			<if test="bizType != 0"> and biz_type=#{bizType}</if>
+		</where>
+		order by view_counts desc limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getOrderResourceInfoByDownloads" parameterType="java.util.HashMap" resultMap="resourceInfoDO">
+		select * from resource_info
+		<where>
+			<if test="cid != 0">cid=#{cid}</if>
+			<if test="bizType != 0"> and biz_type=#{bizType}</if>
+		</where>
+		order by download_counts desc limit #{offset}, #{limit}
+	</select>
+	
 
 </mapper>  

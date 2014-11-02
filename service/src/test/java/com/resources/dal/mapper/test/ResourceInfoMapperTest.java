@@ -88,4 +88,16 @@ public class ResourceInfoMapperTest extends TestCase {
         List<ResourceInfoDO> list = resourceInfoService.getResourceInfoByIds(ids);
         Assert.assertTrue(list.size() == 2);
     }
+
+    @Test
+    public void testGetOrderResourceInfoByViews() {
+        List<ResourceInfoDO> resList = resourceInfoService.getOrderResourceInfoByViews(1, BizType.MOVIE, 0, 10);
+        Assert.assertTrue(resList.size() < 10 && resList.size() > 0);
+    }
+
+    @Test
+    public void testGetOrderResourceInfoByDownloads() {
+        List<ResourceInfoDO> resList = resourceInfoService.getOrderResourceInfoByDownloads(1, BizType.MOVIE, 0, 10);
+        Assert.assertTrue(resList.size() < 10 && resList.size() > 0);
+    }
 }

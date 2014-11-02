@@ -1,7 +1,9 @@
 package com.resources.service;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -53,7 +55,15 @@ public class ResourceInfoService {
      * @return
      */
     public List<ResourceInfoDO> getOrderResourceInfoByViews(long cid, BizType bizType, int offset, int limit) {
-        return null;
+
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        params.put("cid", cid);
+        params.put("bizType", bizType.getType());
+        params.put("offset", offset);
+        params.put("limit", limit);
+
+        return resourceInfoMapper.getOrderResourceInfoByViews(params);
     }
 
     /**
@@ -66,6 +76,13 @@ public class ResourceInfoService {
      * @return
      */
     public List<ResourceInfoDO> getOrderResourceInfoByDownloads(long cid, BizType bizType, int offset, int limit) {
-        return null;
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        params.put("cid", cid);
+        params.put("bizType", bizType.getType());
+        params.put("offset", offset);
+        params.put("limit", limit);
+
+        return resourceInfoMapper.getOrderResourceInfoByDownloads(params);
     }
 }
