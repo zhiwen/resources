@@ -75,5 +75,16 @@
 		order by download_counts desc limit #{offset}, #{limit}
 	</select>
 	
+	
+	<select id="getOrderResourceInfoByColumns" parameterType="java.util.HashMap" resultMap="resourceInfoDO">
+		select * from resource_info
+		<where>
+			<if test="cid != 0">cid=#{cid}</if>
+			<if test="bizType != 0"> and biz_type=#{bizType}</if>
+		</where>
+		order by #{orderColumns} desc limit #{offset}, #{limit}
+	</select>
+	
+	
 
 </mapper>  

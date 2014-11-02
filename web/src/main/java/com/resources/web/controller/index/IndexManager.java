@@ -41,7 +41,7 @@ public class IndexManager {
      */
     @RequestMapping(value = "/index_source", method = { RequestMethod.GET })
     public String buildHome(Model model) {
-
+        model.addAttribute(buildedTemplatePath, "/Users/zhiwenmizw/work/resources/output/index.vm");
         /**
          * <pre>
          * 1、头部大banner
@@ -70,7 +70,12 @@ public class IndexManager {
         model.addAttribute("hotGameDLResList", hotGameDLResList);
         model.addAttribute("hotSoftwareDLResList", hotSoftwareDLResList);
 
-        model.addAttribute(buildedTemplatePath, "/Users/zhiwenmizw/work/resources/output/index.vm");
+        List<ResourceInfoDO> newMovieDLResList = resourceInfoService.getOrderResourceInfoByCreated(0, BizType.MOVIE, 0,
+                                                                                                   10);
+        model.addAttribute("newMovieDLResList", newMovieDLResList);
+
+        List<ResourceInfoDO> newDocDLResList = resourceInfoService.getOrderResourceInfoByCreated(0, BizType.DOC, 0, 10);
+        model.addAttribute("newDocDLResList", newDocDLResList);
 
         return "index_source";
     }

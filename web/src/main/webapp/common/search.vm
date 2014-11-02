@@ -1,0 +1,23 @@
+<div class="container header-container">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-group" role="form">
+        <div class="form-group has-warning">
+          <div class="col-md-9">
+            <input type="search" class="form-control input-lg" id="search" placeholder="无限资源，随心搜索">
+            <span class="help-block">热门搜索：
+              <a href="#">不是不想嫁</a>
+              <a href="#">大力神</a>
+              <a href="#">赵家班小品荟萃</a>
+              <a href="#">美女集中营</a>
+              <a href="#">百变猪猪侠</a>
+            </span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">
+            <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+          </button>
+        </div>
+      </form>
+    </div>
+  </div> <!--end row-->
+</div><!--end container-->

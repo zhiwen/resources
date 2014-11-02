@@ -62,8 +62,8 @@ public class ResourceInfoService {
         params.put("bizType", bizType.getType());
         params.put("offset", offset);
         params.put("limit", limit);
-
-        return resourceInfoMapper.getOrderResourceInfoByViews(params);
+        params.put("orderColumns", "view_counts");
+        return resourceInfoMapper.getOrderResourceInfoByColumns(params);
     }
 
     /**
@@ -82,7 +82,18 @@ public class ResourceInfoService {
         params.put("bizType", bizType.getType());
         params.put("offset", offset);
         params.put("limit", limit);
+        params.put("orderColumns", "download_counts");
+        return resourceInfoMapper.getOrderResourceInfoByColumns(params);
+    }
 
-        return resourceInfoMapper.getOrderResourceInfoByDownloads(params);
+    public List<ResourceInfoDO> getOrderResourceInfoByCreated(long cid, BizType bizType, int offset, int limit) {
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        params.put("cid", cid);
+        params.put("bizType", bizType.getType());
+        params.put("offset", offset);
+        params.put("limit", limit);
+        params.put("orderColumns", "created_time");
+        return resourceInfoMapper.getOrderResourceInfoByColumns(params);
     }
 }

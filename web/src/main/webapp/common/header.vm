@@ -10,8 +10,11 @@
 
     <title>Carousel Template for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS 
     <link href="${staticDomain}/css/bootstrap.min.css" rel="stylesheet">
+	-->
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.css" rel="stylesheet">
+
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -22,88 +25,4 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <!-- Custom styles for this template -->
-    <link href="${staticDomain}/css/carousel.css" rel="stylesheet">
-	
-	<style type="text/css">
-
-      .row .resources-panel-space .col-md-4 {
-        padding-left: 2px;
-        padding-right: 2px;
-      }
-      .row .resources-panel-space > div.col-md-4:first-child {
-        padding-left: 15px;
-      }
-
-      .panel-heading{
-        padding: 1px 15px;
-      }
-      .page-header {
-        width: 83.7777%;
-        margin: 15px 0 5px;
-      }
-
-      .text-black {
-        color: #fff;
-      }
-      .resources-item {
-        color: #BEBCBC;
-      }
-      
-      .resources-item > ul {
-	    list-style:none;
-        padding: 0;
-      }
-
-      .resources-item > ul > li {
-        padding-left: 9px;
-        line-height: 25px;
-        margin: 0;
-        padding: 0;
-      }
-
-      .resources-item > ul > li > a {
-        float: left;
-        font-family: inherit;
-        font-weight: 500;
-        color: #428bca;
-        /*text-decoration: none;*/
-      }
-
-      .resources-item > ul > li > span {
-        float: right;
-        color: #BEBCBC;
-        font-size: 14px;
-        text-align: center;
-      }
-
-      /* CUSTOMIZE THE CAROUSEL
-      -------------------------------------------------- */
-
-      /* Carousel base class */
-      .carousel {
-        margin-top: 50px;
-        height: 300px;
-        margin-bottom: 10px;
-      }
-      /* Since positioning the image, we need to help out the caption */
-      .carousel-caption {
-        z-index: 10;
-      }
-
-      /* Declare heights because of positioning of img element */
-      .carousel .item {
-        height: 300px;
-        background-color: #777;
-      }
-      .carousel-inner > .item > img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        min-width: 100%;
-        height: 300px;
-      }
-
-    </style>
   </head>

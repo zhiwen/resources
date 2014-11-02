@@ -1,9 +1,14 @@
 package com.resources.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.resources.common.Constant;
 import com.resources.dal.mapper.MovieMapper;
 import com.resources.dal.module.MovieDO;
 
@@ -28,4 +33,16 @@ public class MovieService {
     public MovieDO getMovie(long resId) {
         return movieMapper.getMovie(resId);
     }
+
+    public List<MovieDO> getMovieOrderByCreated(long cid, int country, long showTime, int offset, int limit) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("cid", cid);
+        params.put("country", country);
+        params.put("showTime", showTime);
+        params.put("offset", Math.max(offset, 0));
+        params.put("limit", Math.max(limit, 0));
+        params.put(Constant.ORDERBY_COLUMNS, "created_time");
+        return movieMapper.getMovieOrderByColumn(params);
+    }
+
 }

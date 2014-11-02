@@ -1,3 +1,5 @@
+<!-- Custom styles for this template -->
+<link href="${staticDomain}/css/carousel.css" rel="stylesheet">
 <!-- Carousel================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->

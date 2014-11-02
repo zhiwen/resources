@@ -1,0 +1,352 @@
+#parse("common/header.vm")
+#parse("common/carousel_md.vm")
+
+  <body>
+
+    #parse("common/navigation.vm")
+
+    <div class="container header-container">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="http://www.qiyipic.com/common/fix/site/logo-pps-index.png">
+        </div>
+        <div class="col-md-9">
+          <form class="form-group" role="form">
+            <div class="form-group has-warning">
+              <div class="col-md-9">
+                <input type="search" class="form-control input-lg" id="searchMovie" placeholder="Enter movie name">
+                <span class="help-block">按搜：A block of help text that breaks onto a new line and may extend beyond one line.</span>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg">
+                <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+              </button>
+            </div>
+          </form>
+        </div>
+      </div> <!--end row-->
+    </div>
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+      <hr class="featurette-divider">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="media">
+            <a class="pull-left" href="#">
+              <!-- <img class="media-object" src="http://img5.douban.com/view/movie_poster_cover/spst/public/p2162458967.jpg" alt="..."> -->
+              <img class="media-object" src="http://img.yunfan.com/index.php?mid=middle_4216681234727407560&amp;t=p" style="width:250px; height=349px;" alt="...">
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading">第六感 / 灵异第六感 / 鬼眼第六感 / 灵异第六感 / 鬼眼第六感 / 灵异第六感 / 鬼眼 <span class="text-success">[可播放]</span></h4>
+              <h5>导演: <a href="#">M·奈特·沙马兰</a></h5>
+              <h5>编剧: <a href="#">M·奈特·沙马兰</a></h5>
+              <h5>主演: <a href="#">布鲁斯·威利斯 / 海利·乔·奥斯蒙 / 托妮·科莱特 / 奥莉维亚·威廉姆斯 / 唐尼·沃尔伯格</a></h5>
+              <h5>制片国家/地区: <a href="#">美国</a></h5>
+              <h5>语言: <a href="#">英语 / 拉丁语 / 西班牙语</a></h5>
+              <h5>上映日期: <a href="#">1999-08-06</a></h5>
+              <h5>片长: <a href="#">107分钟</a></h5>
+              <h5>又名: <a href="#">灵异第六感 / 鬼眼</a></h5>
+              <h4>
+                <button class="btn btn-danger btn-lg">免费观看</button>
+                <button class="btn btn-danger btn-lg">免费下载</button>
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+            <span class="bigstar45"></span>
+            <strong class="rating_num">8.8</strong>
+            <h5>(154913人评价)</h5>
+            <ul class="nav nav-pills move-tags">
+              <li><a href="#">标签：</a></li>
+              <li><a href="#">灵异(1234)</a></li>
+              <li><a href="#">美国(3232)</a></li>
+              <li><a href="#">心理(330)</a></li>
+              <li><a href="#">恐怖(3232)</a></li>
+              <li><a href="#">惊悚(3232)</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-3">
+          <div class="panel panel-success">
+            <div class="panel-heading">Panel heading</div>
+            <div class="panel-body">
+              2014年4月18日 - 而其使用的icon是存放在img里的一张名为glyphicons-halflings.png 的图片中(提供两种颜色): bootstrap是同glyphicons合作的,所以其图标图片用的就是..
+              <img src="http://img3.douban.com/view/arkenstone/raw/public/cf593518b2ebe90.jpg" style="width:150px">
+            </div>
+            <!-- <div class="panel-footer">Panel footer</div> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Three columns of text below the carousel -->
+      <p></p>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="alert alert-warning" role="alert">
+            <h4><p class="text-success">第六感的剧情简介  ·  ·  ·  ·  ·  ·</p></h4>
+            麦克（布鲁斯·威利斯 饰）是著名儿童心理学家，却也有始终未能治愈的患者，甚至因此遭到枪杀，这名少年随后也饮枪自毙。这给麦克带来很大心理阴影，一年后他找到另一个症状很像这名患者的男孩柯尔（海利·乔·奥斯蒙 饰），并耐心的做起了他的医生。柯尔并不容易接近，但麦克还是慢慢赢得 了他的信任，得知了柯尔的秘密。原来柯尔有着灵异的第六感，可以看到鬼魂。虽然这令人感到难以置信，但麦克在证实了事情的真相后还是帮助柯尔接受了这个事实。 
+　　可是就在问题即将得到解决的时候，麦克却在柯尔的引导下，发现了一个更令人震惊的秘密…… ©豆瓣
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+          <h4><p class="text-success">第六感的预告片和图片 · · · · · · ( 全部308)</p></h4>
+          <div class="row row-pic-space tab-pic-md-2 guest-like-movies">
+            <div class="col-md-3">
+              <a href="#">
+                <img src="http://h.hiphotos.baidu.com/image/w%3D310/sign=77878c45b9a1cd1105b674218913c8b0/ac4bd11373f08202d5f4f94a48fbfbedab641b64.jpg">
+              </a>
+              <h5></h5>
+            </div>
+            <div class="col-md-3">
+              <a href="#">
+                <img src="http://e.hiphotos.baidu.com/image/w%3D310/sign=4621de6e552c11dfded1b92253256255/d62a6059252dd42a0ccc1826013b5bb5c8eab871.jpg">
+              </a>
+              <h5></h5>
+            </div>
+            <div class="col-md-3">
+              <a href="#">
+                <img src="http://d.hiphotos.baidu.com/image/w%3D310/sign=3d3a2ddf7fd98d1076d40a30113eb807/0823dd54564e9258c2ee3dcd9f82d158ccbf4e3e.jpg">
+              </a>
+              <h5></h5>
+            </div>
+            <div class="col-md-3">
+              <a href="#">
+                <img src="http://g.hiphotos.baidu.com/image/w%3D310/sign=227bdec5f8edab6474724bc1c737af81/e824b899a9014c08e87288ab097b02087bf4f477.jpg">
+              </a>
+              <h5></h5>
+            </div>
+            <div class="col-md-3">
+              <a href="#">
+                <img src="http://img0.bdstatic.com/img/image/shouye/fsdctgsjfkkkk.jpg">
+              </a>
+              <h5></h5>
+            </div>
+            <div class="col-md-3">
+              <a href="#">
+                <img src="http://b.hiphotos.baidu.com/image/w%3D310/sign=2a0ed96e68600c33f079d8c92a4d5134/d1a20cf431adcbef3764647cafaf2edda3cc9f73.jpg">
+              </a>
+              <h5></h5>
+            </div>
+
+            <div class="col-md-3">
+              <a href="#">
+                <img src="http://img0.bdstatic.com/img/image/shouye/mxym-9447375568.jpg">
+              </a>
+              <h5></h5>
+            </div>
+
+            <div class="col-md-3">
+              <a href="#">
+                <img src="http://img3.douban.com/view/dale-online/dale_ad/public/bfd2017ee30d8df.jpg">
+              </a>
+              <h5></h5>
+            </div>
+              
+          </div>
+        </div>
+      </div>
+
+      <p></p>
+      <div class="row">
+        <div class="col-md-9">
+          <h4><p class="text-success">喜欢这部电影的人也喜欢 · · · · · ·</p></h4>
+          <div class="row row-pic-space tab-pic-md-1 guest-like-movies" >
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://img2.kankan.kanimg.com//gallery2/block/2014/10/17/b91ca7974d550d9ae9c8b415d5cd5e8f.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                <img class="img-rounded" src="http://i4.kankan.kanimg.com/gallery2/block/2014/09/23/10a9a226a46c1e231f091eb338edf484.jpg">
+              </a>
+              <div class="caption">
+                <h6>
+                  <a href="#">hahahahah</a>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+          <div class="alert alert-warning" role="alert">
+            <h4><p class="text-success">第六感的短评 · · · · · · ( 全部 37692 条 )</p></h4>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <img class="img-rounded" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 150px; height: 85px;">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Etiam </p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-2">
+          <img class="img-rounded" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 150px; height: 85px;">
+          <h6>Duis mollis, est non commodo luctus, </h6>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-2">
+          <img class="img-rounded" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 150px; height: 85px;">
+          <h5>Donec sed odio dui. Cras justo odio, Cras justo odio, Cras justo odio, </h5>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-2">
+          <img class="img-rounded" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 150px; height: 85px;">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, </p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-2">
+          <img class="img-rounded" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 150px; height: 85px;">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, </p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-2">
+          <img class="img-rounded" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 150px; height: 85px;">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, </p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-2">
+          <img class="img-rounded" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 150px; height: 85px;">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, </p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+
+      <p class="featurette-divider"></p>
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+    <script type="text/javascript">
+      /**
+       * 鼠标划过就展开子菜单，免得需要点击才能展开
+       */
+      $(document).on('mouseover.bs.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+      })
+      $(document).on('click.bs.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
+        e.preventDefault();
+        var url = $(this)[0].attributes['data-url'].value;
+        if (url == "" || url == undefined) {
+          return false;
+        };
+        window.open(url);
+      })
+
+    </script>
+    <script src="static/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="static/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

@@ -18,7 +18,7 @@ public interface ResourceInfoMapper {
     public List<ResourceInfoDO> getResourceInfoByIds(List<Long> ids);
 
     /**
-     * 获取按浏览数倒序的资源
+     * 获取按指定的列倒序的资源
      * 
      * @param cid
      * @param bizType
@@ -26,17 +26,5 @@ public interface ResourceInfoMapper {
      * @param limit
      * @return
      */
-    public List<ResourceInfoDO> getOrderResourceInfoByViews(Map<String, Object> params);
-
-    /**
-     * 获取按下载数倒序的资源
-     * 
-     * @param cid
-     * @param bizType
-     * @param offset
-     * @param limit
-     * @return
-     */
-    public List<ResourceInfoDO> getOrderResourceInfoByDownloads(Map<String, Object> params);
-
+    public List<ResourceInfoDO> getOrderResourceInfoByColumns(Map<String, Object> params);
 }
