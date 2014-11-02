@@ -1,21 +1,15 @@
 package com.resources.web.controller.index;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.velocity.VelocityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
-import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 
 import com.resources.common.BizType;
 import com.resources.dal.module.ResourceInfoDO;
@@ -25,21 +19,15 @@ import com.resources.service.ResourceInfoService;
 @Controller
 public class IndexManager {
 
-    private final static Logger  log              = LoggerFactory.getLogger(IndexManager.class);
+    private final static Logger log              = LoggerFactory.getLogger(IndexManager.class);
 
-    public final static String   buildedIndexPath = "$builded_index_path";
-
-    @Resource
-    private ResourceInfoService  resourceInfoService;
+    public final static String  buildedIndexPath = "$builded_index_path";
 
     @Resource
-    private MovieService         movieService;
+    private ResourceInfoService resourceInfoService;
 
     @Resource
-    private VelocityConfigurer   velocityConfigurer;
-
-    @Resource
-    private VelocityViewResolver viewResolver;
+    private MovieService        movieService;
 
     @RequestMapping(value = { "/", "/index", "/index.htm", "/index.html" }, method = { RequestMethod.GET })
     public String goHome() {
@@ -84,27 +72,6 @@ public class IndexManager {
 
         model.addAttribute(buildedIndexPath, "/Users/zhiwenmizw/work/resources/output/index.vm");
 
-        VelocityContext context = new VelocityContext();
-
-        viewResolver.getAttributesMap();
-
         return "index_source";
-    }
-
-    protected void renderPage(VelocityContext context) {
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(new File("/Users/zhiwenmizw/work/resources/output/index.vm"));
-            velocityConfigurer.getVelocityEngine().mergeTemplate("index_source.vm", "UTF-8", context, writer);
-        } catch (IOException e) {
-            log.error("error message", e);
-        } finally {
-            try {
-                writer.close();
-            } catch (Exception e) {
-                log.error("close io fail", e);
-            }
-        }
-
     }
 }
