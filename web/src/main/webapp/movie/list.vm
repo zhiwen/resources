@@ -18,9 +18,9 @@
       <div class="row">
         <div class="col-md-2">
           <span>排序：</span>
-          <a href="${domain}/movie/list/${cid}/${country}/${showTime}/${page}/1">最新</a>
-          <a href="${domain}/movie/list/${cid}/${country}/${showTime}/${page}/2">最热</a>
-          <a href="${domain}/movie/list/${cid}/${country}/${showTime}/${page}/3">好评</a>
+		  <a href="#movieListURL(${cid} ${country} ${showTime} ${page} 1)">最新</a>
+		  <a href="#movieListURL(${cid} ${country} ${showTime} ${page} 2)">最热</a>
+		  <a href="#movieListURL(${cid} ${country} ${showTime} ${page} 3)">好评</a>
           <p>&nbsp;</p>
         </div>
       </div><!-- /.row -->
@@ -30,9 +30,11 @@
 		  #foreach($item in $movieList)
 		  #set($resourceInfo = $mappingedResource.get($item.resId))
           <div class="media">
+			<!--
             <a class="pull-left" href="#">
               <img class="media-object" src="http://img3.douban.com/view/movie_poster_cover/ipst/public/p810384382.jpg" alt="...">
             </a>
+			-->
             <div class="media-body">
               <h5 class="media-heading"><a href="#">$resourceInfo.title</a></h5>
               $resourceInfo.description

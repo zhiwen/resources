@@ -24,9 +24,9 @@ import com.resources.service.ResourceInfoService;
 
 @Controller
 @RequestMapping("/movie")
-public class MovieManager {
+public class MovieList {
 
-    private final static Logger log      = LoggerFactory.getLogger(MovieManager.class);
+    private final static Logger log      = LoggerFactory.getLogger(MovieList.class);
 
     private final int           pageSize = 50;
 
@@ -41,7 +41,7 @@ public class MovieManager {
         return this.list(model, 0, 0, 0, 1, 0);
     }
 
-    @RequestMapping(value = "list/{cid}/{showTime}/{country}/{page}/{order}", method = { RequestMethod.GET })
+    @RequestMapping(value = "list/{cid}-{country}-{showTime}-{page}-{order}", method = { RequestMethod.GET })
     public String list(Model model, @PathVariable("cid") long cid, @PathVariable("showTime") long showTime,
                        @PathVariable("country") int country, @PathVariable("page") int page,
                        @PathVariable("order") int order) {
@@ -102,21 +102,5 @@ public class MovieManager {
 
     }
 
-    @RequestMapping(value = { "detail/{rid}" }, method = { RequestMethod.GET })
-    public String detail(Model model, @PathVariable("id") long id) {
-
-        ResourceInfoDO resourceInfo = resourceInfoService.getResourceInfo(id);
-        if (resourceInfo == null) {
-            return "common/error.vm";
-        }
-
-        if (BizType.MOVIE.getType() == resourceInfo.getBizType()) {
-            MovieDO movie = movieService.getMovie(id);
-
-            model.addAttribute("movie", movie);
-        }
-        model.addAttribute("resourceInfo", resourceInfo);
-
-        return "movie/detail";
-    }
+   
 }

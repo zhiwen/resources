@@ -1,0 +1,3 @@
+#macro(movieListURL $cid $country $showTime $page $order)
+${domain}/movie/list/${cid}-${country}-${showTime}-${page}-${order}
+#end

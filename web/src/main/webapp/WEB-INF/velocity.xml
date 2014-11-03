@@ -15,6 +15,7 @@
 			<map>
 				<entry key="velocimacro.library.autoreload" value="true" />
 				<entry key="file.resource.loader.cache" value="false" />
+				<entry key="velocimacro.library" value="/movie/movie_macro.vm"/>
 				<entry key="input.encoding" value="UTF-8" />
 				<entry key="output.encoding" value="UTF-8" />
 				<entry key="spring.resource.loader.cache" value="false" />

@@ -5,7 +5,7 @@
         <li><a href="#">按类型 &nbsp;</a></li>
         #foreach($item in $movieTypes.entrySet())
 		<li #if($cid == ${item.key}) class="active"#end>
-			<a href="${domain}/movie/list/${item.key}/${country}/${showTime}/${page}/${order}">${item.value}</a>
+			<a href="#movieListURL(${item.key} ${country} ${showTime} ${page} ${order})">${item.value}</a>
 		</li>
 		#end
       </ul>
@@ -18,7 +18,7 @@
         <li><a href="#">按地区 &nbsp;</a></li>
         #foreach($item in $movieCountrys.entrySet())
 		<li #if($country == ${item.key}) class="active"#end>
-			<a href="${domain}/movie/list/${cid}/${item.key}/${showTime}/${page}/${order}">${item.value}</a>
+			<a href="#movieListURL(${cid} ${item.key} ${showTime} ${page} ${order})">${item.value}</a>
 		</li>
 		#end
       </ul>
@@ -31,7 +31,7 @@
         <li><a href="#">按年份 &nbsp;</a></li>
         #foreach($item in $movieShowTimes.entrySet())
 		<li #if($showTime == ${item.key}) class="active"#end>
-			<a href="${domain}/movie/list/${cid}/${country}/${item.key}/${page}/${order}">${item.value}</a>
+			<a href="#movieListURL(${cid} ${country} ${item.key} ${page} ${order})">${item.value}</a>
 		</li>
 		#end
         <li><a href="http://www.qq.com">更早 &raquo;</a></li>
