@@ -1,15 +1,18 @@
-<tools>
-	<toolbox scope="application">
-		<tool>
-			<key>DateTool</key>
-			<class>org.apache.velocity.tools.generic.DateTool</class>
-		</tool>
-	</toolbox>
-	
-	<toolbox scope="application">
-		<tool>
-			<key>escapeTool</key>
-			<class>org.apache.commons.lang.StringEscapeUtils</class>
-		</tool>
-	</toolbox>
-</tools>
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+    <tool>
+        <key>dateTool</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+    </tool>
+    <tool>
+        <key>escapeTool</key>
+        <scope>application</scope>
+        <class>org.apache.commons.lang.StringEscapeUtils</class>
+    </tool>
+    <tool>
+        <key>urlTools</key>
+        <scope>application</scope>
+        <class>com.resources.common.URLTools</class>
+    </tool>
+</toolbox>

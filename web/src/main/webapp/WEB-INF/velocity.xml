@@ -38,7 +38,6 @@
 			<util:map>
 				<entry key="domain" value="${domain}" />
 				<entry key="staticDomain" value="${static.domain}" />
-				<entry key="escapeTool" value-ref="escapeTool" />
 			</util:map>
 		</property>
 		<property name="toolboxConfigLocation" value="/WEB-INF/tool-box.xml" />

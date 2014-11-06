@@ -45,6 +45,9 @@
               </h5>
             </div>
           </div>
+		  $dateTool
+		  $escapeTool
+		  $urlTools
 		  #end
         </div>
         <div class="col-md-4">
