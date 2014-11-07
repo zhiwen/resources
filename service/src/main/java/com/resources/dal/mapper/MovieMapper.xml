@@ -14,7 +14,7 @@
 		<result property="cover" column="cover"/>
 		<result property="director" column="director"/>
 		<result property="screenwriter" column="screenwriter"/>
-		<result property="performer" column="performer"/>
+		<result property="stars" column="stars"/>
 		<result property="cid" column="cid"/>
 		<result property="country" column="country"/>
 		<result property="language" column="language"/>
@@ -29,8 +29,8 @@
 
 	<insert id="addMovie" parameterType="movieDO">
 		insert into resource_movie
-		(res_id,cover,director,screenwriter,performer,cid,country,language,show_time,movie_length,star_level,created_time,modified_time) 
-		values(#{resId},#{cover},#{director},#{screenwriter},#{performer},#{cid},#{country},#{language},
+		(res_id,cover,director,screenwriter,stars,cid,country,language,show_time,movie_length,star_level,created_time,modified_time) 
+		values(#{resId},#{cover},#{director},#{screenwriter},#{stars},#{cid},#{country},#{language},
 		#{showTime},#{movieLength},#{starLevel},#{createdTime},#{modifiedTime})
 	</insert>
 	
@@ -57,7 +57,7 @@
 		select * from resource_movie 
 		<where>
 			<if test="cid != 0">cid=#{cid}</if>
-			<if test="country != 0">and country=#{country}</if>
+			<if test="country != null">and country=#{country}</if>
 			<if test="showTime != 0">and show_time=#{showTime}</if>
 		</where>
 		order by ${order_column} desc limit #{offset}, #{limit}

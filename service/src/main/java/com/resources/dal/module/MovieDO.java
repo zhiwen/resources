@@ -30,7 +30,7 @@ public class MovieDO extends BaseDO {
     /**
      * 演员(JSON)
      */
-    private String performer;
+    private String stars;
 
     /**
      * 电影类型，动作/冒险
@@ -40,12 +40,12 @@ public class MovieDO extends BaseDO {
     /**
      * 制片国家/地区: 美国
      */
-    private int    country;
+    private String country;
 
     /**
      * (语言: 英语)
      */
-    private int    language;
+    private String language;
 
     /**
      * 上映日期: 2014-10-21(中国大陆) / 2014-07-25(美国)
@@ -99,12 +99,12 @@ public class MovieDO extends BaseDO {
         this.screenwriter = screenwriter;
     }
 
-    public String getPerformer() {
-        return performer;
+    public String getStars() {
+        return stars;
     }
 
-    public void setPerformer(String performer) {
-        this.performer = performer;
+    public void setStars(String stars) {
+        this.stars = stars;
     }
 
     public long getCid() {
@@ -115,19 +115,19 @@ public class MovieDO extends BaseDO {
         this.cid = cid;
     }
 
-    public int getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setCountry(int country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
-    public int getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(int language) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config description="自动配置">
+	
+	<group name="db-config">
+		<property name="jdbc.url" defaultValue="jdbc:mysql://127.0.0.1:3306/resources?characterEncoding=utf8" description="dburl" />
+		<property name="jdbc.username" defaultValue="resources" description="数据庘用户名" />
+		<property name="jdbc.password" defaultValue="resources" description="数据庘密码" />
+	</group>
+	
+	<script>
+		<generate template="db-config.properties.vm" destfile="db-config.properties" charset="UTF-8" />		
+	</script>
+	
+</config>
