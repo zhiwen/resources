@@ -13,7 +13,7 @@
 	</resultMap>
 
 	<insert id="addSpiderResources" parameterType="spiderResourcesDO">
-		insert into spider_resources (name,url,download_url) values(#{name},#{url},#{downloadUrl})
+		insert into spider_resources (name,url,download_url, created_time) values(#{name},#{url},#{downloadUrl}, #{createdTime})
 	</insert>
 	
 	<!-- 查询单条记录 -->
