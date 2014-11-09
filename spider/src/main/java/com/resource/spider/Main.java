@@ -21,7 +21,10 @@ public class Main {
         // resSpider.parse("http://movie.douban.com/subject/1428055/");
 
         // resSpider.parse("http://movie.douban.com/subject/3157583/");
-        resSpider.parse("http://movie.douban.com/subject/25845393/");
+        // resSpider.parse("http://movie.douban.com/subject/25845393/");
+        // resSpider.parse("http://www.ygdy8.com/");
 
+        ResourceSpider movieTTResSpider = (ResourceSpider) context.getBean("sunshineMovieSpider");
+        movieTTResSpider.parse("http://www.ygdy8.com/");
     }
 }

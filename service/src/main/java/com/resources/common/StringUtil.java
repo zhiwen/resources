@@ -9,16 +9,16 @@ public final class StringUtil {
 
     static Pattern pattern = Pattern.compile("\\d+");
 
-    public static Long matchNumber(String string) {
+    public static int matchInt(String string) {
         if (StringUtils.isBlank(string)) {
-            return 0L;
+            return 0;
         }
 
         Matcher mh = pattern.matcher(string);
         if (mh.find()) {
             String value = mh.group(0);
-            return Long.valueOf(value);
+            return Integer.valueOf(value);
         }
-        return 0L;
+        return 0;
     }
 }

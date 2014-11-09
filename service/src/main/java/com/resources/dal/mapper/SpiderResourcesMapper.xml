@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.resources.dal.mapper.SpiderResourcesMapper">
+	
+	<resultMap type="com.resources.dal.module.SpiderResourcesDO" id="spiderResourcesDO">
+		<result property="name" column="name"/>
+		<result property="url" column="url"/>
+		<result property="downloadUrl" column="download_url"/>
+	</resultMap>
+
+	<insert id="addSpiderResources" parameterType="spiderResourcesDO">
+		insert into spider_resources (name,url,download_url) values(#{name},#{url},#{downloadUrl})
+	</insert>
+	
+	<!-- 查询单条记录 -->
+	<select id="getSpiderResources" parameterType="java.lang.String" resultMap="spiderResourcesDO">
+		select * from spider_resources where name = #{name}
+	</select>
+	
+</mapper>  

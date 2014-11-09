@@ -41,7 +41,7 @@ public abstract class MovieSpider extends ResourceSpider {
             throw new IllegalAccessError("add resource fail");
         }
 
-        movieDO.setResId(id);
+        movieDO.setResId(resourceInfo.getId());
 
         if (null == movieDO.getCreatedTime()) {
             movieDO.setCreatedTime(new Date());

@@ -101,7 +101,7 @@ public class DoubanMovieSpider extends MovieSpider {
         movieDO.setLanguage(movieInfo.get(MovieInfoEnum.language.name));
         if (movieLen == 0) {
             String mlenString = movieInfo.get(MovieInfoEnum.sigleMovieLen.name);
-            movieLen = StringUtil.matchNumber(mlenString).intValue();
+            movieLen = StringUtil.matchInt(mlenString);
         }
         movieDO.setMovieLength(movieLen);
         movieDO.setShowTime(showTime.getTime());

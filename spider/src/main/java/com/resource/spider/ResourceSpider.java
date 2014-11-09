@@ -19,7 +19,7 @@ public abstract class ResourceSpider {
         this.parseDocument(document);
     }
 
-    public abstract void parseDocument(Document document);
+    public abstract boolean parseDocument(Document document);
 
     public int getTimeout() {
         return timeout;
