@@ -1,9 +1,13 @@
 package com.resource.spider.resources.movie;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -19,6 +23,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import com.resource.spider.ResourceSpider;
+import com.resources.common.IOUtil;
 import com.resources.dal.module.SpiderResourcesDO;
 import com.resources.service.SpiderResourcesService;
 
@@ -40,7 +45,7 @@ public class SunshineMovieSpider extends ResourceSpider {
     // http://www.ygdy8.com/html/gndy/oumei/list_7_1.html
     // http://www.ygdy8.com/html/gndy/oumei/list_7_261.html
 
-    private final List<String>     urls = new ArrayList<String>();
+    private final List<String>     urls    = new ArrayList<String>();
     {
         urls.add("http://www.ygdy8.com/html/gndy/dyzz/list_23_%d.html");
         urls.add("http://www.ygdy8.com/html/gndy/rihan/list_6_%d.html");
@@ -49,42 +54,41 @@ public class SunshineMovieSpider extends ResourceSpider {
         urls.add("http://www.ygdy8.com/html/gndy/jddy/list_63_%d.html");
     }
 
+    private final File             urlFile = new File("/Users/zhiwenmizw/work/resources/processed_url");
+    private final Set<String>      urlSets = new HashSet<String>();
+
     @Override
     public void parse(String urlString) throws IOException {
+
+        // load url
+        List<String> list = IOUtil.readFile(urlFile);
+        if (!CollectionUtils.isEmpty(list)) {
+            urlSets.addAll(list);
+        }
+
         for (String stringUrl : urls) {
 
             int page = 1;
-
             while (true) {
                 String formatedUrl = String.format(stringUrl, page);
-                // URL url = new URL(formatedUrl);
-
-                Connection con = Jsoup.connect(formatedUrl);
-
-                con.header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-                con.header("Accept-Encoding", "gzip,deflate,sdch");
-                con.header("Accept-Language", "en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4");
-                con.header("Connection", "keep-alive");
-
-                con.userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36");
-                con.cookie("37cs_user", "37cs47348866896");
-                con.referrer("http://www.dytt8.net/");
-                con.timeout(getTimeout());
-
-                Document document = con.get();
-
-                Response response = con.response();
-                // 翻页完了，结束了
-                String location = response.header("Content-Location");
-                if (null != location && location.contains("http://www.ygdy8.com/error.htm?404")) {
+                if (urlSets.contains(stringUrl)) {
+                    continue;
+                }
+                System.out.println("current-spider-url:" + formatedUrl);
+                Document document = null;
+                try {
+                    document = getDocument(formatedUrl);
+                    parseDocument(document);
+                } catch (Exception e) {
+                    System.err.println(String.format("getDocument error-url[%s], exception[%s]", formatedUrl,
+                                                     e.getMessage()));
+                    continue;
+                }
+                if (null == document) {
                     break;
                 }
-                String contentLength = response.header("Content-Length");
-                if (null != contentLength && StringUtils.equals(contentLength, "0")) {
-                    break;
-                }
-
-                parseDocument(document);
+                // save point
+                IOUtil.writeFile(urlFile, formatedUrl, true);
                 page++;
 
                 try {
@@ -95,6 +99,34 @@ public class SunshineMovieSpider extends ResourceSpider {
                 }
             }
         }
+    }
+
+    public Document getDocument(String url) throws IOException {
+        Connection con = Jsoup.connect(url);
+
+        con.header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+        con.header("Accept-Encoding", "gzip,deflate,sdch");
+        con.header("Accept-Language", "en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4");
+        con.header("Connection", "keep-alive");
+
+        con.userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36");
+        con.cookie("37cs_user", "37cs47348866896");
+        con.referrer("http://www.dytt8.net/");
+        con.timeout(getTimeout());
+
+        Document document = con.get();
+
+        Response response = con.response();
+        // 翻页完了，结束了
+        String location = response.header("Content-Location");
+        if (null != location && location.contains("http://www.ygdy8.com/error.htm?404")) {
+            return null;
+        }
+        String contentLength = response.header("Content-Length");
+        if (null != contentLength && StringUtils.equals(contentLength, "0")) {
+            return null;
+        }
+        return document;
     }
 
     @Override
@@ -124,6 +156,7 @@ public class SunshineMovieSpider extends ResourceSpider {
                 SpiderResourcesDO resDO = new SpiderResourcesDO();
                 resDO.setName(nameNode.text());
                 resDO.setUrl(url);
+                resDO.setCreatedTime(new Date());
                 resList.add(resDO);
             }
         }

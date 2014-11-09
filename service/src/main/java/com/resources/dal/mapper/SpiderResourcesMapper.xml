@@ -9,6 +9,7 @@
 		<result property="name" column="name"/>
 		<result property="url" column="url"/>
 		<result property="downloadUrl" column="download_url"/>
+		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
 
 	<insert id="addSpiderResources" parameterType="spiderResourcesDO">

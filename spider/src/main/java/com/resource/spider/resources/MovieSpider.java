@@ -22,7 +22,7 @@ public abstract class MovieSpider extends ResourceSpider {
     private MovieService        movieService;
 
     @Override
-    public void parseDocument(Document document) {
+    public boolean parseDocument(Document document) {
 
         ResourceInfoDTO<MovieDO> resourceInfoDTO = parseToMovie(document);
 
@@ -52,6 +52,7 @@ public abstract class MovieSpider extends ResourceSpider {
         if (id < 1) {
             throw new IllegalAccessError("add movie fail");
         }
+        return false;
     }
 
     public abstract ResourceInfoDTO<MovieDO> parseToMovie(Document document);

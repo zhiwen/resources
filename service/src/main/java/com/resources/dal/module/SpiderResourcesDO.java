@@ -1,10 +1,14 @@
 package com.resources.dal.module;
 
+import java.util.Date;
+
 public class SpiderResourcesDO {
 
     private String name;
     private String url;
     private String downloadUrl;
+
+    private Date   createdTime;
 
     public String getName() {
         return name;
@@ -28,6 +32,14 @@ public class SpiderResourcesDO {
 
     public void setDownloadUrl(String downloadUrl) {
         this.downloadUrl = downloadUrl;
+    }
+
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
 }
