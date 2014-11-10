@@ -154,6 +154,18 @@ public class SunshineDetailMovieSpider extends ResourceSpider {
             }
         }
 
+        // pattern 4
+        if (urls.isEmpty()) {
+            contentEles = document.getElementsByAttributeValue("color", "#000000");
+            for (Element element : contentEles) {
+                String url = findUrl(element.outerHtml());
+                if (StringUtils.isNotBlank(url) && StringUtil.isURL(url)) {
+                    urls.add(url);
+                    continue;
+                }
+            }
+        }
+
         if (!CollectionUtils.isEmpty(urls)) {
             spiderResourcesDO.setDownloadUrl(JSON.toJSONString(urls));
 
@@ -180,7 +192,7 @@ public class SunshineDetailMovieSpider extends ResourceSpider {
 
     }
 
-    static String  ftpRegex   = "ftp://(.+?)(.rmvb|.3pg)";
+    static String  ftpRegex   = "ftp://(.+?)(.rmvb|.3pg|.mp4)";
 
     static Pattern ftpPattern = Pattern.compile(ftpRegex, Pattern.CASE_INSENSITIVE | Pattern.DOTALL | Pattern.MULTILINE);
 
