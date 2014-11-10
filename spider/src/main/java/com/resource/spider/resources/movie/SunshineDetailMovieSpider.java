@@ -132,32 +132,25 @@ public class SunshineDetailMovieSpider extends ResourceSpider {
         }
 
         // pattern 2
-        contentEles = document.getElementsByAttributeValue("style", "FONT-SIZE: 12px");
+        if (urls.isEmpty()) {
+            contentEles = document.getElementsByAttributeValue("style", "FONT-SIZE: 12px");
 
-        Element firstEle = contentEles.get(0);
-
-        contentEles = firstEle.getElementsContainingOwnText("ftp://");
-
-        for (Element element : contentEles) {
-            String url = findFtpUrl(element.outerHtml());
-            if (StringUtils.isNotBlank(url) && StringUtil.isURL(url)) {
-                urls.add(url);
-                continue;
+            if (!contentEles.isEmpty()) {
+                List<String> urlSet = findUrlByPattern(contentEles.outerHtml(), ftpPattern);
+                if (!CollectionUtils.isEmpty(urlSet)) {
+                    urls.addAll(urlSet);
+                }
             }
         }
-
         // pattern 3
-        contentEles = document.getElementsByAttributeValue("color", "#ff0000");
-        for (Element element : contentEles) {
-            Node node = element.childNode(0);
-            while (!(node instanceof TextNode)) {
-                node = node.childNode(0);
-            }
-            String url = ((TextNode) node).text();
-
-            if (StringUtils.isNotBlank(url) && StringUtil.isURL(url)) {
-                urls.add(url);
-                continue;
+        if (urls.isEmpty()) {
+            contentEles = document.getElementsByAttributeValue("color", "#ff0000");
+            for (Element element : contentEles) {
+                String url = findUrl(element.outerHtml());
+                if (StringUtils.isNotBlank(url) && StringUtil.isURL(url)) {
+                    urls.add(url);
+                    continue;
+                }
             }
         }
 
@@ -177,80 +170,57 @@ public class SunshineDetailMovieSpider extends ResourceSpider {
 
     public static void main(String[] args) {
         String s = "ftp://迅雷发布xl.dygod.com:影片发布@xunlei.dygod.com/鬼面骑士[<a target=\"_blank\" href=\"http://www.dygod.com/\">www.dygod.com</a>]/鬼面骑士[bbs.dygod.com].rmvb<br><br>";
-        // System.out.println(findFtpUrl(s));
 
-        // s =
-        // "<td style=\"WORD-WRAP: break-word\" bgcolor=\"#fdfddf\"><font color=\"#ff0000\"><a href=\"http://dygod4.dygod.com/趁火行劫DVD/趁火行劫[www.dygod.com电影天堂].rmvb\">http://dygod4.dygod.com/趁火行劫DVD/趁火行劫[www.dygod.com电影天堂].rmvb</a></font></td>";
+        s = "ftp://资源发布xl.dygod.com:影片发布@xunlei.dygod.com/美女的烦恼DVD[</font><a target=\"_blank\" href=\"http://www.dygod.com/\"><font size=\"2\">www.dygod.com</font></a><font size=\"2\">]/美女的烦恼1[电影天堂论坛bbs.dygod.com].rmvb<br />";
 
-        StringBuilder buf = new StringBuilder();
-        Document doc = Jsoup.parse(s);
-        Elements eles = doc.getElementsByAttributeValue("color", "#ff0000");
+        s = "<td style=\"WORD-WRAP: break-word\" bgcolor=\"#fdfddf\"><font color=\"#ff0000\"><a href=\"http://dygod4.dygod.com/趁火行劫DVD/趁火行劫[www.dygod.com电影天堂].rmvb\">http://dygod4.dygod.com/趁火行劫DVD/趁火行劫[www.dygod.com电影天堂].rmvb</a></font></td>";
 
-        for (Element element : eles) {
-            Node node = element.childNode(0);
-            while (!(node instanceof TextNode)) {
-                node = node.childNode(0);
-            }
-            buf.append(((TextNode) node).text());
+        System.out.println(findUrlByPattern(s, ftpPattern));
+        System.out.println(findUrl(s));
+
+    }
+
+    static String  ftpRegex   = "ftp://(.+?)(.rmvb|.3pg)";
+
+    static Pattern ftpPattern = Pattern.compile(ftpRegex, Pattern.CASE_INSENSITIVE | Pattern.DOTALL | Pattern.MULTILINE);
+
+    private static List<String> findUrlByPattern(String html, Pattern pattern) {
+        if (StringUtils.isBlank(html)) {
+            return null;
         }
-        System.out.println(buf.toString());
+        html = StringUtil.cleanEnterChar(html);
+        Matcher m = pattern.matcher(html.trim());
 
-        // s =
-        // "ftp://资源发布xl.dygod.com:影片发布@xunlei.dygod.com/美女的烦恼DVD[</font><a target=\"_blank\" href=\"http://www.dygod.com/\"><font size=\"2\">www.dygod.com</font></a><font size=\"2\">]/美女的烦恼1[电影天堂论坛bbs.dygod.com].rmvb<br />";
-        doc = Jsoup.parse(s);
-        buf = new StringBuilder();
+        List<String> orderList = new LinkedList<String>();
+        Set<String> urls = new HashSet<String>();
 
+        while (m.find()) {
+            String result = m.group(0);
+            String url = findUrl(result);
+            if (null != url && !urls.contains(url)) {
+                urls.add(url);
+                orderList.add(url);
+            }
+        }
+        return orderList.isEmpty() ? null : orderList;
+    }
+
+    private static String findUrl(String html) {
+        StringBuilder buf = new StringBuilder(html.length());
+
+        Document doc = Jsoup.parse(html);
         List<Node> nodes = doc.child(0).childNode(1).childNodes();
-
         for1: for (Node node : nodes) {
-
             while (!(node instanceof TextNode)) {
                 if (node.childNodeSize() == 0) {
                     continue for1;
                 }
                 node = node.childNode(0);
             }
-
             buf.append(((TextNode) node).text());
         }
-        System.out.println(buf);
-    }
-
-    private static String findFtpUrl(String html) {
-        if (StringUtils.isBlank(html)) {
-            return null;
-        }
-
-        // ftp://迅雷发布xl.dygod.com:影片发布@xunlei.dygod.com/鬼面骑士[<a target="_blank"
-        // href="http://www.dygod.com/">www.dygod.com</a>]/鬼面骑士[bbs.dygod.com].rmvb<br />
-        String regex = "ftp://(.+?)<br";
-
-        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE | Pattern.DOTALL | Pattern.MULTILINE);
-
-        Matcher m = p.matcher(html.trim());
-        if (!m.find()) {
-            return null;
-        }
-
-        String result = m.group(0);
-
-        result = result.substring(0, result.length() - 3);
-        // ftp://迅雷发布xl.dygod.com:影片发布@xunlei.dygod.com/鬼面骑士[<a target="_blank"
-        // href="http://www.dygod.com/">www.dygod.com</a>]/鬼面骑士[bbs.dygod.com].rmvb
-
-        StringBuilder buf = new StringBuilder(result.length());
-        Document doc = Jsoup.parse(result);
-        List<Node> nodes = doc.childNodes();
-        Node targetNode = nodes.get(0).childNode(1);
-        for (Node node : targetNode.childNodes()) {
-            while (!(node instanceof TextNode)) {
-                node = node.childNode(0);
-            }
-            buf.append(node.outerHtml().replaceAll("\\r", "").replaceAll("\\n", "").trim());
-        }
-        // ftp://迅雷发布xl.dygod.com:影片发布@xunlei.dygod.com/鬼面骑士[www.dygod.com]/鬼面骑士[bbs.dygod.com].rmvb
-
-        return buf.toString();
+        String url = buf.toString();
+        return StringUtil.isURL(url) ? url : null;
     }
 
 }

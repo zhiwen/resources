@@ -25,4 +25,8 @@ public final class StringUtil {
     public static boolean isURL(String url) {
         return url.startsWith("http://") || url.startsWith("ftp://") || url.startsWith("thunder://");
     }
+
+    public static String cleanEnterChar(String html) {
+        return html.replaceAll("\r", "").replaceAll("\n", "");
+    }
 }
