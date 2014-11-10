@@ -18,6 +18,7 @@ import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,13 @@ public class SunshineMovieSpider extends ResourceSpider {
     // http://www.ygdy8.com/html/gndy/oumei/list_7_1.html
     // http://www.ygdy8.com/html/gndy/oumei/list_7_261.html
 
-    private final List<String>     urls    = new ArrayList<String>();
+    // 国内
+    // http://www.ygdy8.com/html/gndy/china/list_4_97.html
+
+    // 结合
+    // http://www.ygdy8.com/html/gndy/jddy/list_63_167.html
+
+    private final List<String>     urls          = new ArrayList<String>();
     {
         urls.add("http://www.ygdy8.com/html/gndy/dyzz/list_23_%d.html");
         urls.add("http://www.ygdy8.com/html/gndy/rihan/list_6_%d.html");
@@ -54,8 +61,9 @@ public class SunshineMovieSpider extends ResourceSpider {
         urls.add("http://www.ygdy8.com/html/gndy/jddy/list_63_%d.html");
     }
 
-    private final File             urlFile = new File("/Users/zhiwenmizw/work/resources/processed_url");
-    private final Set<String>      urlSets = new HashSet<String>();
+    private final File             urlFile       = new File("/Users/zhiwenmizw/work/resources/processed_url");
+    private final File             failedUrlFile = new File("/Users/zhiwenmizw/work/resources/processed_faild_url");
+    private final Set<String>      urlSets       = new HashSet<String>();
 
     @Override
     public void parse(String urlString) throws IOException {
@@ -68,24 +76,35 @@ public class SunshineMovieSpider extends ResourceSpider {
 
         for (String stringUrl : urls) {
 
-            int page = 1;
+            int page = 1, times = 0;
             while (true) {
                 String formatedUrl = String.format(stringUrl, page);
-                if (urlSets.contains(stringUrl)) {
+                if (urlSets.contains(formatedUrl)) {
+                    page++;
                     continue;
                 }
                 System.out.println("current-spider-url:" + formatedUrl);
                 Document document = null;
                 try {
                     document = getDocument(formatedUrl);
+                    if (document instanceof EndDocument) {
+                        break;// 表示结束了
+                    }
                     parseDocument(document);
                 } catch (Exception e) {
                     System.err.println(String.format("getDocument error-url[%s], exception[%s]", formatedUrl,
                                                      e.getMessage()));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e1) {
+                    }
+
+                    if (times > 3) {
+                        IOUtil.writeFile(failedUrlFile, formatedUrl, true);
+                        break;
+                    }
+                    times++;
                     continue;
-                }
-                if (null == document) {
-                    break;
                 }
                 // save point
                 IOUtil.writeFile(urlFile, formatedUrl, true);
@@ -120,13 +139,20 @@ public class SunshineMovieSpider extends ResourceSpider {
         // 翻页完了，结束了
         String location = response.header("Content-Location");
         if (null != location && location.contains("http://www.ygdy8.com/error.htm?404")) {
-            return null;
+            return new EndDocument("end");
         }
         String contentLength = response.header("Content-Length");
         if (null != contentLength && StringUtils.equals(contentLength, "0")) {
-            return null;
+            return new EndDocument("end");
         }
         return document;
+    }
+
+    public static class EndDocument extends Document {
+
+        public EndDocument(String baseUri){
+            super(baseUri);
+        }
     }
 
     @Override
@@ -152,7 +178,14 @@ public class SunshineMovieSpider extends ResourceSpider {
         for (Element element : contentEles) {
             String url = element.attr("href");
             if (element.childNodeSize() > 0) {
-                TextNode nameNode = (TextNode) element.childNode(0);
+
+                Node childNode = element.childNode(0);
+                while (!(childNode instanceof TextNode)) {
+                    childNode = childNode.childNode(0);
+                }
+
+                TextNode nameNode = (TextNode) childNode;
+
                 SpiderResourcesDO resDO = new SpiderResourcesDO();
                 resDO.setName(nameNode.text());
                 resDO.setUrl(url);
@@ -162,4 +195,5 @@ public class SunshineMovieSpider extends ResourceSpider {
         }
         return resList;
     }
+
 }
