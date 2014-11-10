@@ -1,5 +1,9 @@
 package com.resources.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -13,11 +17,18 @@ public class SpiderResourcesService {
     @Resource
     private SpiderResourcesMapper spiderResourcesMapper;
 
-    public long addSpiderResources(SpiderResourcesDO spiderRes) {
+    public int addSpiderResources(SpiderResourcesDO spiderRes) {
         return spiderResourcesMapper.addSpiderResources(spiderRes);
     }
 
-    public SpiderResourcesDO getSpiderResources(String name) {
-        return spiderResourcesMapper.getSpiderResources(name);
+    public int updateSpiderResources(SpiderResourcesDO spiderRes) {
+        return spiderResourcesMapper.updateSpiderResources(spiderRes);
+    }
+
+    public List<SpiderResourcesDO> getSpiderResources(int offset, int length) {
+        Map<String, Integer> params = new HashMap<String, Integer>();
+        params.put("offset", offset);
+        params.put("length", length);
+        return spiderResourcesMapper.getSpiderResources(params);
     }
 }

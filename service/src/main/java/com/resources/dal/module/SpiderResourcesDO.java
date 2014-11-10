@@ -10,6 +10,8 @@ public class SpiderResourcesDO {
 
     private Date   createdTime;
 
+    private int    status;
+
     public String getName() {
         return name;
     }
@@ -40,6 +42,14 @@ public class SpiderResourcesDO {
 
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

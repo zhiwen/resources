@@ -21,4 +21,8 @@ public final class StringUtil {
         }
         return 0;
     }
+
+    public static boolean isURL(String url) {
+        return url.startsWith("http://") || url.startsWith("ftp://") || url.startsWith("thunder://");
+    }
 }

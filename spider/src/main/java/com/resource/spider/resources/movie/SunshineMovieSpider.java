@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -83,14 +84,13 @@ public class SunshineMovieSpider extends ResourceSpider {
                     page++;
                     continue;
                 }
-                System.out.println("current-spider-url:" + formatedUrl);
                 Document document = null;
                 try {
                     document = getDocument(formatedUrl);
                     if (document instanceof EndDocument) {
                         break;// 表示结束了
                     }
-                    parseDocument(document);
+                    parseDocument(document, null);
                 } catch (Exception e) {
                     System.err.println(String.format("getDocument error-url[%s], exception[%s]", formatedUrl,
                                                      e.getMessage()));
@@ -156,7 +156,7 @@ public class SunshineMovieSpider extends ResourceSpider {
     }
 
     @Override
-    public boolean parseDocument(Document document) {
+    public boolean parseDocument(Document document, Map<String, Object> userData) {
         List<SpiderResourcesDO> resList = parseMovieResources(document);
 
         for (SpiderResourcesDO spiderResourcesDO : resList) {

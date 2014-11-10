@@ -1,11 +1,16 @@
 package com.resources.dal.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import com.resources.dal.module.SpiderResourcesDO;
 
 public interface SpiderResourcesMapper {
 
-    public long addSpiderResources(SpiderResourcesDO spiderRes);
+    public int addSpiderResources(SpiderResourcesDO spiderRes);
 
-    public SpiderResourcesDO getSpiderResources(String name);
+    public int updateSpiderResources(SpiderResourcesDO spiderRes);
+
+    public List<SpiderResourcesDO> getSpiderResources(Map<String, Integer> params);
 
 }
