@@ -5,8 +5,14 @@ import java.util.Date;
 public class SpiderResourcesDO {
 
     private String name;
+
+    private String cleanedName;
+
     private String url;
+
     private String downloadUrl;
+
+    private String doubanId;
 
     private Date   createdTime;
 
@@ -50,6 +56,22 @@ public class SpiderResourcesDO {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getCleanedName() {
+        return cleanedName;
+    }
+
+    public void setCleanedName(String cleanedName) {
+        this.cleanedName = cleanedName;
+    }
+
+    public String getDoubanId() {
+        return doubanId;
+    }
+
+    public void setDoubanId(String doubanId) {
+        this.doubanId = doubanId;
     }
 
 }

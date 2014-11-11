@@ -9,6 +9,8 @@
 		<result property="name" column="name"/>
 		<result property="url" column="url"/>
 		<result property="downloadUrl" column="download_url"/>
+		<result property="cleanedName" column="cleaned_name"/>
+		<result property="doubanId" column="douban_id"/>
 		<result property="status" column="status"/>
 		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
@@ -18,9 +20,14 @@
 	</insert>
 	
 	<update id="updateSpiderResources" parameterType="spiderResourcesDO">
-		update spider_resources set download_url=#{downloadUrl}, status=#{status} where name = #{name}
+		update spider_resources 
+		<set>
+			<if test="downloadUrl != null">download_url=#{downloadUrl},</if>
+			<if test="cleanedName != null">cleaned_name=#{cleanedName},</if>
+			<if test="doubanId != null">douban_id=#{doubanId},</if>
+		</set>
+		where name = #{name}
 	</update>
-	
 	
 	<!-- 查询单条记录 -->
 	<select id="getSpiderResources" parameterType="java.util.HashMap" resultMap="spiderResourcesDO">

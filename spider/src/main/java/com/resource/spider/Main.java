@@ -25,8 +25,15 @@ public class Main {
         // ResourceSpider movieTTResSpider = (ResourceSpider) context.getBean("sunshineMovieSpider");
         // movieTTResSpider.parse("http://www.ygdy8.com/");
 
-        ResourceSpider sunshineDetailResSpider = (ResourceSpider) context.getBean("sunshineDetailMovieSpider");
+        // ResourceSpider sunshineDetailResSpider = (ResourceSpider) context.getBean("sunshineDetailMovieSpider");
+        // sunshineDetailResSpider.parse("http://www.ygdy8.com/");
+
+        ResourceSpider sunshineDetailResSpider = (ResourceSpider) context.getBean("doubanMovieSearch");
         sunshineDetailResSpider.parse("http://www.ygdy8.com/");
+
+    }
+
+    public void test() {
 
         // String domain = "AAftp://c:c@d3.dl1234.com:8006/";
         // String url = "[电影天堂www.dy2018.com]暗金丑岛君电影版2BD日语中字.rmvbZZ";
