@@ -1,6 +1,7 @@
 package com.resource.spider.resources;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -22,7 +23,7 @@ public abstract class MovieSpider extends ResourceSpider {
     private MovieService        movieService;
 
     @Override
-    public boolean parseDocument(Document document) {
+    public boolean parseDocument(Document document, Map<String, Object> userData) {
 
         ResourceInfoDTO<MovieDO> resourceInfoDTO = parseToMovie(document);
 

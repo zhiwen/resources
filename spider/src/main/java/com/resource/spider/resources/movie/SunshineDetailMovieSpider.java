@@ -62,7 +62,7 @@ public class SunshineDetailMovieSpider extends ResourceSpider {
             Map<String, Object> userData = new HashMap<String, Object>();
             for (SpiderResourcesDO spiderResourcesDO : resList) {
                 String url = "http://www.ygdy8.com" + spiderResourcesDO.getUrl();
-                if (urlSets.contains(url)) {
+                if (StringUtils.isNotBlank(spiderResourcesDO.getDownloadUrl()) && urlSets.contains(url)) {
                     continue;
                 }
 
@@ -166,6 +166,29 @@ public class SunshineDetailMovieSpider extends ResourceSpider {
             }
         }
 
+        // pattern 5
+        if (urls.isEmpty()) {
+            contentEles = document.getElementsByAttributeValue("style", "WORD-WRAP: break-word");
+            for (Element element : contentEles) {
+                String url = findUrl(element.outerHtml());
+                if (StringUtils.isNotBlank(url) && StringUtil.isURL(url)) {
+                    urls.add(url);
+                    continue;
+                }
+            }
+        }
+
+        // pattern 6
+        if (urls.isEmpty()) {
+            contentEles = document.getElementsContainingText("thunder://");
+            if (!contentEles.isEmpty()) {
+                List<String> urlSet = findUrlByThunderPattern(contentEles.outerHtml(), thunderPattern);
+                if (!CollectionUtils.isEmpty(urlSet)) {
+                    urls.addAll(urlSet);
+                }
+            }
+        }
+
         if (!CollectionUtils.isEmpty(urls)) {
             spiderResourcesDO.setDownloadUrl(JSON.toJSONString(urls));
 
@@ -190,11 +213,12 @@ public class SunshineDetailMovieSpider extends ResourceSpider {
         System.out.println(findUrlByPattern(s, ftpPattern));
         System.out.println(findUrl(s));
 
+        s = ">迅雷下载地址<br /><br />thunder://QUFmdHA6Ly9keWdvZDpkeWdvZEB4dW5sZWkuZHlnb2QuY29tL1vov4Xpm7fnlLXlvbHkuIvovb14bC5keWdvZC5jb21d5qOu5YakRFZELnJtdmJaWg==<br /><";
+        System.out.println(findUrlByThunderPattern(s, thunderPattern));
     }
 
-    static String  ftpRegex   = "ftp://(.+?)(.rmvb|.3pg|.mp4)";
-
-    static Pattern ftpPattern = Pattern.compile(ftpRegex, Pattern.CASE_INSENSITIVE | Pattern.DOTALL | Pattern.MULTILINE);
+    static Pattern ftpPattern = Pattern.compile("ftp://(.+?)(.rmvb|.3pg|.mp4)", Pattern.CASE_INSENSITIVE
+                                                                                | Pattern.DOTALL | Pattern.MULTILINE);
 
     private static List<String> findUrlByPattern(String html, Pattern pattern) {
         if (StringUtils.isBlank(html)) {
@@ -208,6 +232,31 @@ public class SunshineDetailMovieSpider extends ResourceSpider {
 
         while (m.find()) {
             String result = m.group(0);
+            String url = findUrl(result);
+            if (null != url && !urls.contains(url)) {
+                urls.add(url);
+                orderList.add(url);
+            }
+        }
+        return orderList.isEmpty() ? null : orderList;
+    }
+
+    static Pattern thunderPattern = Pattern.compile("thunder://(.+?)<br", Pattern.CASE_INSENSITIVE | Pattern.DOTALL
+                                                                          | Pattern.MULTILINE);
+
+    private static List<String> findUrlByThunderPattern(String html, Pattern pattern) {
+        if (StringUtils.isBlank(html)) {
+            return null;
+        }
+        html = StringUtil.cleanEnterChar(html);
+        Matcher m = pattern.matcher(html.trim());
+
+        List<String> orderList = new LinkedList<String>();
+        Set<String> urls = new HashSet<String>();
+
+        while (m.find()) {
+            String result = m.group(0);
+            result = result.substring(0, result.length() - 3);
             String url = findUrl(result);
             if (null != url && !urls.contains(url)) {
                 urls.add(url);
