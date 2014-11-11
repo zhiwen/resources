@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -62,25 +61,28 @@ public class DoubanMovieSearch extends ResourceSpider {
                 if (StringUtils.isBlank(spiderResourcesDO.getCleanedName())) {
                     continue;
                 }
+                if (StringUtils.isNotBlank(spiderResourcesDO.getDoubanIds())) {
+                    continue;
+                }
                 String name = spiderResourcesDO.getName();
                 String cleanedName = cleanMovieName(name);
 
                 List<String> idList = idNameMappingWithSuggest(name, cleanedName);
+                if (idList.isEmpty()) {
+                    continue;
+                }
 
                 spiderResourcesDO.setDownloadUrl(null);
                 spiderResourcesDO.setUrl(null);
+                spiderResourcesDO.setCleanedName(cleanedName);
                 spiderResourcesDO.setStatus(0);
 
-                if (idList.size() == 1) {
-                    spiderResourcesDO.setDoubanId(idList.get(0));
-                }
-                if (idList.size() > 1) {
-                    spiderResourcesDO.setStatus(4);
-                }
+                spiderResourcesDO.setDoubanIds(JSON.toJSONString(idList));
+
                 spiderResourcesService.updateSpiderResources(spiderResourcesDO);
 
                 try {
-                    Thread.sleep(6000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
             }
@@ -107,21 +109,21 @@ public class DoubanMovieSearch extends ResourceSpider {
 
             JSONObject subject = (JSONObject) object;
             String movieUrl = subject.get("url").toString();
-            String title = subject.get("title").toString();
-            String subTitle = subject.get("sub_title").toString();
-            String type = subject.get("type").toString();
+            // String title = subject.get("title").toString();
+            // String subTitle = (String) subject.get("sub_title");
+            String type = (String) subject.get("type");
             if (!StringUtils.equals(type, "movie")) {
                 continue;
             }
-            if (StringUtils.equals(cleanedName, title) || StringUtils.equals(cleanedName, subTitle)) {
-                // http://movie.douban.com/subject/1436891/?suggest=%E5%A4%A7%E5%81%B7%E8%A2%AD
-                Matcher m = doubanIdPattern.matcher(movieUrl);
-                if (m.find()) {
-                    String id = m.group(0);
-                    id = id.substring(idMarkLength, id.length() - 1);
-                    idList.add(id);
-                }
+            // if (StringUtils.equals(cleanedName, title) || StringUtils.equals(cleanedName, subTitle)) {
+            // http://movie.douban.com/subject/1436891/?suggest=%E5%A4%A7%E5%81%B7%E8%A2%AD
+            Matcher m = doubanIdPattern.matcher(movieUrl);
+            if (m.find()) {
+                String id = m.group(0);
+                id = id.substring(idMarkLength, id.length() - 1);
+                idList.add(id);
             }
+            // }
         }
         return idList;
     }
@@ -203,9 +205,10 @@ public class DoubanMovieSearch extends ResourceSpider {
     public String getHttpHtml(URL url) {
         InputStream in = null;
         try {
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            HttpURLConnectionWrapper con = new HttpURLConnectionWrapper(url);
             con.setConnectTimeout(getTimeout());
             in = con.getInputStream();
+
             return getHtml(in, "utf-8");
         } catch (Exception e) {
             e.printStackTrace();

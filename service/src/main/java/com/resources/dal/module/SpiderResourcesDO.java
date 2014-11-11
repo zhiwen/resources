@@ -12,7 +12,7 @@ public class SpiderResourcesDO {
 
     private String downloadUrl;
 
-    private String doubanId;
+    private String doubanIds;
 
     private Date   createdTime;
 
@@ -66,12 +66,12 @@ public class SpiderResourcesDO {
         this.cleanedName = cleanedName;
     }
 
-    public String getDoubanId() {
-        return doubanId;
+    public String getDoubanIds() {
+        return doubanIds;
     }
 
-    public void setDoubanId(String doubanId) {
-        this.doubanId = doubanId;
+    public void setDoubanIds(String doubanIds) {
+        this.doubanIds = doubanIds;
     }
 
 }
