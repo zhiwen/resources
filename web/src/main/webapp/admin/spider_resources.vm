@@ -1,0 +1,55 @@
+#parse("common/header.vm")
+</head>
+  <body>
+    <div class="container">
+        <p></p>
+        <table class="table table-bordered">
+            <tr>
+                <td>名称</td>
+                <td>名称2</td>
+                <td>豆瓣id</td>
+            </tr>
+			
+			#foreach($item in $list)
+            <tr class="success">
+                <td><a href="http://www.ygdy8.com${item.url}" target="_blank">$!escapeTool.escapeHtml($item.name)</td>
+                <td>$!escapeTool.escapeHtml($item.cleanedName)</td>
+                <td>
+				#set($dids=$!stringTool.stringToArray($!{item.doubanIds}))
+				<form>
+				#foreach($id in $dids)
+					<input type="radio" name="$!escapeTool.escapeHtml($item.name)" value="$!{id}">
+						<a href="http://movie.douban.com/subject/$!{id}/" target="_blank">$!{id}</a>
+					</input>
+				#end
+				#if($dids.size() > 0)
+				<input type="button" onclick="confirmChoosed('$!escapeTool.escapeHtml($item.name)')" class="btn btn-primary" #if($!{item.status}==1) disabled="disabled" #end value="ok" />
+				#end
+				</form>
+				</td>
+            </tr>
+			#end
+        </table>
+		
+		<nav>
+          <ul class="pagination pagination-lg">
+			#set($minus=$page - 1)
+			#set($plus=$page+1)
+            <li><a href="${minus}">上一页&laquo;</a></li>
+            <li><a href="${plus}">下一页&raquo;</a></li>
+          </ul>
+        </nav>
+    </div>
+	<script type="text/javascript">
+		function confirmChoosed(name) {
+			var eles = document.getElementsByName(name);
+			for(var i = 0; i < eles.length; i++ ) {
+				if(eles[i].checked) {
+					alert(eles[i].value);
+					alert($.ajax);
+				}
+			}
+		}
+	</script>
+#parse("common/script.vm")
+#parse("common/footer.vm")

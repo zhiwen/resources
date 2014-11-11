@@ -15,4 +15,9 @@
         <scope>application</scope>
         <class>com.resources.common.URLTools</class>
     </tool>
+    <tool>
+        <key>stringTool</key>
+        <scope>application</scope>
+        <class>com.resources.common.StringUtil</class>
+    </tool>
 </toolbox>

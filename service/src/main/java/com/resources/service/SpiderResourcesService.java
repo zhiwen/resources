@@ -31,4 +31,8 @@ public class SpiderResourcesService {
         params.put("length", length);
         return spiderResourcesMapper.getSpiderResources(params);
     }
+
+    public SpiderResourcesDO getSpiderResource(String name) {
+        return spiderResourcesMapper.getSpiderResource(name);
+    }
 }

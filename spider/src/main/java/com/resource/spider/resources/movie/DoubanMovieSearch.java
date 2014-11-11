@@ -109,7 +109,7 @@ public class DoubanMovieSearch extends ResourceSpider {
 
             JSONObject subject = (JSONObject) object;
             String movieUrl = subject.get("url").toString();
-            // String title = subject.get("title").toString();
+            String title = subject.get("title").toString();
             // String subTitle = (String) subject.get("sub_title");
             String type = (String) subject.get("type");
             if (!StringUtils.equals(type, "movie")) {

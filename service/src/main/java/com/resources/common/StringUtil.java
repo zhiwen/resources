@@ -1,9 +1,15 @@
 package com.resources.common;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 
 public final class StringUtil {
 
@@ -28,5 +34,14 @@ public final class StringUtil {
 
     public static String cleanEnterChar(String html) {
         return html.replaceAll("\r", "").replaceAll("\n", "");
+    }
+
+    public static List<Object> stringToArray(String str) {
+
+        if (StringUtils.isBlank(str)) {
+            return Collections.emptyList();
+        }
+        JSONArray jsonArray = JSON.parseArray(str);
+        return new ArrayList<Object>(jsonArray);
     }
 }

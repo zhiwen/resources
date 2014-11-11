@@ -14,6 +14,8 @@ public class SpiderResourcesDO {
 
     private String doubanIds;
 
+    private String doubanNames;
+
     private Date   createdTime;
 
     private int    status;
@@ -72,6 +74,14 @@ public class SpiderResourcesDO {
 
     public void setDoubanIds(String doubanIds) {
         this.doubanIds = doubanIds;
+    }
+
+    public String getDoubanNames() {
+        return doubanNames;
+    }
+
+    public void setDoubanNames(String doubanNames) {
+        this.doubanNames = doubanNames;
     }
 
 }

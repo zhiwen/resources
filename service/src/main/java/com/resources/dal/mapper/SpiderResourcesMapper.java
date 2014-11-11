@@ -13,4 +13,6 @@ public interface SpiderResourcesMapper {
 
     public List<SpiderResourcesDO> getSpiderResources(Map<String, Integer> params);
 
+    public SpiderResourcesDO getSpiderResource(String name);
+
 }
