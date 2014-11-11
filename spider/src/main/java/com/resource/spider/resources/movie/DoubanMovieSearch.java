@@ -49,6 +49,8 @@ public class DoubanMovieSearch extends ResourceSpider {
 
         int offset = 0, length = 1000;
 
+        long id = 1;
+
         while (true) {
 
             List<SpiderResourcesDO> resList = spiderResourcesService.getSpiderResources(offset, length);
@@ -58,33 +60,32 @@ public class DoubanMovieSearch extends ResourceSpider {
             }
 
             for (SpiderResourcesDO spiderResourcesDO : resList) {
-                if (StringUtils.isBlank(spiderResourcesDO.getCleanedName())) {
-                    continue;
-                }
-                if (StringUtils.isNotBlank(spiderResourcesDO.getDoubanIds())) {
-                    continue;
-                }
+                // if (StringUtils.isBlank(spiderResourcesDO.getCleanedName())) {
+                // continue;
+                // }
+                // if (StringUtils.isNotBlank(spiderResourcesDO.getDoubanIds())) {
+                // continue;
+                // }
                 String name = spiderResourcesDO.getName();
                 String cleanedName = cleanMovieName(name);
 
-                List<String> idList = idNameMappingWithSuggest(name, cleanedName);
-                if (idList.isEmpty()) {
-                    continue;
-                }
+                // List<String> idList = idNameMappingWithSuggest(name, cleanedName);
+                // if (idList.isEmpty()) {
+                // continue;
+                // }
 
-                spiderResourcesDO.setDownloadUrl(null);
-                spiderResourcesDO.setUrl(null);
-                spiderResourcesDO.setCleanedName(cleanedName);
+                spiderResourcesDO.setCleanedName(StringUtils.trim(cleanedName));
                 spiderResourcesDO.setStatus(0);
+                spiderResourcesDO.setName(StringUtils.trim(name));
 
-                spiderResourcesDO.setDoubanIds(JSON.toJSONString(idList));
-
+                // spiderResourcesDO.setDoubanIds(JSON.toJSONString(idList));
+                spiderResourcesDO.setId(id++);
                 spiderResourcesService.updateSpiderResources(spiderResourcesDO);
 
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                }
+                // try {
+                // Thread.sleep(1000);
+                // } catch (InterruptedException e) {
+                // }
             }
 
             offset += length;

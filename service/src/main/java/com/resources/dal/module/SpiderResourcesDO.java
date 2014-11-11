@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class SpiderResourcesDO {
 
+    private long   id;
+
     private String name;
 
     private String cleanedName;
@@ -19,6 +21,14 @@ public class SpiderResourcesDO {
     private Date   createdTime;
 
     private int    status;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -83,5 +93,4 @@ public class SpiderResourcesDO {
     public void setDoubanNames(String doubanNames) {
         this.doubanNames = doubanNames;
     }
-
 }

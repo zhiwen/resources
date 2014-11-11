@@ -6,6 +6,7 @@
 <mapper namespace="com.resources.dal.mapper.SpiderResourcesMapper">
 	
 	<resultMap type="com.resources.dal.module.SpiderResourcesDO" id="spiderResourcesDO">
+		<result property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="url" column="url"/>
 		<result property="downloadUrl" column="download_url"/>
@@ -16,7 +17,7 @@
 		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
 
-	<insert id="addSpiderResources" parameterType="spiderResourcesDO">
+	<insert id="addSpiderResources" parameterType="spiderResourcesDO" useGeneratedKeys="true" keyProperty="id">
 		insert into spider_resources (name,url,download_url, created_time) values(#{name},#{url},#{downloadUrl}, #{createdTime})
 	</insert>
 	
@@ -28,6 +29,7 @@
 			<if test="doubanIds != null">douban_ids=#{doubanIds},</if>
 			<if test="doubanNames != null">douban_names=#{doubanNames},</if>
 			<if test="status != 0">status=#{status},</if>
+			<if test="id != 0">id=#{id},</if>
 		</set>
 		where name = #{name}
 	</update>
@@ -39,6 +41,10 @@
 	
 	<select id="getSpiderResource" parameterType="java.lang.String" resultMap="spiderResourcesDO">
 		select * from spider_resources where name=#{name}
+	</select>
+	
+	<select id="getSpiderResourceById" parameterType="java.lang.Long" resultMap="spiderResourcesDO">
+		select * from spider_resources where id=#{id}
 	</select>
 	
 </mapper>  

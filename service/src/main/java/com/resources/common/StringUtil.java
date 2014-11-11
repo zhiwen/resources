@@ -44,4 +44,20 @@ public final class StringUtil {
         JSONArray jsonArray = JSON.parseArray(str);
         return new ArrayList<Object>(jsonArray);
     }
+
+    public static String escapeHtml(String str) {
+        if (StringUtils.isBlank(str)) {
+            return str;
+        }
+        StringBuilder buf = new StringBuilder();
+        char chs[] = str.toCharArray();
+        for (char c : chs) {
+
+            if ('"' == c || '\'' == c) {
+                buf.append('\\');
+            }
+            buf.append(c);
+        }
+        return buf.toString();
+    }
 }

@@ -1,5 +1,6 @@
 package com.resources.web.controller.admin;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,12 +23,9 @@ public class SpiderResourcesManager {
     private SpiderResourcesService spiderResourcesService;
 
     @RequestMapping(value = { "list/{page}" }, method = { RequestMethod.GET })
-    public String list(Model model, @PathVariable("page") int page, @PathVariable("count") int count) {
+    public String list(Model model, @PathVariable("page") int page) {
 
-        int length = count;
-        if (length == 0) {
-            count = 50;
-        }
+        int length = 100;
 
         int offset = (Math.max(page, 1) - 1) * length;
 
@@ -39,13 +37,14 @@ public class SpiderResourcesManager {
         return "admin/spider_resources";
     }
 
-    @RequestMapping(value = "confirmed/{name}-{id}", method = { RequestMethod.GET })
-    public String confirmed(Model model, @PathVariable("name") String name, @PathVariable("id") String id) {
+    @RequestMapping(value = "confirmed/{rid}-{did}", method = { RequestMethod.POST })
+    public String confirmed(Model model, @PathVariable("rid") long rid, @PathVariable("did") String did)
+                                                                                                        throws UnsupportedEncodingException {
 
-        SpiderResourcesDO spiderResDO = spiderResourcesService.getSpiderResource(name);
+        SpiderResourcesDO spiderResDO = spiderResourcesService.getSpiderResourceById(rid);
 
         JSONArray jarray = new JSONArray();
-        jarray.add(id);
+        jarray.add(did);
         spiderResDO.setDoubanIds(jarray.toJSONString());
         spiderResDO.setStatus(1);
 

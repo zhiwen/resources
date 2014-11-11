@@ -15,4 +15,6 @@ public interface SpiderResourcesMapper {
 
     public SpiderResourcesDO getSpiderResource(String name);
 
+    public SpiderResourcesDO getSpiderResourceById(long id);
+
 }

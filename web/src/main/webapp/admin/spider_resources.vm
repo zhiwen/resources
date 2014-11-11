@@ -12,18 +12,22 @@
 			
 			#foreach($item in $list)
             <tr class="success">
-                <td><a href="http://www.ygdy8.com${item.url}" target="_blank">$!escapeTool.escapeHtml($item.name)</td>
-                <td>$!escapeTool.escapeHtml($item.cleanedName)</td>
+                <td><a href="http://www.ygdy8.com${item.url}" target="_blank">$item.name</td>
+                <td>$item.cleanedName</td>
                 <td>
 				#set($dids=$!stringTool.stringToArray($!{item.doubanIds}))
 				<form>
 				#foreach($id in $dids)
-					<input type="radio" name="$!escapeTool.escapeHtml($item.name)" value="$!{id}">
+					<input type="radio" name="$item.id" value="$!{id}">
 						<a href="http://movie.douban.com/subject/$!{id}/" target="_blank">$!{id}</a>
 					</input>
 				#end
 				#if($dids.size() > 0)
-				<input type="button" onclick="confirmChoosed('$!escapeTool.escapeHtml($item.name)')" class="btn btn-primary" #if($!{item.status}==1) disabled="disabled" #end value="ok" />
+					#if($!{item.status}==1) 
+					<input type="button" disabled="disabled" class="btn" value="ok" />
+					#else
+					<input type="button" onclick="confirmChoosed(${item.id})" class="btn btn-primary" value="ok" />
+					#end
 				#end
 				</form>
 				</td>
@@ -40,16 +44,21 @@
           </ul>
         </nav>
     </div>
-	<script type="text/javascript">
-		function confirmChoosed(name) {
-			var eles = document.getElementsByName(name);
-			for(var i = 0; i < eles.length; i++ ) {
-				if(eles[i].checked) {
-					alert(eles[i].value);
-					alert($.ajax);
-				}
+#parse("common/script.vm")
+
+<script type="text/javascript">
+	
+	function confirmChoosed(id) {
+		var eles = document.getElementsByName(id);
+		for(var i = 0; i < eles.length; i++ ) {
+			if(eles[i].checked) {
+				var url = "${domain}/admin/confirmed/"+id+"-"+eles[i].value+"";
+				url = encodeURI(url,"UTF-8");
+				$.post(url);
 			}
 		}
-	</script>
-#parse("common/script.vm")
+	}
+	
+</script>
+
 #parse("common/footer.vm")
