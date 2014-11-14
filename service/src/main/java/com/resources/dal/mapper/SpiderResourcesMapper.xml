@@ -29,7 +29,6 @@
 			<if test="doubanIds != null">douban_ids=#{doubanIds},</if>
 			<if test="doubanNames != null">douban_names=#{doubanNames},</if>
 			<if test="status != 0">status=#{status},</if>
-			<if test="id != 0">id=#{id},</if>
 		</set>
 		where name = #{name}
 	</update>

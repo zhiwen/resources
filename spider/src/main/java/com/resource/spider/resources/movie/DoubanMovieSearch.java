@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -60,32 +61,34 @@ public class DoubanMovieSearch extends ResourceSpider {
             }
 
             for (SpiderResourcesDO spiderResourcesDO : resList) {
-                // if (StringUtils.isBlank(spiderResourcesDO.getCleanedName())) {
-                // continue;
-                // }
-                // if (StringUtils.isNotBlank(spiderResourcesDO.getDoubanIds())) {
-                // continue;
-                // }
+
+                if (StringUtils.isBlank(spiderResourcesDO.getCleanedName())) {
+                    continue;
+                }
+                if (StringUtils.isNotBlank(spiderResourcesDO.getDoubanIds())) {
+                    continue;
+                }
                 String name = spiderResourcesDO.getName();
                 String cleanedName = cleanMovieName(name);
 
-                // List<String> idList = idNameMappingWithSuggest(name, cleanedName);
-                // if (idList.isEmpty()) {
-                // continue;
-                // }
+                List<String> idList = idNameMappingWithSuggest(name, cleanedName);
+                if (!idList.isEmpty()) {
 
-                spiderResourcesDO.setCleanedName(StringUtils.trim(cleanedName));
-                spiderResourcesDO.setStatus(0);
-                spiderResourcesDO.setName(StringUtils.trim(name));
+                    spiderResourcesDO.setCleanedName(StringUtils.trim(cleanedName));
+                    spiderResourcesDO.setStatus(0);
+                    spiderResourcesDO.setName(StringUtils.trim(name));
 
-                // spiderResourcesDO.setDoubanIds(JSON.toJSONString(idList));
-                spiderResourcesDO.setId(id++);
-                spiderResourcesService.updateSpiderResources(spiderResourcesDO);
+                    spiderResourcesDO.setDoubanIds(JSON.toJSONString(idList));
+                    spiderResourcesDO.setId(id++);
+                    spiderResourcesService.updateSpiderResources(spiderResourcesDO);
+                }
 
-                // try {
-                // Thread.sleep(1000);
-                // } catch (InterruptedException e) {
-                // }
+                try {
+                    System.out.println("======" + spiderResourcesDO.getId());
+                    Thread.sleep(6000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
             offset += length;
@@ -101,6 +104,10 @@ public class DoubanMovieSearch extends ResourceSpider {
 
         String url = String.format(suggestApi, URLEncoder.encode(cleanedName, "utf-8"));
         String jsonContent = getHttpHtml(new URL(url));
+
+        if (StringUtils.isBlank(jsonContent)) {
+            return Collections.emptyList();
+        }
 
         JSONArray jsonArray = JSON.parseArray(jsonContent);
 
@@ -204,20 +211,19 @@ public class DoubanMovieSearch extends ResourceSpider {
     }
 
     public String getHttpHtml(URL url) {
-        InputStream in = null;
+        HttpURLConnectionWrapper con = null;
         try {
-            HttpURLConnectionWrapper con = new HttpURLConnectionWrapper(url);
-            con.setConnectTimeout(getTimeout());
-            in = con.getInputStream();
-
+            con = new HttpURLConnectionWrapper(url);
+            // con.setConnectTimeout(getTimeout());
+            InputStream in = con.getInputStream();
             return getHtml(in, "utf-8");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (in != null) {
+            if (con != null) {
                 try {
-                    in.close();
-                } catch (IOException e) {
+                    con.disconnect();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -226,6 +232,9 @@ public class DoubanMovieSearch extends ResourceSpider {
     }
 
     public String getHtml(InputStream in, String charset) {
+        if (null == in) {
+            return null;
+        }
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream(2048);
             int count = 0;
