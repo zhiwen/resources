@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.resources.dal.mapper.ResMovieMapper">
+	
+	<sql id="allColumns">
+		id,did,title,original_title,cast_ids,director_ids,writer_ids,country_ids,alt,mobile_url,rating_count,rating_id,wish_count,collect_count,
+		subtype,website,douban_site,pubdates,mainland_pubdate,year,languages,durations,summary_id,comment_count,review_count,season_count,current_season,
+		episode_count,imdb_id,tag_ids,created_time,modified_time
+	</sql>
+	
+	<resultMap type="com.resources.dal.dataobject.ResMovieDO" id="movieDO">
+		<result property="id" column="id"/>
+		<result property="did" column="did"/>
+		<result property="title" column="title"/>
+		<result property="originalTitle" column="original_title"/>
+		<result property="castIds" column="cast_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="directorIds" column="director_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="writerIds" column="writer_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="countryIds" column="country_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="aka" column="aka" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="alt" column="alt"/>
+		<result property="mobileUrl" column="mobile_url"/>
+		<result property="ratingCount" column="rating_count"/>
+		<result property="ratingId" column="rating_id"/>
+		<result property="wishCount" column="wish_count"/>
+		<result property="collectCount" column="collect_count"/>
+		<result property="subType" column="subtype"/>
+		<result property="website" column="website"/>
+		<result property="doubanSite" column="douban_site"/>
+		<result property="pubdates" column="pubdates"/>
+		<result property="mainlandPubdate" column="mainland_pubdate"/>
+		<result property="year" column="year"/>
+		<result property="languages" column="languages" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="durations" column="durations"/>
+		<result property="summaryId" column="summary_id"/>
+		<result property="commentCount" column="comment_count"/>
+		<result property="reviewCount" column="review_count"/>
+		<result property="seasonCount" column="season_count"/>
+		<result property="currentSeason" column="current_season"/>
+		<result property="episodeCount" column="episode_count"/>
+		<result property="imdbId" column="imdb_id"/>
+		<result property="tagIds" column="tag_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+		<result property="modifiedTime" column="modified_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	</resultMap>
+
+	<insert id="addMovie" parameterType="movieDO">
+		insert into res_movie
+		<include refid="allColumns"/> 
+		values(
+		#{id},#{did},#{title},#{originalTitle},#{castIds},#{directorIds},#{writerIds},#{countryIds},#{alt},#{mobileUrl},
+		#{ratingCount},#{ratingId},#{wishCount},#{collectCount},#{subType},#{websiteUrl},#{doubanSite},#{pubdates},#{mainlandPubdate},
+		#{year},#{languages},#{durations},#{summaryId},#{commentCount},#{reviewCount},#{seasonCount},#{currentSeason},#{episodeCount},
+		#{imdbId},#{tagIds},#{createdTime},#{modifiedTime}
+		)
+	</insert>
+	
+	<delete id="deleteMovie" parameterType="long">
+		delete from res_movie where id = #{id}
+	</delete>
+	
+	<update id="updateMovie" parameterType="movieDO">
+		update res_movie
+		<set>
+			<if test="cid != 0">cid=#{cid},</if>
+			<if test="starLevel != 0">star_level=#{starLevel},</if>
+			<if test="modifiedTime != null">modified_time=#{modifiedTime},</if>		
+		</set>
+		where res_id = #{resId}
+	</update>
+	
+	<!-- 查询单条记录 -->
+	<select id="getMovie" parameterType="long" resultMap="movieDO">
+		select <include refid="allColumns"/> from res_movie where id = #{id}
+	</select>
+	
+	<select id="getMovieByPaginator" parameterType="java.util.Map" resultMap="movieDO">
+		select <include refid="allColumns"/> from res_movie limit #{offset}, #{length}
+	</select>
+	
+</mapper>  

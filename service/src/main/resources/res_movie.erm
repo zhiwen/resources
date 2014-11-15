@@ -11,8 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>0</x>
-	<y>0</y>
+	<x>36</x>
+	<y>70</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -42,9 +42,9 @@
 		<export_setting>
 			<category_name_to_export>All</category_name_to_export>
 			<ddl_output>/Users/zhiwenmizw/Public/dev/workcontent/resources/service/src/main/resources/res_movie.sql</ddl_output>
-			<excel_output></excel_output>
-			<excel_template></excel_template>
-			<image_output></image_output>
+			<excel_output>/Users/zhiwenmizw/Public/dev/workcontent/resources/service/src/main/resources/res_movie.xls</excel_output>
+			<excel_template>Default（English）</excel_template>
+			<image_output>/Users/zhiwenmizw/Public/dev/workcontent/resources/service/src/main/resources/res_movie.png</image_output>
 			<put_diagram_on_excel>false</put_diagram_on_excel>
 			<use_logical_name_as_sheet>false</use_logical_name_as_sheet>
 			<open_after_saved>false</open_after_saved>
@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2014-11-13 22:17:52</creation_date>
-			<updated_date>2014-11-15 14:16:47</updated_date>
+			<updated_date>2014-11-15 14:51:58</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -811,7 +811,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>20</word_id>
+					<word_id>21</word_id>
 					<id>0</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1038,7 +1038,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>21</word_id>
+					<word_id>20</word_id>
 					<id>6</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1439,8 +1439,25 @@
 				<primary_key_length_of_text>null</primary_key_length_of_text>
 			</table_properties>
 		</table>
-		<table>
+		<note>
 			<id>3</id>
+			<height>150</height>
+			<width>284</width>
+				<font_name>Lucida Grande</font_name>
+				<font_size>9</font_size>
+			<x>710</x>
+			<y>74</y>
+			<color>
+				<r>128</r>
+				<g>128</g>
+				<b>192</b>
+			</color>
+			<connections>
+			</connections>
+			<text>制作国家--&gt;tagId列表&#x0A;演员---&gt;tagId列表&#x0A;导演---&gt;tagId列表&#x0A;作家---&gt;tagId列表&#x0A;tag----&gt;tagId列表&#x0A;&#x0A;评分---&gt;kvId&#x0A;summary--&gt;kvId&#x0A;&#x0A;预告片地址、播放地址、封面地址、下载地址、剧照地址--&gt;url+obj_id&#x0A;</text>
+		</note>
+		<table>
+			<id>4</id>
 			<height>75</height>
 			<width>120</width>
 				<font_name>Lucida Grande</font_name>
@@ -2547,23 +2564,6 @@
 				<primary_key_length_of_text>null</primary_key_length_of_text>
 			</table_properties>
 		</table>
-		<note>
-			<id>4</id>
-			<height>150</height>
-			<width>284</width>
-				<font_name>Lucida Grande</font_name>
-				<font_size>9</font_size>
-			<x>710</x>
-			<y>74</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-			</connections>
-			<text>制作国家--&gt;tagId列表&#x0A;演员---&gt;tagId列表&#x0A;导演---&gt;tagId列表&#x0A;作家---&gt;tagId列表&#x0A;tag----&gt;tagId列表&#x0A;&#x0A;评分---&gt;kvId&#x0A;summary--&gt;kvId&#x0A;&#x0A;预告片地址、播放地址、封面地址、下载地址、剧照地址--&gt;url+obj_id&#x0A;</text>
-		</note>
 	</contents>
 	<column_groups>
 	</column_groups>

@@ -4,8 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-	<typeAliases>
-		<typeAlias type="com.resources.dal.module.ResourceInfoDO" alias="resourceInfo"/>
-	</typeAliases>
-
+	<typeHandlers>
+		<package name="com.resources.dal.mybatis.handlers"/>
+	</typeHandlers>
+	
 </configuration>
