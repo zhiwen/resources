@@ -54,7 +54,7 @@ CREATE TABLE RES_MOVIE
 	-- 作家-->tag表id列表
 	WRITER_IDS VARCHAR(100) COMMENT '作家-->tag表id列表',
 	-- 制片国家/地区-->tag表id列表
-	COUNTRIE_IDS VARCHAR(100) COMMENT '制片国家/地区-->tag表id列表',
+	COUNTRY_IDS VARCHAR(100) COMMENT '制片国家/地区-->tag表id列表',
 	-- 影视又名
 	AKA VARCHAR(100) COMMENT '影视又名',
 	-- douban影视url
@@ -62,7 +62,7 @@ CREATE TABLE RES_MOVIE
 	-- douban移动版影视url
 	MOBILE_URL VARCHAR(100) COMMENT 'douban移动版影视url',
 	-- 评分人数
-	RATINGS_COUNT INT COMMENT '评分人数',
+	RATING_COUNT INT COMMENT '评分人数',
 	-- 评分信息-->kv表id
 	RATING_ID BIGINT COMMENT '评分信息-->kv表id',
 	-- 想看人数
@@ -90,20 +90,20 @@ CREATE TABLE RES_MOVIE
 	SUMMARY_ID BIGINT COMMENT '简介-->kv表id
 ',
 	-- 短评数
-	COMMENTS_COUNT INT COMMENT '短评数',
+	COMMENT_COUNT INT COMMENT '短评数',
 	-- 影评数量
-	REVIEWS_COUNT INT COMMENT '影评数量',
+	REVIEW_COUNT INT COMMENT '影评数量',
 	-- 总季数(tv only)
-	SEASONS_COUNT INT COMMENT '总季数(tv only)',
+	SEASON_COUNT INT COMMENT '总季数(tv only)',
 	-- 当前季数(tv only)
 	CURRENT_SEASON INT COMMENT '当前季数(tv only)',
 	-- 当前季的集数(tv only)
-	EPISODES_COUNT INT COMMENT '当前季的集数(tv only)',
+	EPISODE_COUNT INT COMMENT '当前季的集数(tv only)',
 	-- imdb的id
 	IMDB_ID VARCHAR(50) COMMENT 'imdb的id',
 	-- 标签 -->tag表Id数组
 	-- 
-	TAGS VARCHAR(100) COMMENT '标签 -->tag表Id数组
+	TAG_IDS VARCHAR(100) COMMENT '标签 -->tag表Id数组
 ',
 	-- 创建时间
 	CREATED_TIME DATETIME NOT NULL COMMENT '创建时间',

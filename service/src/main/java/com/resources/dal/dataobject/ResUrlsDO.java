@@ -1,6 +1,6 @@
 package com.resources.dal.dataobject;
 
-public class ResUrls extends BaseDO {
+public class ResUrlsDO extends BaseDO {
 
     private long   id;
 

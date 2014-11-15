@@ -43,7 +43,7 @@
 		<property name="configLocation" value="mybatisConfig.xml" />
 		<!-- <property name="mapperLocations" value="classpath*:com/demo/mybatis/mapper/*.xml" 
 			/> -->
-		<property name="typeAliasesPackage" value="com.resources.dal.module" />
+		<property name="typeAliasesPackage" value="com.resources.dal.dataobject" />
 	</bean>
 
 	<!-- 自动扫描mapper 并注册 sqlSessionFactory -->

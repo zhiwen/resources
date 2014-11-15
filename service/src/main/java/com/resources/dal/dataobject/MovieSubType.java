@@ -4,7 +4,7 @@ public enum MovieSubType {
 
     movie(1), tv(2);
 
-    private final int typeValue;
+    public final int typeValue;
 
     private MovieSubType(int typeValue){
         this.typeValue = typeValue;
