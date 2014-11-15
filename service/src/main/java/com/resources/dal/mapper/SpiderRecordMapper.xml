@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.resources.dal.mapper.SpiderRecordMapper">
+	
+	<sql id="allColumns">
+		id, type, tag_name, page_number, eat_number, created_time
+	</sql>
+	
+	<resultMap type="com.resources.dal.dataobject.SpiderRecordDO" id="spiderRecordDO">
+		<result property="id" column="id"/>
+		<result property="type" column="type"/>
+		<result property="tagName" column="tag_name"/>
+		<result property="pageNumber" column="page_number"/>
+		<result property="eatNumber" column="eat_number"/>
+		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	</resultMap>
+
+	<insert id="addRecord" parameterType="spiderRecordDO" useGeneratedKeys="true" keyProperty="id">
+		insert into spider_record
+		(<include refid="allColumns"/>)
+		values(#{id},#{type},#{tagName},#{pageNumber},#{eatNumber},#{createdTime})
+	</insert>
+	
+	<delete id="deleteRecord" parameterType="long">
+		delete from spider_record where id = #{resId}
+	</delete>
+	
+	<update id="updateRecord" parameterType="spiderRecordDO">
+		update spider_record
+		<set>
+			<if test="pageNumber != 0">page_number=#{pageNumber},</if>
+			<if test="eatNumber != 0">eat_number=#{eatNumber},</if>		
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 查询单条记录 -->
+	<select id="getRecordByType" parameterType="int" resultMap="spiderRecordDO">
+		select * from spider_record where type = #{type}
+	</select>
+	
+</mapper>  
