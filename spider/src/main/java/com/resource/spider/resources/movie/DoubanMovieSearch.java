@@ -26,6 +26,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.resource.spider.ResourceSpider;
+import com.resource.spider.http.HttpURLConnectionWrapper;
 import com.resources.dal.module.SpiderResourcesDO;
 import com.resources.service.SpiderResourcesService;
 

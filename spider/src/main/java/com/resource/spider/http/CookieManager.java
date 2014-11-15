@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie;
+package com.resource.spider.http;
 
 import java.io.Serializable;
 import java.util.Map;
