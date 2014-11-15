@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.resources.common.BizType;
+import com.resources.common.BizTypeEnum;
 import com.resources.dal.module.ResourceInfoDO;
 import com.resources.service.MovieService;
 import com.resources.service.ResourceInfoService;
@@ -57,24 +57,24 @@ public class IndexManager {
          * </pre>
          */
 
-        List<ResourceInfoDO> hotMovieDLResList = resourceInfoService.getOrderResourceInfoByDownloads(0, BizType.MOVIE,
+        List<ResourceInfoDO> hotMovieDLResList = resourceInfoService.getOrderResourceInfoByDownloads(0, BizTypeEnum.MOVIE,
                                                                                                      0, 10);
 
-        List<ResourceInfoDO> hotGameDLResList = resourceInfoService.getOrderResourceInfoByDownloads(0, BizType.GAME, 0,
+        List<ResourceInfoDO> hotGameDLResList = resourceInfoService.getOrderResourceInfoByDownloads(0, BizTypeEnum.GAME, 0,
                                                                                                     10);
 
         List<ResourceInfoDO> hotSoftwareDLResList = resourceInfoService.getOrderResourceInfoByDownloads(0,
-                                                                                                        BizType.SOFTWARE,
+                                                                                                        BizTypeEnum.SOFTWARE,
                                                                                                         0, 10);
         model.addAttribute("hotMovieDLResList", hotMovieDLResList);
         model.addAttribute("hotGameDLResList", hotGameDLResList);
         model.addAttribute("hotSoftwareDLResList", hotSoftwareDLResList);
 
-        List<ResourceInfoDO> newMovieDLResList = resourceInfoService.getOrderResourceInfoByCreated(0, BizType.MOVIE, 0,
+        List<ResourceInfoDO> newMovieDLResList = resourceInfoService.getOrderResourceInfoByCreated(0, BizTypeEnum.MOVIE, 0,
                                                                                                    10);
         model.addAttribute("newMovieDLResList", newMovieDLResList);
 
-        List<ResourceInfoDO> newDocDLResList = resourceInfoService.getOrderResourceInfoByCreated(0, BizType.DOC, 0, 10);
+        List<ResourceInfoDO> newDocDLResList = resourceInfoService.getOrderResourceInfoByCreated(0, BizTypeEnum.DOC, 0, 10);
         model.addAttribute("newDocDLResList", newDocDLResList);
 
         return "index_source";

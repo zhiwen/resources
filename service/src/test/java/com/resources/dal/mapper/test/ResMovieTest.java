@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableList;
-import com.resources.common.MovieSubType;
+import com.resources.common.MovieSubTypeEnum;
 import com.resources.dal.dataobject.ResMovieDO;
 import com.resources.service.ResMovieService;
 
@@ -54,7 +54,7 @@ public class ResMovieTest extends TestCase {
         movie.setRatingId(1);
         movie.setWishCount(3322);
         movie.setCollectCount(2151);
-        movie.setSubType(MovieSubType.tv);
+        movie.setSubType(MovieSubTypeEnum.tv);
         movie.setWebsiteUrl("www.cbs.com/shows/big_bang_theory/");
         movie.setDoubanSite(null);
         movie.setPubdates("2014-09-22");

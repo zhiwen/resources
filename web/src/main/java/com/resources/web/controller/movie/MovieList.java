@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.resources.common.BizType;
+import com.resources.common.BizTypeEnum;
 import com.resources.dal.module.MovieDO;
 import com.resources.dal.module.ResourceInfoDO;
 import com.resources.service.MovieService;

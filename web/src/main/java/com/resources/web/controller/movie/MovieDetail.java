@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.resources.common.BizType;
+import com.resources.common.BizTypeEnum;
 import com.resources.dal.module.MovieDO;
 import com.resources.dal.module.ResourceInfoDO;
 import com.resources.service.MovieService;
@@ -36,7 +36,7 @@ public class MovieDetail {
             return "common/error.vm";
         }
 
-        if (BizType.MOVIE.getType() == resourceInfo.getBizType()) {
+        if (BizTypeEnum.MOVIE.getType() == resourceInfo.getBizType()) {
             MovieDO movie = movieService.getMovie(id);
 
             model.addAttribute("movie", movie);

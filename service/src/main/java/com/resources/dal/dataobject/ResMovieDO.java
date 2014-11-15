@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.resources.common.BaseDO;
-import com.resources.common.MovieSubType;
+import com.resources.common.MovieSubTypeEnum;
 
 public class ResMovieDO extends BaseDO {
 
@@ -73,7 +73,7 @@ public class ResMovieDO extends BaseDO {
     /**
      * 条目分类, movie或者tv
      */
-    private MovieSubType subType;
+    private MovieSubTypeEnum subType;
     /**
      * 官方网站
      */
@@ -259,11 +259,11 @@ public class ResMovieDO extends BaseDO {
         this.collectCount = collectCount;
     }
 
-    public MovieSubType getSubType() {
+    public MovieSubTypeEnum getSubType() {
         return subType;
     }
 
-    public void setSubType(MovieSubType subType) {
+    public void setSubType(MovieSubTypeEnum subType) {
         this.subType = subType;
     }
 

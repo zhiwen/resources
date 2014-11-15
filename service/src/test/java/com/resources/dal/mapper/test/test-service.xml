@@ -7,7 +7,7 @@
        ">
 
 	<context:component-scan base-package="com.resources.service" />
-	
+
 	<context:property-placeholder location="classpath:com/resources/dal/mapper/test/test-config.properties"/>
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"

@@ -9,13 +9,9 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedJdbcTypes;
-import org.apache.ibatis.type.MappedTypes;
 
 import com.alibaba.fastjson.JSON;
 
-@MappedTypes({ List.class })
-@MappedJdbcTypes({ JdbcType.VARCHAR, JdbcType.BIGINT, JdbcType.INTEGER })
 public class ObjectListToJSONHandler extends BaseTypeHandler<List<Object>> {
 
     @Override

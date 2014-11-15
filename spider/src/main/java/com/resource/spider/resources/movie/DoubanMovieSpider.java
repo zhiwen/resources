@@ -17,7 +17,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import com.resource.spider.resources.MovieSpider;
-import com.resources.common.BizType;
+import com.resources.common.BizTypeEnum;
 import com.resources.common.StringUtil;
 import com.resources.dal.module.MovieDO;
 import com.resources.dal.module.ResourceInfoDO;
@@ -81,7 +81,7 @@ public class DoubanMovieSpider extends MovieSpider {
         resourceInfo.setTitle(StringUtils.trim(title));
         resourceInfo.setCid(cid);
         resourceInfo.setDescription(StringUtils.trim(desc));
-        resourceInfo.setBizType(BizType.MOVIE.getType());
+        resourceInfo.setBizType(BizTypeEnum.MOVIE.getType());
 
         int hashCode = Math.abs(title.hashCode());
         if (hashCode > 500) {
