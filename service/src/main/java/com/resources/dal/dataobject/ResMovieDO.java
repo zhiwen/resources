@@ -134,6 +134,11 @@ public class ResMovieDO extends BaseDO {
      * tag-id列表
      */
     private List<Long>       tagIds;
+
+    /**
+     * 一部电影爬虫处理状态
+     */
+    private int              dataStatus;
     /**
      * 修改时间
      */
@@ -385,6 +390,14 @@ public class ResMovieDO extends BaseDO {
 
     public void setTagIds(List<Long> tagIds) {
         this.tagIds = tagIds;
+    }
+
+    public int getDataStatus() {
+        return dataStatus;
+    }
+
+    public void setDataStatus(int dataStatus) {
+        this.dataStatus = dataStatus;
     }
 
     public Date getModifiedTime() {

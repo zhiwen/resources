@@ -13,6 +13,8 @@ public interface ResMovieMapper {
 
     public int updateMovie(ResMovieDO movieDO);
 
+    public ResMovieDO getMovieByDid(long did);
+
     public ResMovieDO getMovie(long id);
 
     public List<ResMovieDO> getMovieByPaginator(Map<String, ? extends Object> params);
