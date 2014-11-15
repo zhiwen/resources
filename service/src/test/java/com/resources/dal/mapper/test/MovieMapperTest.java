@@ -31,13 +31,10 @@ public class MovieMapperTest extends TestCase {
 
         movieDO.setResId(1);
         movieDO.setCid(1);
-        movieDO.setCountry(1);
         movieDO.setCover("http://img3.douban.com/view/site/large/public/f92ffd2d4a123ee.jpg");
         movieDO.setAliasName("大空一号");
         movieDO.setDirector("xiamigg");
-        movieDO.setPerformer("007");
         movieDO.setScreenwriter("boundle");
-        movieDO.setLanguage(1);
         movieDO.setShowTime(360);
         movieDO.setMovieLength(1024);
         movieDO.setStarLevel(8.4f);
