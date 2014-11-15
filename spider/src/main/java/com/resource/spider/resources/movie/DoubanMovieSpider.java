@@ -81,7 +81,7 @@ public class DoubanMovieSpider extends MovieSpider {
         resourceInfo.setTitle(StringUtils.trim(title));
         resourceInfo.setCid(cid);
         resourceInfo.setDescription(StringUtils.trim(desc));
-        resourceInfo.setBizType(BizTypeEnum.MOVIE.getType());
+        resourceInfo.setBizType(BizTypeEnum.MOVIE.getValue());
 
         int hashCode = Math.abs(title.hashCode());
         if (hashCode > 500) {

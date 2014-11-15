@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.resources.common.BizType;
+import com.resources.common.BizTypeEnum;
 import com.resources.common.Constant;
 import com.resources.dal.mapper.ResourceInfoMapper;
 import com.resources.dal.module.ResourceInfoDO;
@@ -50,17 +50,17 @@ public class ResourceInfoService {
      * 获取按浏览数倒序的资源
      * 
      * @param cid
-     * @param bizType
+     * @param BizTypeEnum
      * @param offset
      * @param limit
      * @return
      */
-    public List<ResourceInfoDO> getOrderResourceInfoByViews(long cid, BizType bizType, int offset, int limit) {
+    public List<ResourceInfoDO> getOrderResourceInfoByViews(long cid, BizTypeEnum BizTypeEnum, int offset, int limit) {
 
         Map<String, Object> params = new HashMap<String, Object>();
 
         params.put("cid", cid);
-        params.put("bizType", bizType.getType());
+        params.put("BizTypeEnum", BizTypeEnum.getValue());
         params.put("offset", offset);
         params.put("limit", limit);
         params.put(Constant.ORDERBY_COLUMNS, "view_counts");
@@ -71,27 +71,27 @@ public class ResourceInfoService {
      * 获取按下载数倒序的资源
      * 
      * @param cid
-     * @param bizType
+     * @param BizTypeEnum
      * @param offset
      * @param limit
      * @return
      */
-    public List<ResourceInfoDO> getOrderResourceInfoByDownloads(long cid, BizType bizType, int offset, int limit) {
+    public List<ResourceInfoDO> getOrderResourceInfoByDownloads(long cid, BizTypeEnum BizTypeEnum, int offset, int limit) {
         Map<String, Object> params = new HashMap<String, Object>();
 
         params.put("cid", cid);
-        params.put("bizType", bizType.getType());
+        params.put("BizTypeEnum", BizTypeEnum.getValue());
         params.put("offset", offset);
         params.put("limit", limit);
         params.put(Constant.ORDERBY_COLUMNS, "download_counts");
         return resourceInfoMapper.getOrderResourceInfoByColumns(params);
     }
 
-    public List<ResourceInfoDO> getOrderResourceInfoByCreated(long cid, BizType bizType, int offset, int limit) {
+    public List<ResourceInfoDO> getOrderResourceInfoByCreated(long cid, BizTypeEnum BizTypeEnum, int offset, int limit) {
         Map<String, Object> params = new HashMap<String, Object>();
 
         params.put("cid", cid);
-        params.put("bizType", bizType.getType());
+        params.put("BizTypeEnum", BizTypeEnum.getValue());
         params.put("offset", offset);
         params.put("limit", limit);
         params.put(Constant.ORDERBY_COLUMNS, "modified_time");

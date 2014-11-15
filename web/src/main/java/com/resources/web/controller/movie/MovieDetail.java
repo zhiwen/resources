@@ -36,7 +36,7 @@ public class MovieDetail {
             return "common/error.vm";
         }
 
-        if (BizTypeEnum.MOVIE.getType() == resourceInfo.getBizType()) {
+        if (BizTypeEnum.MOVIE.getValue() == resourceInfo.getBizType()) {
             MovieDO movie = movieService.getMovie(id);
 
             model.addAttribute("movie", movie);
