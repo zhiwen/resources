@@ -47,14 +47,14 @@ CREATE TABLE RES_MOVIE
 	ORIGINAL_TITLE VARCHAR(100) COMMENT '原名',
 	-- 演员->tag表id列表
 	-- 
-	CASTS VARCHAR(100) COMMENT '演员->tag表id列表
+	CAST_IDS VARCHAR(100) COMMENT '演员->tag表id列表
 ',
 	-- 导演-->tag表id列表
-	DIRECTORS VARCHAR(100) COMMENT '导演-->tag表id列表',
+	DIRECTOR_IDS VARCHAR(100) COMMENT '导演-->tag表id列表',
 	-- 作家-->tag表id列表
-	WRITERS VARCHAR(100) COMMENT '作家-->tag表id列表',
+	WRITER_IDS VARCHAR(100) COMMENT '作家-->tag表id列表',
 	-- 制片国家/地区-->tag表id列表
-	COUNTRIES VARCHAR(100) COMMENT '制片国家/地区-->tag表id列表',
+	COUNTRIE_IDS VARCHAR(100) COMMENT '制片国家/地区-->tag表id列表',
 	-- 影视又名
 	AKA VARCHAR(100) COMMENT '影视又名',
 	-- douban影视url
