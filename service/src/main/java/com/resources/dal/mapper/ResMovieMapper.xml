@@ -52,7 +52,7 @@
 		(<include refid="allColumns"/>)
 		values(
 		#{id},#{did},#{title},#{originalTitle},#{castIds},#{directorIds},#{writerIds},#{countryIds},#{aka},#{alt},#{mobileUrl},
-		#{ratingCount},#{ratingId},#{wishCount},#{collectCount},#{subType},#{websiteUrl},#{doubanSite},#{pubdates},#{mainlandPubdate},
+		#{ratingCount},#{ratingId},#{wishCount},#{collectCount},#{subType},#{website},#{doubanSite},#{pubdates},#{mainlandPubdate},
 		#{year},#{languages},#{durations},#{summaryId},#{commentCount},#{reviewCount},#{seasonCount},#{currentSeason},#{episodeCount},
 		#{imdbId},#{tagIds},#{createdTime},#{modifiedTime}
 		)

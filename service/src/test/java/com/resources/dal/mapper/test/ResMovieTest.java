@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -55,7 +56,7 @@ public class ResMovieTest extends TestCase {
         movie.setWishCount(3322);
         movie.setCollectCount(2151);
         movie.setSubType(MovieSubTypeEnum.tv);
-        movie.setWebsiteUrl("www.cbs.com/shows/big_bang_theory/");
+        movie.setWebsite("www.cbs.com/shows/big_bang_theory/");
         movie.setDoubanSite(null);
         movie.setPubdates("2014-09-22");
         movie.setMainlandPubdate(null);
@@ -71,7 +72,7 @@ public class ResMovieTest extends TestCase {
         movie.setSeasonCount(10);
         movie.setCurrentSeason(8);
         movie.setEpisodeCount(24);
-        movie.setImdbId("tt3596130");
+        movie.setImdbId("t3596130");
 
         ImmutableList<Long> tagIds = ImmutableList.of(1L, 2L, 3L);
         movie.setTagIds(tagIds);
@@ -83,8 +84,17 @@ public class ResMovieTest extends TestCase {
     }
 
     @Test
-    public void testAddResourceInfo() {
-        resMovieService.addMovie(get());
+    public void testAddResMovie() {
+        ResMovieDO movie = get();
+        resMovieService.addMovie(movie);
+        Assert.assertTrue(movie.getId() > 0);
+    }
 
+    @Test
+    public void testgetResMovie() {
+        ResMovieDO movie = resMovieService.getMovie(1L);
+        Assert.assertTrue(movie != null);
+        Assert.assertTrue(!movie.getAka().isEmpty());
+        Assert.assertTrue(movie.getSubType().getValue() == MovieSubTypeEnum.tv.getValue());
     }
 }

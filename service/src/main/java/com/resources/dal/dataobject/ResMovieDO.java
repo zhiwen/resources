@@ -8,68 +8,68 @@ import com.resources.common.MovieSubTypeEnum;
 
 public class ResMovieDO extends BaseDO {
 
-    private long         id;
+    private long             id;
 
     /**
      * doubanid
      */
-    private long         did;
+    private long             did;
 
     /**
      * 标题
      */
-    private String       title;
+    private String           title;
     /**
      * 原标题
      */
-    private String       originalTitle;
+    private String           originalTitle;
 
     /**
      * 演员
      */
-    private List<Long>   castIds;
+    private List<Long>       castIds;
 
     /**
      * 导演
      */
-    private List<Long>   directorIds;
+    private List<Long>       directorIds;
 
     /**
      * 作家
      */
-    private List<Long>   writerIds;
+    private List<Long>       writerIds;
     /**
      * 制作国家/地区
      */
-    private List<Long>   countryIds;
+    private List<Long>       countryIds;
     /**
      * 又名 ["天才也性感 第八季","天才理论传 第八季","大爆炸理论 第八季","宅男行不行 第八季(台)"]
      */
-    private List<String> aka;
+    private List<String>     aka;
     /**
      * 地址
      */
-    private String       alt;
+    private String           alt;
     /**
      * 移动版url
      */
-    private String       mobileUrl;
+    private String           mobileUrl;
     /**
      * 评分数
      */
-    private int          ratingCount;
+    private int              ratingCount;
     /**
      * 评分详细信息id
      */
-    private long         ratingId;
+    private long             ratingId;
     /**
      * 想看人数
      */
-    private int          wishCount;
+    private int              wishCount;
     /**
      * 看过人数
      */
-    private int          collectCount;
+    private int              collectCount;
     /**
      * 条目分类, movie或者tv
      */
@@ -77,67 +77,67 @@ public class ResMovieDO extends BaseDO {
     /**
      * 官方网站
      */
-    private String       websiteUrl;
+    private String           website;
     /**
      * 豆瓣小站
      */
-    private String       doubanSite;
+    private String           doubanSite;
     /**
      * 如果条目类型是电影则为上映日期，如果是电视剧则为首Ï日期
      */
-    private String       pubdates;
+    private String           pubdates;
     /**
      * 大陆上映日期，如果条目类型是电影则为上映日期，如果是电视剧则为首播日期
      */
-    private String       mainlandPubdate;
+    private String           mainlandPubdate;
     /**
      * 年代
      */
-    private String       year;
+    private String           year;
     /**
      * 语言
      */
-    private List<String> languages;
+    private List<String>     languages;
     /**
      * 片长
      */
-    private String       durations;
+    private String           durations;
     /**
      * 摘要详情id
      */
-    private long         summaryId;
+    private long             summaryId;
     /**
      * 短评数量
      */
-    private int          commentCount;
+    private int              commentCount;
     /**
      * 影评数量
      */
-    private int          reviewCount;
+    private int              reviewCount;
     /**
      * 总季数(tv only)
      */
-    private int          seasonCount;
+    private int              seasonCount;
     /**
      * 当前季数(tv only)
      */
-    private int          currentSeason;
+    private int              currentSeason;
     /**
      * 当前季的集数(tv only)
      */
-    private int          episodeCount;
+    private int              episodeCount;
     /**
      * imdbId
      */
-    private String       imdbId;
+    private String           imdbId;
     /**
      * tag-id列表
      */
-    private List<Long>   tagIds;
+    private List<Long>       tagIds;
     /**
      * 修改时间
      */
-    private Date         modifiedTime;
+    private Date             modifiedTime;
 
     public long getId() {
         return id;
@@ -267,12 +267,12 @@ public class ResMovieDO extends BaseDO {
         this.subType = subType;
     }
 
-    public String getWebsiteUrl() {
-        return websiteUrl;
+    public String getWebsite() {
+        return website;
     }
 
-    public void setWebsiteUrl(String websiteUrl) {
-        this.websiteUrl = websiteUrl;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getDoubanSite() {
