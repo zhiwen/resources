@@ -8,7 +8,7 @@
 	<sql id="allColumns">
 		id,did,title,original_title,cast_ids,director_ids,writer_ids,country_ids,aka,alt,mobile_url,rating_count,rating_id,wish_count,collect_count,
 		subtype,website,douban_site,pubdates,mainland_pubdate,year,languages,durations,summary_id,comment_count,review_count,season_count,current_season,
-		episode_count,imdb_id,tag_ids,created_time,modified_time
+		episode_count,imdb_id,tag_ids,data_status,created_time,modified_time
 	</sql>
 	
 	<resultMap type="com.resources.dal.dataobject.ResMovieDO" id="resMovieDO">
@@ -43,6 +43,7 @@
 		<result property="episodeCount" column="episode_count"/>
 		<result property="imdbId" column="imdb_id"/>
 		<result property="tagIds" column="tag_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="dataStatus" column="data_status"/>
 		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 		<result property="modifiedTime" column="modified_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
@@ -54,7 +55,7 @@
 		#{id},#{did},#{title},#{originalTitle},#{castIds},#{directorIds},#{writerIds},#{countryIds},#{aka},#{alt},#{mobileUrl},
 		#{ratingCount},#{ratingId},#{wishCount},#{collectCount},#{subType},#{website},#{doubanSite},#{pubdates},#{mainlandPubdate},
 		#{year},#{languages},#{durations},#{summaryId},#{commentCount},#{reviewCount},#{seasonCount},#{currentSeason},#{episodeCount},
-		#{imdbId},#{tagIds},#{createdTime},#{modifiedTime}
+		#{imdbId},#{tagIds},#{dataStatus},#{createdTime},#{modifiedTime}
 		)
 	</insert>
 	

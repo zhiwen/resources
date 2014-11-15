@@ -8,5 +8,5 @@
 
 	<context:component-scan base-package="com.resource.spider.resources" />
 
-	<bean id="doubanMovieSpider" class="com.resource.spider.resources.movie.DoubanMovieSpider"/>
+	
 </beans>
