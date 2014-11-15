@@ -3,6 +3,9 @@ package com.resources.dal.dataobject;
 import java.util.Date;
 import java.util.List;
 
+import com.resources.common.BaseDO;
+import com.resources.common.MovieSubType;
+
 public class ResMovieDO extends BaseDO {
 
     private long         id;

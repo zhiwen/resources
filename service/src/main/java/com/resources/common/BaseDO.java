@@ -1,4 +1,4 @@
-package com.resources.dal.dataobject;
+package com.resources.common;
 
 import java.util.Date;
 

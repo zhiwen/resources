@@ -1,5 +1,7 @@
 package com.resources.dal.dataobject;
 
+import com.resources.common.BaseDO;
+
 public class ResUrlsDO extends BaseDO {
 
     private long   id;
