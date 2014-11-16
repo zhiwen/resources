@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.resources.dal.mapper.ResURLMapper">
+	
+	<sql id="allColumns">
+		id, biz_type, url, description, object_id, created_time
+	</sql>
+	
+	<resultMap type="com.resources.dal.dataobject.ResURLDO" id="resURLDO">
+		<result property="id" column="id"/>
+		<result property="bizType" column="biz_type" javaType="com.resources.common.BizTypeEnum" jdbcType="INTEGER"/>
+		<result property="url" column="url"/>
+		<result property="description" column="description"/>
+		<result property="objectId" column="object_id"/>
+		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	</resultMap>
+
+	<insert id="addData" parameterType="resURLDO" useGeneratedKeys="true" keyProperty="id">
+		insert into res_url
+		(<include refid="allColumns"/>)
+		values(#{id},#{bizType},#{url},#{description},#{objectId},#{createdTime})
+	</insert>
+	
+	<delete id="delData" parameterType="long">
+		delete from res_url where id = #{id}
+	</delete>
+	
+	<update id="updateData" parameterType="resURLDO">
+		update res_url
+		<set>
+			<if test="bizType != null">biz_type=#{bizType},</if>
+			<if test="url != null">url=#{url},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="objectId != null">object_id=#{objectId},</if>		
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 查询单条记录 -->
+	<select id="getData" parameterType="long" resultMap="resURLDO">
+		select <include refid="allColumns"/> from res_url where id = #{id}
+	</select>
+	
+</mapper>  

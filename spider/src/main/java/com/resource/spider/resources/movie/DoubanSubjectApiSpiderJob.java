@@ -100,6 +100,21 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         // release_year 发行年代
         // subtype Movie/TV
 
+        valueObject.getJSONObject("rating");
+        valueObject.getString("reviews_count");
+        valueObject.getString("wish_count");
+        valueObject.getString("collect_count");
+        valueObject.getJSONObject("images");
+        valueObject.getString("mobile_url");
+        valueObject.getString("title");
+        valueObject.getJSONArray("countries");
+        valueObject.getString("original_title");
+        valueObject.getString("summary");
+        valueObject.getString("comments_count");
+        valueObject.getString("ratings_count");
+        valueObject.getJSONArray("aka");
+        valueObject.getString("douban_site");
+
         // actors
         List<Long> castIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("actors"));
         if (CollectionUtils.isNotEmpty(castIds)) {

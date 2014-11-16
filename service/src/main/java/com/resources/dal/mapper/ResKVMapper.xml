@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.resources.dal.mapper.ResKVMapper">
+	
+	<cache/>
+	
+	<sql id="allColumns">
+		id,res_key, res_value, type,created_time
+	</sql>
+	
+	<resultMap type="com.resources.dal.dataobject.ResKVDO" id="resKVDO">
+		<result property="id" column="id"/>
+		<result property="resKey" column="res_key"/>
+		<result property="resValue" column="res_value"/>
+		<result property="type" column="type"/>
+		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	</resultMap>
+
+	<insert id="addData" parameterType="resKVDO" useGeneratedKeys="true" keyProperty="id">
+		insert into res_kv
+		(<include refid="allColumns"/>)
+		values(#{id},#{resKey},#{resValue},#{type},#{createdTime})
+	</insert>
+	
+	<delete id="delData" parameterType="long">
+		delete from res_kv where id = #{id}
+	</delete>
+	
+	<update id="updateData" parameterType="resKVDO">
+		update res_kv
+		<set>
+			<if test="resValue != null">res_key=#{resValue},</if>
+			<if test="type != null">type=#{type},</if>		
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 查询单条记录 -->
+	<select id="getData" parameterType="long" resultMap="resKVDO">
+		select <include refid="allColumns"/> from res_kv where id = #{id}
+	</select>
+	
+</mapper>  
