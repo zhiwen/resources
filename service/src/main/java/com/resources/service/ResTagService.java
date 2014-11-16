@@ -2,6 +2,7 @@ package com.resources.service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Resource;
 
@@ -16,7 +17,9 @@ import com.resources.dal.mapper.ResTagMapper;
 public class ResTagService {
 
     @Resource
-    private ResTagMapper resTagMapper;
+    private ResTagMapper                              resTagMapper;
+
+    private final ConcurrentHashMap<String, ResTagDO> cache = new ConcurrentHashMap<String, ResTagDO>(10240);
 
     public int addData(ResTagDO value) {
         if (null == value) {
@@ -45,14 +48,29 @@ public class ResTagService {
         if (null == value) {
             return null;
         }
+
         ResTagDO dbTagDO = null;
         if (0 == value.getId()) {
+            StringBuilder key = new StringBuilder().append(value.getBizType().getValue()).append('$').append(value.getTagName());
+            dbTagDO = cache.get(key.toString());
+            if (null != dbTagDO) {
+                return dbTagDO;
+            }
+
             ImmutableMap<String, ? extends Object> param = ImmutableMap.of("bizType", value.getBizType().getValue(),
                                                                            "tagName", value.getTagName());
             dbTagDO = resTagMapper.getDataByNameWithType(param);
+            if (null != dbTagDO) {
+                cache.put(key.toString(), dbTagDO);
+            }
         } else {
             dbTagDO = resTagMapper.getData(value.getId());
         }
+
+        if (cache.size() > 10000) {
+            cache.clear();
+        }
+
         if (null == dbTagDO) {
             int ret = resTagMapper.addData(value);
             if (ret > 0) {
