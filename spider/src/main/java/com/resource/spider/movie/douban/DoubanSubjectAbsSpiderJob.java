@@ -36,7 +36,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
     private final static Logger log              = LoggerFactory.getLogger(DoubanSubjectAbsSpiderJob.class);
 
     public String               doubanSubjectAbs = "http://movie.douban.com/j/subject_abstract?subject_id=%s";
-    public int                  timeInterval     = 5000;
+    public int                  timeInterval     = 4000;
 
     @Resource
     private ResMovieService     resMovieService;
