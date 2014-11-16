@@ -31,33 +31,32 @@ public class ResMovieService {
         if (null != movieDO) {
             return 0;
         }
-
         movieDO = new ResMovieDO();
         movieDO.setDid(did);
         movieDO.setTitle("");
         movieDO.setCreatedTime(new Date());
         movieDO.setModifiedTime(movieDO.getCreatedTime());
-        return resMovieMapper.addMovie(movieDO);
+        return resMovieMapper.addData(movieDO);
     }
 
     public int addMovie(ResMovieDO movieDO) {
-        return resMovieMapper.addMovie(movieDO);
+        return resMovieMapper.addData(movieDO);
     }
 
     public int deleteMovie(long id) {
-        return resMovieMapper.deleteMovie(id);
+        return resMovieMapper.delData(id);
     }
 
     public int updateMovie(ResMovieDO movieDO) {
-        return resMovieMapper.updateMovie(movieDO);
+        return resMovieMapper.updateData(movieDO);
     }
 
     public ResMovieDO getMovieByDid(long did) {
-        return resMovieMapper.getMovieByDid(did);
+        return resMovieMapper.getDataByDid(did);
     }
 
     public ResMovieDO getMovie(long id) {
-        return resMovieMapper.getMovie(id);
+        return resMovieMapper.getData(id);
     }
 
     public List<ResMovieDO> getMovieByPaginatorWithStatus(int dataStatus, int offset, int length) {

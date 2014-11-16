@@ -112,7 +112,7 @@ public class DoubanListSpiderJob implements SpiderJob {
                 recordDO.setType(SpiderRecordDO.SpiderRecordTypeEnum.douban.getValue());
                 recordDO.setTagName(tagName);
                 recordDO.setCreatedTime(new Date());
-                spiderRecordMapper.addRecord(recordDO);
+                spiderRecordMapper.addData(recordDO);
 
                 // news
                 spiderRecrods.add(recordDO);
@@ -167,7 +167,7 @@ public class DoubanListSpiderJob implements SpiderJob {
             // 4、记录总和总页条数到db
             spiderRecordDO.setPageNumber(i);
             spiderRecordDO.setEatNumber(eatedCount);
-            spiderRecordMapper.updateRecord(spiderRecordDO);
+            spiderRecordMapper.updateData(spiderRecordDO);
         }
     }
 

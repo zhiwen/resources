@@ -18,17 +18,17 @@
 		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
 
-	<insert id="addRecord" parameterType="spiderRecordDO" useGeneratedKeys="true" keyProperty="id">
+	<insert id="addData" parameterType="spiderRecordDO" useGeneratedKeys="true" keyProperty="id">
 		insert into spider_record
 		(<include refid="allColumns"/>)
 		values(#{id},#{type},#{tagName},#{pageNumber},#{eatNumber},#{createdTime})
 	</insert>
 	
-	<delete id="deleteRecord" parameterType="long">
+	<delete id="delData" parameterType="long">
 		delete from spider_record where id = #{resId}
 	</delete>
 	
-	<update id="updateRecord" parameterType="spiderRecordDO">
+	<update id="updateData" parameterType="spiderRecordDO">
 		update spider_record
 		<set>
 			<if test="pageNumber != 0">page_number=#{pageNumber},</if>
@@ -36,6 +36,10 @@
 		</set>
 		where id = #{id}
 	</update>
+	
+	<select id="getData" parameterType="long" resultMap="spiderRecordDO">
+		select * from spider_record where id = #{id}
+	</select>
 	
 	<!-- 查询单条记录 -->
 	<select id="getRecordByType" parameterType="int" resultMap="spiderRecordDO">

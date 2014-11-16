@@ -5,17 +5,9 @@ import java.util.Map;
 
 import com.resources.dal.dataobject.ResMovieDO;
 
-public interface ResMovieMapper {
+public interface ResMovieMapper extends BaseMapper<ResMovieDO, Long> {
 
-    public int addMovie(ResMovieDO movieDO);
-
-    public int deleteMovie(long id);
-
-    public int updateMovie(ResMovieDO movieDO);
-
-    public ResMovieDO getMovieByDid(long did);
-
-    public ResMovieDO getMovie(long id);
+    public ResMovieDO getDataByDid(long did);
 
     public List<ResMovieDO> getMovieByPaginatorWithStatus(Map<String, ? extends Object> params);
 
