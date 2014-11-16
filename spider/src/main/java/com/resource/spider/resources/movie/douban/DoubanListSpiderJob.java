@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie;
+package com.resource.spider.resources.movie.douban;
 
 import java.io.InputStream;
 import java.net.URL;

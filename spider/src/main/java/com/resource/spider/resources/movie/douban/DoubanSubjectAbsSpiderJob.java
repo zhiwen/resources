@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie;
+package com.resource.spider.resources.movie.douban;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -21,7 +21,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.resource.spider.SpiderJob;
 import com.resource.spider.http.HttpURLConnectionWrapper;
-import com.resource.spider.resources.movie.DoubanListSpiderJob.DataStatus;
+import com.resource.spider.resources.movie.douban.DoubanListSpiderJob.DataStatus;
 import com.resources.common.BizTypeEnum;
 import com.resources.common.IOUtil;
 import com.resources.common.MovieSubTypeEnum;

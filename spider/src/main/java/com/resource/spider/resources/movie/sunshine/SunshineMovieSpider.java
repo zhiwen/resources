@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie;
+package com.resource.spider.resources.movie.sunshine;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie;
+package com.resource.spider.resources.movie.douban;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,7 +20,6 @@ import javax.net.ssl.HttpsURLConnection;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
-import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -30,7 +29,8 @@ import com.resource.spider.http.HttpURLConnectionWrapper;
 import com.resources.dal.module.SpiderResourcesDO;
 import com.resources.service.SpiderResourcesService;
 
-@Service
+//@Service
+@Deprecated
 public class DoubanMovieSearch extends ResourceSpider {
 
     @Resource

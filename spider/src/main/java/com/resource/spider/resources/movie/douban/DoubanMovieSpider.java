@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie;
+package com.resource.spider.resources.movie.douban;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -14,7 +14,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Service;
 
 import com.resource.spider.resources.MovieSpider;
 import com.resources.common.BizTypeEnum;
@@ -23,7 +22,8 @@ import com.resources.dal.module.MovieDO;
 import com.resources.dal.module.ResourceInfoDO;
 import com.resources.service.dto.ResourceInfoDTO;
 
-@Service
+//@Service
+@Deprecated
 public class DoubanMovieSpider extends MovieSpider {
 
     private enum MovieInfoEnum {
