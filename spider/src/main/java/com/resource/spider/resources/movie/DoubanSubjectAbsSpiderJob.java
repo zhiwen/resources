@@ -149,14 +149,24 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
 
         // release_year
         String releaseYear = StringUtils.trim(valueObject.getString("release_year"));
-        if (StringUtils.isNotBlank(releaseYear) && StringUtils.isNumeric(releaseYear)) {
-            resMovieDO.setYear(releaseYear);
+        if (StringUtils.isNotBlank(releaseYear)) {
+            if (StringUtils.isNumeric(releaseYear)) {
+                resMovieDO.setYear(releaseYear);
+            } else {
+                log.error("releaseYear-not-an-number did[{}] releaseYear[{}]", resMovieDO.getDid(), releaseYear);
+            }
         }
 
         // subtype
         String subtype = StringUtils.trim(valueObject.getString("subtype"));
         if (StringUtils.isNotBlank(subtype)) {
-            resMovieDO.setSubType(MovieSubTypeEnum.valueOf(subtype));
+            if (StringUtils.equalsIgnoreCase(subtype, MovieSubTypeEnum.movie.name())) {
+                resMovieDO.setSubType(MovieSubTypeEnum.movie);
+            } else if (StringUtils.equalsIgnoreCase(subtype, MovieSubTypeEnum.tv.name())) {
+                resMovieDO.setSubType(MovieSubTypeEnum.tv);
+            } else {
+                log.error("unknow-subtype did[{}] releaseYear[{}]", resMovieDO.getDid(), subtype);
+            }
         }
 
         resMovieDO.setDataStatus(DataStatus.SubjectAbs.value);
@@ -176,6 +186,9 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
             for (ResMovieDO resMovieDO : movieList) {
                 String qulifySubjectUrl = String.format(doubanSubjectAbs, resMovieDO.getDid());
                 JSONObject valueObject = getData(qulifySubjectUrl);
+                if (null == valueObject) {
+                    continue;
+                }
                 valueObject = valueObject.getJSONObject("subject");
 
                 if (null == valueObject || valueObject.isEmpty()) {

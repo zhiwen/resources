@@ -5,6 +5,8 @@
   
 <mapper namespace="com.resources.dal.mapper.ResTagMapper">
 	
+	<cache/>
+	
 	<sql id="allColumns">
 		id,cid, biz_type, tag_name,created_time
 	</sql>
@@ -23,11 +25,11 @@
 		values(#{id},#{cid},#{bizType},#{tagName},#{createdTime})
 	</insert>
 	
-	<delete id="delData" parameterType="long">
+	<delete id="delData" parameterType="long" flushCache="true">
 		delete from res_tag where id = #{id}
 	</delete>
 	
-	<update id="updateData" parameterType="resTagDO">
+	<update id="updateData" parameterType="resTagDO" flushCache="true">
 		update res_tag
 		<set>
 			<if test="cid != 0">cid=#{cid},</if>
@@ -38,18 +40,18 @@
 	</update>
 	
 	<!-- 查询单条记录 -->
-	<select id="getData" parameterType="long" resultMap="resTagDO">
+	<select id="getData" parameterType="long" resultMap="resTagDO" useCache="true">
 		select <include refid="allColumns"/> from res_tag where id = #{id}
 	</select>
 	
-	<select id="getDataByIds" resultMap="resTagDO">
+	<select id="getDataByIds" resultMap="resTagDO" useCache="true">
 		select <include refid="allColumns"/> from res_tag where id in
 		<foreach collection="list" item="item" separator="," open="(" close=")">
 			#{item}
 		</foreach>
 	</select>
 	
-	<select id="getDataByNameWithType" resultMap="resTagDO">
+	<select id="getDataByNameWithType" resultMap="resTagDO" useCache="true">
 		select <include refid="allColumns"/> from res_tag where biz_type=#{bizType} and tag_name=#{tagName}
 	</select>
 	

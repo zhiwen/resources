@@ -47,8 +47,8 @@ public class ResTagService {
         }
         ResTagDO dbTagDO = null;
         if (0 == value.getId()) {
-            ImmutableMap<String, ? extends Object> param = ImmutableMap.of("bizType", value.getBizType(), "tagName",
-                                                                           value.getTagName());
+            ImmutableMap<String, ? extends Object> param = ImmutableMap.of("bizType", value.getBizType().getValue(),
+                                                                           "tagName", value.getTagName());
             dbTagDO = resTagMapper.getDataByNameWithType(param);
         } else {
             dbTagDO = resTagMapper.getData(value.getId());
