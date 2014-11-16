@@ -32,7 +32,7 @@
 	<update id="updateData" parameterType="resKVDO">
 		update res_kv
 		<set>
-			<if test="resValue != null">res_key=#{resValue},</if>
+			<if test="resValue != null">res_value=#{resValue},</if>
 			<if test="type != null">type=#{type},</if>		
 		</set>
 		where id = #{id}
@@ -41,6 +41,10 @@
 	<!-- 查询单条记录 -->
 	<select id="getData" parameterType="long" resultMap="resKVDO">
 		select <include refid="allColumns"/> from res_kv where id = #{id}
+	</select>
+	
+	<select id="getDataByKeyWithType" parameterType="java.util.HashMap" resultMap="resKVDO">
+		select <include refid="allColumns"/> from res_kv where res_key=#{resKey} and type=#{type}
 	</select>
 	
 </mapper>  

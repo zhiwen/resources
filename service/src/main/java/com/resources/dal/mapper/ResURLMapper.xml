@@ -34,7 +34,7 @@
 			<if test="bizType != null">biz_type=#{bizType},</if>
 			<if test="url != null">url=#{url},</if>
 			<if test="description != null">description=#{description},</if>
-			<if test="objectId != null">object_id=#{objectId},</if>		
+			<if test="objectId != 0">object_id=#{objectId},</if>		
 		</set>
 		where id = #{id}
 	</update>
