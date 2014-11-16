@@ -4,8 +4,6 @@ import com.resources.common.BaseDO;
 
 public class ResUrlsDO extends BaseDO {
 
-    private long   id;
-
     /**
      * 业务类型（预告片、播放地址、下载地址、封面、剧照）
      */

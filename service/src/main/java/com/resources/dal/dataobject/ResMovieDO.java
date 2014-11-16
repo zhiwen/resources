@@ -8,8 +8,6 @@ import com.resources.common.MovieSubTypeEnum;
 
 public class ResMovieDO extends BaseDO {
 
-    private long             id;
-
     /**
      * doubanid
      */
@@ -143,14 +141,6 @@ public class ResMovieDO extends BaseDO {
      * 修改时间
      */
     private Date             modifiedTime;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public long getDid() {
         return did;

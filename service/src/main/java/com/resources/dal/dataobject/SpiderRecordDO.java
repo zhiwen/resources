@@ -4,8 +4,6 @@ import com.resources.common.BaseDO;
 
 public class SpiderRecordDO extends BaseDO {
 
-    private long   id;
-
     private int    type;
 
     private String tagName;
@@ -13,14 +11,6 @@ public class SpiderRecordDO extends BaseDO {
     private int    pageNumber;
 
     private int    eatNumber;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public int getType() {
         return type;
