@@ -1,6 +1,7 @@
 package com.resources.dal.mapper.test;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -91,10 +92,18 @@ public class ResMovieTest extends TestCase {
     }
 
     @Test
-    public void testgetResMovie() {
+    public void testGetResMovie() {
         ResMovieDO movie = resMovieService.getMovie(1L);
         Assert.assertTrue(movie != null);
         Assert.assertTrue(!movie.getAka().isEmpty());
         Assert.assertTrue(movie.getSubType().getValue() == MovieSubTypeEnum.tv.getValue());
     }
+
+    @Test
+    public void testGetMovieByPaginatorWithStatus() {
+        List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(0, 0, 100);
+        Assert.assertTrue(movieList != null);
+        Assert.assertTrue(!movieList.isEmpty());
+    }
+
 }

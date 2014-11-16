@@ -30,11 +30,23 @@ import com.resources.dal.mapper.SpiderRecordMapper;
 import com.resources.service.ResMovieService;
 
 @Service
-public class DoubanSpiderJob implements SpiderJob {
+public class DoubanListSpiderJob implements SpiderJob {
+
+    public static enum DataStatus {
+        TagList(1), SubjectAbs(2), SubjectApi(3);
+
+        public final int value;
+
+        private DataStatus(int value){
+            this.value = value;
+        }
+    }
 
     public String              doubanTagPage = "http://movie.douban.com/tag/";
     public int                 length        = 20, timeInterval = 5000;
 
+    // http://movie.douban.com/j/subject_abstract?subject_id=2027945
+    // http://api.douban.com/v2/movie/subject/2027945
     @Resource
     private SpiderRecordMapper spiderRecordMapper;
 
@@ -117,50 +129,45 @@ public class DoubanSpiderJob implements SpiderJob {
         if (null == doc) {
             return;
         }
-        // 1、获取总页数
-        int pageNumber = 0;
-        Elements pagAEles = doc.getElementsByClass("paginator").get(0).getElementsByTag("a");
-        for (Element element : pagAEles) {
-            TextNode textNode = (TextNode) element.childNode(0);
-            String pageNumberString = StringUtils.trim(textNode.text());
-            if (!StringUtils.isNumeric(pageNumberString)) {
-                continue;
-            }
-            int pn = Integer.valueOf(pageNumberString);
-            if (pn > pageNumber) {
-                pageNumber = pn;
-            }
-        }
-
         List<Long> didList = null;
-        // 2、提前计算页面上有多少条数据，减少不必要的爬取
-        if (pageNumber == spiderRecordDO.getPageNumber()) {
-            int offset = (pageNumber - 1) * length;
-            doubanTagPageByTag = String.format("%s%s?start=%s&type=T", doubanTagPage, encTagName, offset);
-            didList = parsePageListItem(doubanTagPageByTag);
-
-            // 如果总条数和已经吃掉的条数一样则不需要继续爬了，表示没有新东西产生
-            int totalCount = didList.size() * pageNumber;
-            if (spiderRecordDO.getEatNumber() >= totalCount) {
-                return;
+        // 1、 吃了的条数和页数都为0，表示没有爬过。
+        if (0 == spiderRecordDO.getPageNumber() || 0 == spiderRecordDO.getEatNumber()) {
+            // 2、获取总页数
+            int pageNumber = 1;
+            Elements pagAEles = doc.getElementsByClass("paginator");
+            if (CollectionUtils.isNotEmpty(pagAEles)) {
+                pagAEles = pagAEles.get(0).getElementsByTag("a");
+                for (Element element : pagAEles) {
+                    TextNode textNode = (TextNode) element.childNode(0);
+                    String pageNumberString = StringUtils.trim(textNode.text());
+                    if (!StringUtils.isNumeric(pageNumberString)) {
+                        continue;
+                    }
+                    int pn = Integer.valueOf(pageNumberString);
+                    if (pn > pageNumber) {
+                        pageNumber = pn;
+                    }
+                }
             }
+            spiderRecordDO.setPageNumber(pageNumber);
         }
 
-        // 3、抓取每页的数据
+        // 3、抓取每页的数据, 从最后一页开始吃起
         int eatedCount = spiderRecordDO.getEatNumber();
-        for (int i = 1; i <= pageNumber; i++) {
+        for (int i = spiderRecordDO.getPageNumber(); i >= 1; i--) {
+
             int offset = (i - 1) * length;
+
             doubanTagPageByTag = String.format("%s%s?start=%s&type=T", doubanTagPage, encTagName, offset);
+
             didList = parsePageListItem(doubanTagPageByTag);
-            // 保存id到db，如果返回0表示当前爬的数据db都已经有了，直接结束了不需要继续爬了
+
             eatedCount += resMovieService.addMovieList(didList);
 
             // 4、记录总和总页条数到db
-            if (eatedCount > spiderRecordDO.getEatNumber()) {
-                spiderRecordDO.setPageNumber(pageNumber);
-                spiderRecordDO.setEatNumber(eatedCount);
-                spiderRecordMapper.updateRecord(spiderRecordDO);
-            }
+            spiderRecordDO.setPageNumber(i);
+            spiderRecordDO.setEatNumber(eatedCount);
+            spiderRecordMapper.updateRecord(spiderRecordDO);
         }
     }
 
@@ -203,7 +210,7 @@ public class DoubanSpiderJob implements SpiderJob {
         // 1、加载处理过的url，
         List<SpiderRecordDO> spiderRecrods = preData();
 
-        // 2、开始抓取列表页的数据
+        // 2、开始抓取列表页的数据并保存入db
         for (SpiderRecordDO spiderRecordDO : spiderRecrods) {
             parsePageList(spiderRecordDO);
         }

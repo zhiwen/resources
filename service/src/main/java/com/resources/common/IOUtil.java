@@ -1,7 +1,9 @@
 package com.resources.common;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,6 +45,16 @@ public class IOUtil {
         } catch (Exception e) {
             return Collections.emptyList();
         }
+    }
+
+    public static ByteArrayOutputStream getByteData(InputStream in) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int len = 0;
+        byte[] b = new byte[1024];
+        while ((len = in.read(b)) > 0) {
+            out.write(b, 0, len);
+        }
+        return out;
     }
 
 }

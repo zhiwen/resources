@@ -82,8 +82,8 @@
 		select <include refid="allColumns"/> from res_movie where did = #{did}
 	</select>
 	
-	<select id="getMovieByPaginator" parameterType="java.util.Map" resultMap="resMovieDO">
-		select <include refid="allColumns"/> from res_movie limit #{offset}, #{length}
+	<select id="getMovieByPaginatorWithStatus" parameterType="java.util.Map" resultMap="resMovieDO">
+		select id, did from res_movie where data_status=#{dataStatus} limit #{offset}, #{length}
 	</select>
 	
 </mapper>  

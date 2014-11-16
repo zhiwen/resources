@@ -60,9 +60,10 @@ public class ResMovieService {
         return resMovieMapper.getMovie(id);
     }
 
-    public List<ResMovieDO> getMovieByPaginator(int offset, int length) {
-        ImmutableMap<String, Integer> params = ImmutableMap.of("offset", offset, "length", length);
-        return resMovieMapper.getMovieByPaginator(params);
+    public List<ResMovieDO> getMovieByPaginatorWithStatus(int dataStatus, int offset, int length) {
+        ImmutableMap<String, Integer> params = ImmutableMap.of("dataStatus", dataStatus, "offset", offset, "length",
+                                                               length);
+        return resMovieMapper.getMovieByPaginatorWithStatus(params);
     }
 
 }
