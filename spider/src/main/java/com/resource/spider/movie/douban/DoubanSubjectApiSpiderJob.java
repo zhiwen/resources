@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie.douban;
+package com.resource.spider.movie.douban;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -21,7 +21,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.resource.spider.SpiderJob;
 import com.resource.spider.http.HttpURLConnectionWrapper;
-import com.resource.spider.resources.movie.douban.DoubanListSpiderJob.DataStatus;
+import com.resource.spider.movie.douban.DoubanListSpiderJob.DataStatus;
 import com.resources.common.BizTypeEnum;
 import com.resources.common.IOUtil;
 import com.resources.common.MovieSubTypeEnum;
@@ -31,11 +31,11 @@ import com.resources.service.ResMovieService;
 import com.resources.service.ResTagService;
 
 @Service
-public class DoubanSubjectAbsSpiderJob implements SpiderJob {
+public class DoubanSubjectApiSpiderJob implements SpiderJob {
 
-    private final static Logger log              = LoggerFactory.getLogger(DoubanSubjectAbsSpiderJob.class);
+    private final static Logger log              = LoggerFactory.getLogger(DoubanSubjectApiSpiderJob.class);
 
-    public String               doubanSubjectAbs = "http://movie.douban.com/j/subject_abstract?subject_id=%s";
+    public String               doubanSubjectApi = "http://api.douban.com/v2/movie/subject/%s";
     public int                  timeInterval     = 5000;
 
     @Resource
@@ -99,6 +99,21 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
         // -----star 星级
         // release_year 发行年代
         // subtype Movie/TV
+
+        valueObject.getJSONObject("rating");
+        valueObject.getString("reviews_count");
+        valueObject.getString("wish_count");
+        valueObject.getString("collect_count");
+        valueObject.getJSONObject("images");
+        valueObject.getString("mobile_url");
+        valueObject.getString("title");
+        valueObject.getJSONArray("countries");
+        valueObject.getString("original_title");
+        valueObject.getString("summary");
+        valueObject.getString("comments_count");
+        valueObject.getString("ratings_count");
+        valueObject.getJSONArray("aka");
+        valueObject.getString("douban_site");
 
         // actors
         List<Long> castIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("actors"));
@@ -169,7 +184,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
             }
         }
 
-        resMovieDO.setDataStatus(DataStatus.SubjectAbs.value);
+        resMovieDO.setDataStatus(DataStatus.SubjectApi.value);
         resMovieService.updateMovie(resMovieDO);
     }
 
@@ -177,14 +192,14 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
     public void execute() throws Exception {
         int offset = 0, length = 1000;
         while (true) {
-            List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.TagList.value,
+            List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.SubjectAbs.value,
                                                                                        offset, length);
             if (CollectionUtils.isEmpty(movieList)) {
                 break;// the end
             }
 
             for (ResMovieDO resMovieDO : movieList) {
-                String qulifySubjectUrl = String.format(doubanSubjectAbs, resMovieDO.getDid());
+                String qulifySubjectUrl = String.format(doubanSubjectApi, resMovieDO.getDid());
                 JSONObject valueObject = getData(qulifySubjectUrl);
                 if (null == valueObject) {
                     continue;

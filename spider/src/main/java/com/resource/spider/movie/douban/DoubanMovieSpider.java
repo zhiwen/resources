@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie.douban;
+package com.resource.spider.movie.douban;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -15,7 +15,7 @@ import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
-import com.resource.spider.resources.MovieSpider;
+import com.resource.spider.movie.MovieSpider;
 import com.resources.common.BizTypeEnum;
 import com.resources.common.StringUtil;
 import com.resources.dal.module.MovieDO;

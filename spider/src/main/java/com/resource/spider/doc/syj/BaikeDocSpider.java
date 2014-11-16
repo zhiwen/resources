@@ -1,4 +1,4 @@
-package com.resource.spider.resources.doc.syj;
+package com.resource.spider.doc.syj;
 
 import java.util.Map;
 

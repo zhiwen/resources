@@ -1,4 +1,4 @@
-package com.resource.spider.resources.movie.douban;
+package com.resource.spider.movie.douban;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

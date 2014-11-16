@@ -1,4 +1,4 @@
-package com.resource.spider.resources;
+package com.resource.spider.movie;
 
 import java.util.Date;
 import java.util.Map;

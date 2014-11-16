@@ -50,8 +50,7 @@ public class HttpURLConnectionWrapper {
             // 清除cookie并重新发请求
             CookieManager.getInstance().removeCookies(url.getHost());
             try {
-                httpURLConnection.disconnect();
-                is.close();
+                disconnect();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -79,14 +78,4 @@ public class HttpURLConnectionWrapper {
     public void disconnect() {
         httpURLConnection.disconnect();
     }
-    //
-    // @Override
-    // public boolean usingProxy() {
-    // return httpURLConnection.usingProxy();
-    // }
-    //
-    // @Override
-    // public void connect() throws IOException {
-    // httpURLConnection.connect();
-    // }
 }
