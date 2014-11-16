@@ -23,7 +23,7 @@ public class ResMovieDO extends BaseDO {
     private String           originalTitle;
 
     /**
-     * 演员
+     * 主演、演员
      */
     private List<Long>       castIds;
 
@@ -31,6 +31,11 @@ public class ResMovieDO extends BaseDO {
      * 导演
      */
     private List<Long>       directorIds;
+
+    /**
+     * 类型
+     */
+    private List<Long>       genreIds;
 
     /**
      * 作家
@@ -44,10 +49,7 @@ public class ResMovieDO extends BaseDO {
      * 又名 ["天才也性感 第八季","天才理论传 第八季","大爆炸理论 第八季","宅男行不行 第八季(台)"]
      */
     private List<String>     aka;
-    /**
-     * 地址
-     */
-    private String           alt;
+
     /**
      * 移动版url
      */
@@ -137,6 +139,12 @@ public class ResMovieDO extends BaseDO {
      * 一部电影爬虫处理状态
      */
     private int              dataStatus;
+
+    /**
+     * 是否可以播放
+     */
+    private int              playable;
+
     /**
      * 修改时间
      */
@@ -182,6 +190,14 @@ public class ResMovieDO extends BaseDO {
         this.directorIds = directorIds;
     }
 
+    public List<Long> getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(List<Long> genreIds) {
+        this.genreIds = genreIds;
+    }
+
     public List<Long> getWriterIds() {
         return writerIds;
     }
@@ -204,14 +220,6 @@ public class ResMovieDO extends BaseDO {
 
     public void setAka(List<String> aka) {
         this.aka = aka;
-    }
-
-    public String getAlt() {
-        return alt;
-    }
-
-    public void setAlt(String alt) {
-        this.alt = alt;
     }
 
     public String getMobileUrl() {
@@ -388,6 +396,14 @@ public class ResMovieDO extends BaseDO {
 
     public void setDataStatus(int dataStatus) {
         this.dataStatus = dataStatus;
+    }
+
+    public int getPlayable() {
+        return playable;
+    }
+
+    public void setPlayable(int playable) {
+        this.playable = playable;
     }
 
     public Date getModifiedTime() {

@@ -6,9 +6,9 @@
 <mapper namespace="com.resources.dal.mapper.ResMovieMapper">
 	
 	<sql id="allColumns">
-		id,did,title,original_title,cast_ids,director_ids,writer_ids,country_ids,aka,alt,mobile_url,rating_count,rating_id,wish_count,collect_count,
+		id,did,title,original_title,cast_ids,director_ids,genre_Ids,writer_ids,country_ids,aka,mobile_url,rating_count,rating_id,wish_count,collect_count,
 		subtype,website,douban_site,pubdates,mainland_pubdate,year,languages,durations,summary_id,comment_count,review_count,season_count,current_season,
-		episode_count,imdb_id,tag_ids,data_status,created_time,modified_time
+		episode_count,imdb_id,tag_ids,data_status,playable,created_time,modified_time
 	</sql>
 	
 	<resultMap type="com.resources.dal.dataobject.ResMovieDO" id="resMovieDO">
@@ -18,10 +18,10 @@
 		<result property="originalTitle" column="original_title"/>
 		<result property="castIds" column="cast_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="directorIds" column="director_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="genreIds" column="genre_Ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="writerIds" column="writer_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="countryIds" column="country_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="aka" column="aka" javaType="java.util.List" jdbcType="VARCHAR"/>
-		<result property="alt" column="alt"/>
 		<result property="mobileUrl" column="mobile_url"/>
 		<result property="ratingCount" column="rating_count"/>
 		<result property="ratingId" column="rating_id"/>
@@ -44,6 +44,7 @@
 		<result property="imdbId" column="imdb_id"/>
 		<result property="tagIds" column="tag_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="dataStatus" column="data_status"/>
+		<result property="playable" column="playable"/>
 		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 		<result property="modifiedTime" column="modified_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
@@ -52,25 +53,54 @@
 		insert into res_movie
 		(<include refid="allColumns"/>)
 		values(
-		#{id},#{did},#{title},#{originalTitle},#{castIds},#{directorIds},#{writerIds},#{countryIds},#{aka},#{alt},#{mobileUrl},
+		#{id},#{did},#{title},#{originalTitle},#{castIds},#{directorIds},#{genreIds},#{writerIds},#{countryIds},#{aka},#{mobileUrl},
 		#{ratingCount},#{ratingId},#{wishCount},#{collectCount},#{subType},#{website},#{doubanSite},#{pubdates},#{mainlandPubdate},
 		#{year},#{languages},#{durations},#{summaryId},#{commentCount},#{reviewCount},#{seasonCount},#{currentSeason},#{episodeCount},
-		#{imdbId},#{tagIds},#{dataStatus},#{createdTime},#{modifiedTime}
+		#{imdbId},#{tagIds},#{dataStatus},#{playable},#{createdTime},#{modifiedTime}
 		)
 	</insert>
 
 	<delete id="delData" parameterType="long">
 		delete from res_movie where id = #{id}
 	</delete>
-	
-	<update id="updateMovie" parameterType="resMovieDO">
+
+	<update id="updateData" parameterType="resMovieDO">
 		update res_movie
 		<set>
-			<if test="cid != 0">cid=#{cid},</if>
-			<if test="starLevel != 0">star_level=#{starLevel},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="originalTitle != null">original_title=#{originalTitle},</if>
+			<if test="castIds != null">cast_ids=#{castIds},</if>
+			<if test="directorIds != null">director_ids=#{directorIds},</if>
+			<if test="genreIds != null">genre_ids=#{genreIds},</if>
+			<if test="writerIds != null">writer_ids=#{writerIds},</if>
+			<if test="countryIds != null">country_ids=#{countryIds},</if>
+			<if test="aka != null">aka=#{aka},</if>
+			<if test="mobileUrl != null">mobile_url=#{mobileUrl},</if>
+			<if test="ratingCount != 0">rating_count=#{ratingCount},</if>
+			<if test="ratingId != 0">rating_id=#{ratingId},</if>
+			<if test="wishCount != 0">wish_count=#{wishCount},</if>
+			<if test="collectCount != 0">collect_count=#{collectCount},</if>
+			<if test="subType != null">subtype=#{subType},</if>
+			<if test="website != null">website=#{website},</if>
+			<if test="doubanSite != null">douban_site=#{doubanSite},</if>
+			<if test="pubdates != null">pubdates=#{pubdates},</if>
+			<if test="mainlandPubdate != null">mainland_pubdate=#{mainlandPubdate},</if>
+			<if test="year != 0">year=#{year},</if>
+			<if test="languages != null">languages=#{languages},</if>
+			<if test="durations != null">durations=#{durations},</if>
+			<if test="summaryId != 0">summary_id=#{summaryId},</if>
+			<if test="commentCount != 0">comment_count=#{commentCount},</if>
+			<if test="reviewCount != 0">review_count=#{reviewCount},</if>
+			<if test="seasonCount != 0">season_count=#{seasonCount},</if>
+			<if test="currentSeason != 0">current_season=#{currentSeason},</if>
+			<if test="episodeCount != 0">episode_count=#{episodeCount},</if>
+			<if test="imdbId != null">imdb_id=#{imdbId},</if>
+			<if test="tagIds != null">tag_ids=#{tagIds},</if>
+			<if test="dataStatus != 0">data_status=#{dataStatus},</if>
+			<if test="playable != 0">playable=#{playable},</if>
 			<if test="modifiedTime != null">modified_time=#{modifiedTime},</if>		
 		</set>
-		where res_id = #{resId}
+		where id = #{id}
 	</update>
 	
 	<!-- 查询单条记录 -->

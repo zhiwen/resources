@@ -12,7 +12,7 @@
 	<resultMap type="com.resources.dal.dataobject.ResTagDO" id="resTagDO">
 		<result property="id" column="id"/>
 		<result property="cid" column="cid"/>
-		<result property="bizType" column="biz_type"/>
+		<result property="bizType" column="biz_type" javaType="com.resources.common.BizTypeEnum" jdbcType="INTEGER"/>
 		<result property="tagName" column="tag_name"/>
 		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
@@ -31,7 +31,7 @@
 		update res_tag
 		<set>
 			<if test="cid != 0">cid=#{cid},</if>
-			<if test="bizType != 0">biz_type=#{bizType},</if>
+			<if test="bizType != null">biz_type=#{bizType},</if>
 			<if test="tagName != null">tag_name=#{tagName},</if>		
 		</set>
 		where id = #{id}
@@ -47,6 +47,10 @@
 		<foreach collection="list" item="item" separator="," open="(" close=")">
 			#{item}
 		</foreach>
+	</select>
+	
+	<select id="getDataByNameWithType" resultMap="resTagDO">
+		select <include refid="allColumns"/> from res_tag where biz_type=#{bizType} and tag_name=#{tagName}
 	</select>
 	
 </mapper>  

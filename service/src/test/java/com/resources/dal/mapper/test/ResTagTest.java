@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.common.collect.ImmutableList;
+import com.resources.common.BizTypeEnum;
 import com.resources.dal.dataobject.ResTagDO;
 import com.resources.service.ResTagService;
 
@@ -26,8 +27,8 @@ public class ResTagTest extends TestCase {
 
     public ResTagDO get() {
         ResTagDO value = new ResTagDO();
-        value.setBizType(1);
-        value.setCid(1);
+        value.setBizType(BizTypeEnum.MOVIE);
+        value.setCid(-1);
         value.setTagName("tagName");
         value.setCreatedTime(new Date());
         return value;

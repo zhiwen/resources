@@ -1,12 +1,13 @@
 package com.resources.dal.dataobject;
 
 import com.resources.common.BaseDO;
+import com.resources.common.BizTypeEnum;
 
 public class ResTagDO extends BaseDO {
 
-    private long   cid;
-    private int    bizType;
-    private String tagName;
+    private long        cid;
+    private BizTypeEnum bizType;
+    private String      tagName;
 
     public long getCid() {
         return cid;
@@ -16,11 +17,11 @@ public class ResTagDO extends BaseDO {
         this.cid = cid;
     }
 
-    public int getBizType() {
+    public BizTypeEnum getBizType() {
         return bizType;
     }
 
-    public void setBizType(int bizType) {
+    public void setBizType(BizTypeEnum bizType) {
         this.bizType = bizType;
     }
 

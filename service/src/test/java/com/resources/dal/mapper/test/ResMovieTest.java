@@ -48,8 +48,6 @@ public class ResMovieTest extends TestCase {
         ImmutableList<String> aka = ImmutableList.of("天才也性感 第八季", "天才理论传 第八季", "大爆炸理论 第八季", "宅男行不行 第八季(台)");
         movie.setAka(aka);
 
-        movie.setAlt("http://movie.douban.com/subject/25845393/");
-
         movie.setMobileUrl("http://movie.douban.com/subject/25845393/mobile");
 
         movie.setRatingCount(4497);
@@ -89,6 +87,15 @@ public class ResMovieTest extends TestCase {
         ResMovieDO movie = get();
         resMovieService.addMovie(movie);
         Assert.assertTrue(movie.getId() > 0);
+    }
+
+    @Test
+    public void testUpdateMovie() {
+        ResMovieDO movie = get();
+        resMovieService.addMovie(movie);
+        movie.setTitle(movie.getTitle() + "updated");
+        int r = resMovieService.updateMovie(movie);
+        Assert.assertTrue(r > 0);
     }
 
     @Test

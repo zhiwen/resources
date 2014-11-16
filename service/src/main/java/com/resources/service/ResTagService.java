@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.ImmutableMap;
 import com.resources.dal.dataobject.ResTagDO;
 import com.resources.dal.mapper.ResTagMapper;
 
@@ -25,14 +26,40 @@ public class ResTagService {
     }
 
     public int addDataIfNotExist(ResTagDO value) {
-        if (null == value || 0 == value.getId()) {
+        if (null == value) {
             return 0;
         }
         ResTagDO dbTagDO = resTagMapper.getData(value.getId());
         if (null != dbTagDO) {
             return 1;
         }
-        return resTagMapper.addData(value);
+        try {
+            return resTagMapper.addData(value);
+        } catch (Exception e) {
+            // not thing todo
+        }
+        return 1;
+    }
+
+    public ResTagDO getDataIfNotExistAdd(ResTagDO value) {
+        if (null == value) {
+            return null;
+        }
+        ResTagDO dbTagDO = null;
+        if (0 == value.getId()) {
+            ImmutableMap<String, ? extends Object> param = ImmutableMap.of("bizType", value.getBizType(), "tagName",
+                                                                           value.getTagName());
+            dbTagDO = resTagMapper.getDataByNameWithType(param);
+        } else {
+            dbTagDO = resTagMapper.getData(value.getId());
+        }
+        if (null == dbTagDO) {
+            int ret = resTagMapper.addData(value);
+            if (ret > 0) {
+                dbTagDO = value;
+            }
+        }
+        return dbTagDO;
     }
 
     public int delData(long pkId) {
