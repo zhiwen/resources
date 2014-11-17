@@ -1,15 +1,6 @@
 <component>
 	<fileSets>
 		<fileSet>
-			<directory>./src/main/scripts</directory>
-			<outputDirectory>bin</outputDirectory>
-			<includes>
-				<include>**/*</include>
-			</includes>
-			<fileMode>0755</fileMode>
-		</fileSet>
-
-		<fileSet>
 			<directory>./src/main/static</directory>
 			<outputDirectory>static</outputDirectory>
 			<includes>
