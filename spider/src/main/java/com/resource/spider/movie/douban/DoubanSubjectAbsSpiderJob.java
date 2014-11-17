@@ -170,7 +170,11 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
         }
 
         resMovieDO.setDataStatus(DataStatus.SubjectAbs.value);
-        resMovieService.updateMovie(resMovieDO);
+        try {
+            resMovieService.updateMovie(resMovieDO);
+        } catch (Exception e) {
+            log.error("updateMovie-fail movieDO:[{}]", resMovieDO);
+        }
     }
 
     @Override
@@ -185,6 +189,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
 
             for (ResMovieDO resMovieDO : movieList) {
                 String qulifySubjectUrl = String.format(doubanSubjectAbs, resMovieDO.getDid());
+                log.debug("processor-url:[{}]", qulifySubjectUrl);
                 JSONObject valueObject = getData(qulifySubjectUrl);
                 if (null == valueObject) {
                     continue;
