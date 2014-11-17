@@ -92,21 +92,21 @@
 	</appender>
 	
 	<logger name="com.resource.spider.movie.douban.DoubanListSpiderJob" addtivity="false">
-		<level value="ALL" />
+		<level value="info" />
 		<appender-ref ref="doubanListSpiderJobAppender"/>
 	</logger>
 	
 	<logger name="com.resource.spider.movie.douban.DoubanSubjectAbsSpiderJob" addtivity="false">
-		<level value="ALL" />
+		<level value="info" />
 		<appender-ref ref="doubanSubjectAbsSpiderJobAppender"/>
 	</logger>
 	
 	<logger name="com.resource.spider.movie.douban.DoubanSubjectApiSpiderJob" addtivity="false">
-		<level value="ALL" />
+		<level value="info" />
 		<appender-ref ref="doubanSubjectApiSpiderJobAppender"/>
 	</logger>
 	
-	<root level="ALL">
+	<root level="info">
 		<appender-ref ref="stdoutAppender" />
 		<appender-ref ref="rootAppender" />
 	</root>

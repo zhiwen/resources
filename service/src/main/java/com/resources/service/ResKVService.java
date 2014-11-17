@@ -25,7 +25,6 @@ public class ResKVService {
             value.setId(dbValue.getId());
             return 1;
         }
-
         return resKVMapper.addData(value);
     }
 

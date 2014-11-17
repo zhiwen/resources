@@ -39,8 +39,8 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
 
     private final static Logger log              = LoggerFactory.getLogger(DoubanSubjectApiSpiderJob.class);
 
-    public String               doubanSubjectApi = "http://api.douban.com/v2/movie/subject/%s";
-    public int                  timeInterval     = 5000;
+    public String               doubanSubjectApi = "http://api.douban.com/v2/movie/subject/%s?apikey=049d5a53f9bfebf30dd80efbed3fc3d9";
+    public int                  timeInterval     = 3000;
 
     @Resource
     private ResMovieService     resMovieService;
@@ -97,6 +97,20 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         return tagIds;
     }
 
+    private long addResKV(ResMovieDO resMovieDO, ResKVTypeEnum type, String value) {
+        ResKVDO resKVDO = new ResKVDO();
+        resKVDO.setResKey(String.valueOf(resMovieDO.getId()));
+        resKVDO.setCreatedTime(resMovieDO.getCreatedTime());
+        resKVDO.setType(type);
+        resKVDO.setResValue(value);
+        try {
+            resKVService.addData(resKVDO);
+        } catch (Exception e) {
+            log.error("addResKeyValue-fail did:[{}]", resMovieDO.getDid(), e);
+        }
+        return resKVDO.getId();
+    }
+
     public void parseAndSave(ResMovieDO resMovieDO, JSONObject valueObject) {
 
         int reviewCount = StringUtil.stringToInt(valueObject.getString("reviews_count"));
@@ -138,46 +152,38 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         JSONArray aka = valueObject.getJSONArray("aka");
         resMovieDO.setAka(StringUtil.toStringList(aka));
 
-        ResKVDO resKVDO = new ResKVDO();
-        resKVDO.setResKey(String.valueOf(resMovieDO.getId()));
-        resKVDO.setCreatedTime(resMovieDO.getCreatedTime());
-
         // rating
         JSONObject rating = valueObject.getJSONObject("rating");
         if (null != rating && !rating.isEmpty()) {
-            resKVDO.setType(ResKVTypeEnum.movie_rating);
-            resKVDO.setResValue(rating.toJSONString());
-            resKVService.addData(resKVDO);
-            resMovieDO.setRatingId(resKVDO.getId());
+            long id = addResKV(resMovieDO, ResKVTypeEnum.movie_rating, rating.toJSONString());
+            resMovieDO.setRatingId(id);
         }
         // summary
         String summary = valueObject.getString("summary");
         if (StringUtils.isNotBlank(summary)) {
-            resKVDO.setId(0);
-            resKVDO.setType(ResKVTypeEnum.movie_summay);
-            resKVDO.setResValue(StringUtils.trim(summary));
-            resKVService.addData(resKVDO);
-            resMovieDO.setSummaryId(resKVDO.getId());
+            long id = addResKV(resMovieDO, ResKVTypeEnum.movie_summay, StringUtils.trim(summary));
+            resMovieDO.setSummaryId(id);
         }
 
         // 封面图
         JSONObject converImages = valueObject.getJSONObject("images");
         if (null != converImages && !converImages.isEmpty()) {
-            resKVDO.setId(0);
-            resKVDO.setType(ResKVTypeEnum.movie_images);
-            resKVDO.setResValue(converImages.toJSONString());
-            resKVService.addData(resKVDO);
-            resMovieDO.setCoverImagesId(resKVDO.getId());
+            long id = addResKV(resMovieDO, ResKVTypeEnum.movie_images, converImages.toJSONString());
+            resMovieDO.setCoverImagesId(id);
+
         }
-        resKVDO = null;
 
         resMovieDO.setDataStatus(DataStatus.SubjectApi.value);
-        resMovieService.updateMovie(resMovieDO);
+        try {
+            resMovieService.updateMovie(resMovieDO);
+        } catch (Exception e) {
+            log.error("updateMovie-fail movieDO:[{}]", resMovieDO);
+        }
     }
 
     @Override
     public void execute() throws Exception {
-        int offset = 0, length = 1;
+        int offset = 0, length = 1000;
         while (true) {
             List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.SubjectAbs.value,
                                                                                        offset, length);
