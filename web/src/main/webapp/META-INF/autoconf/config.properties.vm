@@ -1,7 +1,0 @@
-domain=${domain}
-static.domain=${static_domain}
-template.path=${template_path}
-static.path=${static_path}
-jdbc.url=${jdbc_url}
-jdbc.username=${jdbc_username}
-jdbc.password=${jdbc_password}

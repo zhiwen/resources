@@ -11,7 +11,7 @@
  
 	<context:annotation-config/>
 	
-	<context:property-placeholder ignore-resource-not-found="false" file-encoding="utf-8" location="/WEB-INF/config.properties,classpath:db-config.properties"/>
+	<context:property-placeholder ignore-resource-not-found="false" file-encoding="utf-8" location="/WEB-INF/config/config.properties,classpath:db-config.properties"/>
 		
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">

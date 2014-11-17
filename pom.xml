@@ -26,7 +26,8 @@
 	<modules>
 		<module>web</module>
 		<module>service</module>
-        <module>spider</module>
+	        <module>spider</module>
+	        <module>deploy</module>
 	</modules>
 	<dependencyManagement>
 	<dependencies>
@@ -211,7 +212,7 @@
 	</dependencyManagement>
     
 	<build>
-        <finalName>resources</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -232,7 +233,16 @@
 				<configuration>
 					<port>8080</port>
 					<path>/</path>
+                    <!--
+                    <systemProperties>
+                        <appserver.base>/Users/zhiwenmizw/work/resources/deploy/deploy.web/target/deploy.web-1.0-SNAPSHOT/</appserver.base>
+                        <appserver.home>/Users/zhiwenmizw/work/resources/deploy/deploy.web/target/deploy.web-1.0-SNAPSHOT/</appserver.home>
+                        <derby.system.home>/Users/zhiwenmizw/work/resources/deploy/deploy.web/target/deploy.web-1.0-SNAPSHOT/logs</derby.system.home>
+                        <java.io.tmpdir>/Users/zhiwenmizw/work/resources/deploy/deploy.web/target/temp/</java.io.tmpdir>
+                    </systemProperties>
+                    -->
 				</configuration>
+                
 			</plugin>
 
 		</plugins>

@@ -38,7 +38,7 @@
 				<entry key="staticDomain" value="${static.domain}" />
 			</util:map>
 		</property>
-		<property name="toolboxConfigLocation" value="/WEB-INF/tool-box.xml" />
+		<property name="toolboxConfigLocation" value="/WEB-INF/config/tool-box.xml" />
 	</bean>
 
 </beans>

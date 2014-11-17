@@ -14,15 +14,9 @@
 		<property name="log.home" defaultValue="/Users/zhiwenmizw/work/movie/output" description="log-output-path" />
 	</group>
 	
-	<group name="db-config">
-		<property name="jdbc.url" defaultValue="jdbc:mysql://127.0.0.1:3306/resources?characterEncoding=utf8" description="dburl" />
-		<property name="jdbc.username" defaultValue="resources" description="数据庘用户名" />
-		<property name="jdbc.password" defaultValue="resources" description="数据庘密码" />
-	</group>
-	
 	<script>
-		<generate template="config.properties.vm" destfile="WEB-INF/config.properties" charset="UTF-8" />		
-		<generate template="logback.xml" destfile="logback.xml" charset="UTF-8" />
+		<generate template="config.properties.vm" destfile="WEB-INF/config/config.properties" charset="UTF-8" />		
+		<generate template="logback.xml" destfile="WEB-INF/classes/logback.xml" charset="UTF-8" />
 	</script>
 	
 </config>

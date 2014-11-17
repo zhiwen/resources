@@ -16,3 +16,11 @@ spider/.project
 web/.classpath
 
 web/.project
+
+deploy/deploy.spider/.project
+
+deploy/deploy.spider/.classpath
+
+deploy/deploy.web/.project
+
+deploy/deploy.web/.classpath
