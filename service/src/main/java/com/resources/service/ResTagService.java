@@ -34,6 +34,7 @@ public class ResTagService {
         }
         ResTagDO dbTagDO = resTagMapper.getData(value.getId());
         if (null != dbTagDO) {
+            value.setId(dbTagDO.getId());
             return 1;
         }
         try {

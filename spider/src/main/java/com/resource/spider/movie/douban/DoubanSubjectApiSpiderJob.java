@@ -107,9 +107,13 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         resMovieDO.setCollectCount(collectCount);
 
         String mobileUrl = valueObject.getString("mobile_url");
-        resMovieDO.setMobileUrl(StringUtils.trim(mobileUrl));
+        if (StringUtils.isNotBlank(mobileUrl)) {
+            resMovieDO.setMobileUrl(StringUtils.trim(mobileUrl));
+        }
         String title = valueObject.getString("title");
-        resMovieDO.setTitle(StringUtils.trim(title));
+        if (StringUtils.isNotBlank(title)) {
+            resMovieDO.setTitle(StringUtils.trim(title));
+        }
 
         List<Long> countryIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("countries"));
         if (CollectionUtils.isNotEmpty(countryIds)) {
@@ -117,7 +121,9 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         }
 
         String originalTitle = valueObject.getString("original_title");
-        resMovieDO.setOriginalTitle(StringUtils.trim(originalTitle));
+        if (StringUtils.isNotBlank(originalTitle)) {
+            resMovieDO.setOriginalTitle(StringUtils.trim(originalTitle));
+        }
 
         int commentCount = StringUtil.stringToInt(valueObject.getString("comments_count"));
         resMovieDO.setCommentCount(commentCount);
@@ -125,7 +131,9 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         resMovieDO.setRatingCount(ratingCount);
 
         String doubanSite = valueObject.getString("douban_site");
-        resMovieDO.setDoubanSite(StringUtils.trim(doubanSite));
+        if (StringUtils.isNotBlank(doubanSite)) {
+            resMovieDO.setDoubanSite(StringUtils.trim(doubanSite));
+        }
 
         JSONArray aka = valueObject.getJSONArray("aka");
         resMovieDO.setAka(StringUtil.toStringList(aka));
@@ -144,16 +152,18 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         }
         // summary
         String summary = valueObject.getString("summary");
-        if (null != summary) {
+        if (StringUtils.isNotBlank(summary)) {
+            resKVDO.setId(0);
             resKVDO.setType(ResKVTypeEnum.movie_summay);
             resKVDO.setResValue(StringUtils.trim(summary));
             resKVService.addData(resKVDO);
-            resMovieDO.setRatingId(resKVDO.getId());
+            resMovieDO.setSummaryId(resKVDO.getId());
         }
 
         // 封面图
         JSONObject converImages = valueObject.getJSONObject("images");
         if (null != converImages && !converImages.isEmpty()) {
+            resKVDO.setId(0);
             resKVDO.setType(ResKVTypeEnum.movie_images);
             resKVDO.setResValue(converImages.toJSONString());
             resKVService.addData(resKVDO);
@@ -167,7 +177,7 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
 
     @Override
     public void execute() throws Exception {
-        int offset = 0, length = 1000;
+        int offset = 0, length = 1;
         while (true) {
             List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.SubjectAbs.value,
                                                                                        offset, length);

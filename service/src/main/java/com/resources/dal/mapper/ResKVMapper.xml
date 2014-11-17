@@ -25,11 +25,11 @@
 		values(#{id},#{resKey},#{resValue},#{type},#{createdTime})
 	</insert>
 	
-	<delete id="delData" parameterType="long">
+	<delete id="delData" parameterType="long" flushCache="true">
 		delete from res_kv where id = #{id}
 	</delete>
 	
-	<update id="updateData" parameterType="resKVDO">
+	<update id="updateData" parameterType="resKVDO" flushCache="true">
 		update res_kv
 		<set>
 			<if test="resValue != null">res_value=#{resValue},</if>
@@ -39,11 +39,11 @@
 	</update>
 	
 	<!-- 查询单条记录 -->
-	<select id="getData" parameterType="long" resultMap="resKVDO">
+	<select id="getData" parameterType="long" resultMap="resKVDO" useCache="true">
 		select <include refid="allColumns"/> from res_kv where id = #{id}
 	</select>
 	
-	<select id="getDataByKeyWithType" parameterType="java.util.HashMap" resultMap="resKVDO">
+	<select id="getDataByKeyWithType" parameterType="java.util.HashMap" resultMap="resKVDO" useCache="true">
 		select <include refid="allColumns"/> from res_kv where res_key=#{resKey} and type=#{type}
 	</select>
 	

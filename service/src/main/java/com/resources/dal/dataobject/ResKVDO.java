@@ -1,15 +1,22 @@
 package com.resources.dal.dataobject;
 
+import java.io.Serializable;
+
 import com.resources.common.BaseDO;
 import com.resources.common.ResKVTypeEnum;
 
-public class ResKVDO extends BaseDO {
+public class ResKVDO extends BaseDO implements Serializable {
 
-    private String        resKey;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5587981763270747082L;
 
-    private String        resValue;
+    private String            resKey;
 
-    private ResKVTypeEnum type;
+    private String            resValue;
+
+    private ResKVTypeEnum     type;
 
     public String getResKey() {
         return resKey;

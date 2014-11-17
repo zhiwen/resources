@@ -202,5 +202,6 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
                 parseAndSave(resMovieDO, valueObject);
             }
         }
+        // 因为修改了状态，所以不需要这里来改变offset
     }
 }

@@ -115,7 +115,7 @@
 	</select>
 	
 	<select id="getMovieByPaginatorWithStatus" parameterType="java.util.Map" resultMap="resMovieDO">
-		select id, did from res_movie where data_status=#{dataStatus} limit #{offset}, #{length}
+		select id, did, created_time from res_movie where data_status=#{dataStatus} limit #{offset}, #{length}
 	</select>
 	
 </mapper>  
