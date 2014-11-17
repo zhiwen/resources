@@ -1,14 +1,15 @@
 package com.resources.dal.dataobject;
 
 import com.resources.common.BaseDO;
+import com.resources.common.ResKVTypeEnum;
 
 public class ResKVDO extends BaseDO {
 
-    private String resKey;
+    private String        resKey;
 
-    private String resValue;
+    private String        resValue;
 
-    private String type;
+    private ResKVTypeEnum type;
 
     public String getResKey() {
         return resKey;
@@ -26,11 +27,11 @@ public class ResKVDO extends BaseDO {
         this.resValue = resValue;
     }
 
-    public String getType() {
+    public ResKVTypeEnum getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ResKVTypeEnum type) {
         this.type = type;
     }
 

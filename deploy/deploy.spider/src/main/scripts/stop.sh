@@ -25,18 +25,18 @@ get_pid() {
 current_path=`pwd`
 base="$(cd "$(dirname "$0")" && pwd -P)"
 
-pid=`cat $base/tesla.manager.pid`
+pid=`cat $base/spider.pid`
 if [ "$pid" == "" ] ; then
-  pid=`get_pid "appName=tesla-manager"`
+  pid=`get_pid "appName=spider"`
 fi
 
-echo -e "`hostname`: stopping tesla manager $pid ... "
+echo -e "`hostname`: stopping spider $pid ... "
 kill $pid
 
 LOOPS=0
 while (true); 
 do 
-  pid=`get_pid "appName=tesla-manager"`
+  pid=`get_pid "appName=spider"`
   if [ "$pid" == "" ] ; then
     echo "Oook! cost:$LOOPS"
     break;

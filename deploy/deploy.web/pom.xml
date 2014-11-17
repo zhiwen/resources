@@ -24,6 +24,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -64,7 +65,6 @@
 							<descriptors>
 								<descriptor>${basedir}/src/main/assembly/release.xml</descriptor>
 							</descriptors>
-							<finalName>${project.artifactId}-${project.version}</finalName>
 							<outputDirectory>${project.parent.build.directory}</outputDirectory>
 						</configuration>
 					</plugin>
@@ -92,7 +92,6 @@
 							<descriptors>
 								<descriptor>${basedir}/src/main/assembly/dev.xml</descriptor>
 							</descriptors>
-							<finalName>${project.artifactId}-${project.version}</finalName>
 							<outputDirectory>${project.build.directory}</outputDirectory>
 						</configuration>
 					</plugin>

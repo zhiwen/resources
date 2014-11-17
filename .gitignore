@@ -27,3 +27,5 @@ deploy/deploy.web/.project
 deploy/deploy.web/target/*
 
 deploy/deploy.web/.classpath
+
+deploy/target/*

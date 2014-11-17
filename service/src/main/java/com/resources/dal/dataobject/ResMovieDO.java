@@ -51,6 +51,11 @@ public class ResMovieDO extends BaseDO {
     private List<String>     aka;
 
     /**
+     * 电影封面图（JSONObject)
+     */
+    private long             coverImagesId;
+
+    /**
      * 移动版url
      */
     private String           mobileUrl;
@@ -220,6 +225,14 @@ public class ResMovieDO extends BaseDO {
 
     public void setAka(List<String> aka) {
         this.aka = aka;
+    }
+
+    public long getCoverImagesId() {
+        return coverImagesId;
+    }
+
+    public void setCoverImagesId(long coverImagesId) {
+        this.coverImagesId = coverImagesId;
     }
 
     public String getMobileUrl() {

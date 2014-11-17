@@ -15,7 +15,7 @@
 		<result property="id" column="id"/>
 		<result property="resKey" column="res_key"/>
 		<result property="resValue" column="res_value"/>
-		<result property="type" column="type"/>
+		<result property="type" column="type" javaType="com.resources.common.ResKVTypeEnum" jdbcType="VARCHAR"/>
 		<result property="createdTime" column="created_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
 	</resultMap>
 

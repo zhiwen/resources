@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- local -->
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-
+	
+	<substitutionProperty name="log_home"
+		value="/Users/zhiwenmizw/work/resources/output/spider" />
+		
 	<!-- 控制台输出 -->
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="stdoutAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- 日志输出编码 -->
 		<Encoding>UTF-8</Encoding>
 		<layout class="ch.qos.logback.classic.PatternLayout">
@@ -13,12 +16,12 @@
 		</layout>
 	</appender>
 
-	<appender name="FILE"
+	<appender name="rootAppender"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!--日志文件输出的文件名 -->
-			<FileNamePattern>/Users/zhiwenmizw/work/resources/output/spider.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home}/spider.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -27,26 +30,85 @@
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
 			</pattern>
 		</layout>
-
 		<!--日志文件最大的大小 -->
 		<triggeringPolicy
 			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
 			<MaxFileSize>10MB</MaxFileSize>
 		</triggeringPolicy>
-
 	</appender>
 	
-	<!-- 日志输出级别 -->
-	<root level="INFO">
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
+	<appender name="doubanListSpiderJobAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log_home}/db-list.log-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+			</pattern>
+		</layout>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="doubanSubjectApiSpiderJobAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log_home}/db-subject-api.log-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+			</pattern>
+		</layout>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="doubanSubjectAbsSpiderJobAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log_home}/db-subject-abs.log-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+			</pattern>
+		</layout>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<logger name="com.resource.spider.movie.douban.DoubanListSpiderJob" addtivity="false">
+		<level value="ALL" />
+		<appender-ref ref="doubanListSpiderJobAppender"/>
+	</logger>
+	
+	<logger name="com.resource.spider.movie.douban.DoubanSubjectAbsSpiderJob" addtivity="false">
+		<level value="ALL" />
+		<appender-ref ref="doubanSubjectAbsSpiderJobAppender"/>
+	</logger>
+	
+	<logger name="com.resource.spider.movie.douban.DoubanSubjectApiSpiderJob" addtivity="false">
+		<level value="ALL" />
+		<appender-ref ref="doubanSubjectApiSpiderJobAppender"/>
+	</logger>
+	
+	<root level="ALL">
+		<appender-ref ref="stdoutAppender" />
+		<appender-ref ref="rootAppender" />
 	</root>
-	<root level="ERROR">
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
-	</root>
-	<root level="DEBUG">
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
-	</root>
+	
 </configuration>

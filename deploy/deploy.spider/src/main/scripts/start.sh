@@ -4,13 +4,7 @@ current_path=`pwd`
 
 base="$(cd "$(dirname "$0")" && pwd -P)"
 
-logback_file=$base/../conf/logback.xml
-
-if [ -f $base/env/find_java_home.sh ]; then
-  . $base/env/find_java_home.sh
-fi
-
-if [ -z $JAVA ]; then
+if [ -z $JAVA_HOME ]; then
   echo java not find!
   exit 1
 fi
@@ -19,9 +13,9 @@ case "$#"
   in
   0 )
   ;;
-1 )
+  1 )
   ;;
-2 )
+  2 )
   var1=$1
   var2=$2
   if [ "$1" = "debug" ]; then
@@ -35,31 +29,22 @@ case "$#"
   ;;
 esac
 
-
 JAVA_OPTS="-server -Xms2048m -Xmx3072m -Xmn1024m -XX:SurvivorRatio=2 -XX:PermSize=96m -XX:MaxPermSize=256m -Xss256k -XX:-UseAdaptiveSizePolicy -XX:MaxTenuringThreshold=15 -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompactAtFullCollection -XX:+UseFastAccessorMethods -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError"
+JAVA_OPTS=" $JAVA_OPTS -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnetworkaddress.cache.ttl=15 -Dfile.encoding=UTF-8 -DappName=spider"
 
-JAVA_OPTS=" $JAVA_OPTS -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnetworkaddress.cache.ttl=15 -Dfile.encoding=UTF-8"
-TESLA_OPTS="-DappName=tesla-manager -Dlogback.configurationFile=$logback_file"
+for i in $base/../lib/*;
+do
+  CLASSPATH=$i:"$CLASSPATH";
+done
 
-if [ -e $logback_file ]
-then
-  for i in $base/../lib/*;
-  do CLASSPATH=$i:"$CLASSPATH";
-  done
+echo CLASSPATH :$CLASSPATH
 
-  echo LOG CONFIGURATION : $logback_file
-  echo CLASSPATH :$CLASSPATH
+cd $base
 
-  echo "cd to $base for workaround relative path for logback"
-  cd $base
+$JAVA $JAVA_OPTS $JAVA_DEBUG_OPT -classpath .:$CLASSPATH com.resource.spider.Main 1>>$base/nohup.out 2>&1 &
 
-  $JAVA $JAVA_OPTS $JAVA_DEBUG_OPT $TESLA_OPTS -classpath .:$CLASSPATH com.taobao.tesla.manager.TeslaManagerLauncher 1>>$base/nohup.out 2>&1 &
+echo "cd to current path"
+cd $current_path
 
-  echo "cd to current path"
-  cd $current_path
+echo $! > $base/spider.pid
 
-  echo $! > $base/tesla.manager.pid
-
-else
-  echo there is no logback file, please check!
-fi

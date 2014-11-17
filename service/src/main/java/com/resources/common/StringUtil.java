@@ -2,6 +2,7 @@ package com.resources.common;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,6 +46,21 @@ public final class StringUtil {
         return new ArrayList<Object>(jsonArray);
     }
 
+    public static List<String> toStringList(JSONArray array) {
+
+        if (null == array) {
+            return null;
+        }
+        List<String> retList = new LinkedList<String>();
+        for (Object object : array) {
+            if (null == object) {
+                continue;
+            }
+            retList.add(object.toString());
+        }
+        return retList;
+    }
+
     public static String escapeHtml(String str) {
         if (StringUtils.isBlank(str)) {
             return str;
@@ -59,5 +75,16 @@ public final class StringUtil {
             buf.append(c);
         }
         return buf.toString();
+    }
+
+    public static int stringToInt(String str) {
+        if (StringUtils.isBlank(str)) {
+            return 0;
+        }
+        str = str.trim();
+        if (StringUtils.isNumeric(str)) {
+            return Integer.valueOf(str);
+        }
+        return 0;
     }
 }

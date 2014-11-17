@@ -24,11 +24,15 @@ import com.resource.spider.http.HttpURLConnectionWrapper;
 import com.resource.spider.movie.douban.DoubanListSpiderJob.DataStatus;
 import com.resources.common.BizTypeEnum;
 import com.resources.common.IOUtil;
-import com.resources.common.MovieSubTypeEnum;
+import com.resources.common.ResKVTypeEnum;
+import com.resources.common.StringUtil;
+import com.resources.dal.dataobject.ResKVDO;
 import com.resources.dal.dataobject.ResMovieDO;
 import com.resources.dal.dataobject.ResTagDO;
+import com.resources.service.ResKVService;
 import com.resources.service.ResMovieService;
 import com.resources.service.ResTagService;
+import com.resources.service.ResURLService;
 
 @Service
 public class DoubanSubjectApiSpiderJob implements SpiderJob {
@@ -43,6 +47,12 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
 
     @Resource
     private ResTagService       resTagService;
+
+    @Resource
+    private ResKVService        resKVService;
+
+    @Resource
+    private ResURLService       resURLService;
 
     public JSONObject getData(String url) {
         HttpURLConnectionWrapper con = null;
@@ -88,101 +98,68 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
     }
 
     public void parseAndSave(ResMovieDO resMovieDO, JSONObject valueObject) {
-        // actors[] 主演、演员
-        // directors[] 导演
-        // types[] 类型【喜剧、战争】
-        // duration 片长
-        // episodes_count = 集数
-        // -----is_tv 是不是电视剧 true/false
-        // playable 是否可播放 true/false
-        // -----region 国家
-        // -----star 星级
-        // release_year 发行年代
-        // subtype Movie/TV
 
-        valueObject.getJSONObject("rating");
-        valueObject.getString("reviews_count");
-        valueObject.getString("wish_count");
-        valueObject.getString("collect_count");
-        valueObject.getJSONObject("images");
-        valueObject.getString("mobile_url");
-        valueObject.getString("title");
-        valueObject.getJSONArray("countries");
-        valueObject.getString("original_title");
-        valueObject.getString("summary");
-        valueObject.getString("comments_count");
-        valueObject.getString("ratings_count");
-        valueObject.getJSONArray("aka");
-        valueObject.getString("douban_site");
+        int reviewCount = StringUtil.stringToInt(valueObject.getString("reviews_count"));
+        resMovieDO.setReviewCount(reviewCount);
+        int wishCount = StringUtil.stringToInt(valueObject.getString("wish_count"));
+        resMovieDO.setWishCount(wishCount);
+        int collectCount = StringUtil.stringToInt(valueObject.getString("collect_count"));
+        resMovieDO.setCollectCount(collectCount);
 
-        // actors
-        List<Long> castIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("actors"));
-        if (CollectionUtils.isNotEmpty(castIds)) {
-            resMovieDO.setCastIds(castIds);
-        } else {
-            log.warn("castIds-is-empty: did[{}]", resMovieDO.getDid());
+        String mobileUrl = valueObject.getString("mobile_url");
+        resMovieDO.setMobileUrl(StringUtils.trim(mobileUrl));
+        String title = valueObject.getString("title");
+        resMovieDO.setTitle(StringUtils.trim(title));
+
+        List<Long> countryIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("countries"));
+        if (CollectionUtils.isNotEmpty(countryIds)) {
+            resMovieDO.setCountryIds(countryIds);
         }
 
-        // directors
-        List<Long> directorIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("directors"));
-        if (CollectionUtils.isNotEmpty(directorIds)) {
-            resMovieDO.setDirectorIds(directorIds);
-        } else {
-            log.warn("directors-is-empty: did[{}]", resMovieDO.getDid());
+        String originalTitle = valueObject.getString("original_title");
+        resMovieDO.setOriginalTitle(StringUtils.trim(originalTitle));
+
+        int commentCount = StringUtil.stringToInt(valueObject.getString("comments_count"));
+        resMovieDO.setCommentCount(commentCount);
+        int ratingCount = StringUtil.stringToInt(valueObject.getString("ratings_count"));
+        resMovieDO.setRatingCount(ratingCount);
+
+        String doubanSite = valueObject.getString("douban_site");
+        resMovieDO.setDoubanSite(StringUtils.trim(doubanSite));
+
+        JSONArray aka = valueObject.getJSONArray("aka");
+        resMovieDO.setAka(StringUtil.toStringList(aka));
+
+        ResKVDO resKVDO = new ResKVDO();
+        resKVDO.setResKey(String.valueOf(resMovieDO.getId()));
+        resKVDO.setCreatedTime(resMovieDO.getCreatedTime());
+
+        // rating
+        JSONObject rating = valueObject.getJSONObject("rating");
+        if (null != rating && !rating.isEmpty()) {
+            resKVDO.setType(ResKVTypeEnum.movie_rating);
+            resKVDO.setResValue(rating.toJSONString());
+            resKVService.addData(resKVDO);
+            resMovieDO.setRatingId(resKVDO.getId());
+        }
+        // summary
+        String summary = valueObject.getString("summary");
+        if (null != summary) {
+            resKVDO.setType(ResKVTypeEnum.movie_summay);
+            resKVDO.setResValue(StringUtils.trim(summary));
+            resKVService.addData(resKVDO);
+            resMovieDO.setRatingId(resKVDO.getId());
         }
 
-        // types
-        List<Long> genreIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("types"));
-        if (CollectionUtils.isNotEmpty(genreIds)) {
-            resMovieDO.setGenreIds(genreIds);
-        } else {
-            log.warn("genres-is-empty: did[{}]", resMovieDO.getDid());
+        // 封面图
+        JSONObject converImages = valueObject.getJSONObject("images");
+        if (null != converImages && !converImages.isEmpty()) {
+            resKVDO.setType(ResKVTypeEnum.movie_images);
+            resKVDO.setResValue(converImages.toJSONString());
+            resKVService.addData(resKVDO);
+            resMovieDO.setCoverImagesId(resKVDO.getId());
         }
-
-        // duration
-        String durations = StringUtils.trim(valueObject.getString("duration"));
-        if (StringUtils.isNotBlank(durations)) {
-            resMovieDO.setDurations(durations);
-        }
-
-        // episodes_count
-        String episodesCount = StringUtils.trim(valueObject.getString("episodes_count"));
-        if (StringUtils.isNotBlank(episodesCount)) {
-            if (StringUtils.isNumeric(episodesCount)) {
-                resMovieDO.setEpisodeCount(Integer.valueOf(episodesCount));
-            } else {
-                log.error("episodesCount-not-an-number did[{}] episodesCount[{}]", resMovieDO.getDid(), episodesCount);
-            }
-        }
-
-        // playable
-        String playable = StringUtils.trim(valueObject.getString("playable"));
-        if (StringUtils.isNotBlank(playable)) {
-            Boolean bPlayable = Boolean.valueOf(playable);
-            resMovieDO.setPlayable(bPlayable ? 1 : 0);
-        }
-
-        // release_year
-        String releaseYear = StringUtils.trim(valueObject.getString("release_year"));
-        if (StringUtils.isNotBlank(releaseYear)) {
-            if (StringUtils.isNumeric(releaseYear)) {
-                resMovieDO.setYear(releaseYear);
-            } else {
-                log.error("releaseYear-not-an-number did[{}] releaseYear[{}]", resMovieDO.getDid(), releaseYear);
-            }
-        }
-
-        // subtype
-        String subtype = StringUtils.trim(valueObject.getString("subtype"));
-        if (StringUtils.isNotBlank(subtype)) {
-            if (StringUtils.equalsIgnoreCase(subtype, MovieSubTypeEnum.movie.name())) {
-                resMovieDO.setSubType(MovieSubTypeEnum.movie);
-            } else if (StringUtils.equalsIgnoreCase(subtype, MovieSubTypeEnum.tv.name())) {
-                resMovieDO.setSubType(MovieSubTypeEnum.tv);
-            } else {
-                log.error("unknow-subtype did[{}] releaseYear[{}]", resMovieDO.getDid(), subtype);
-            }
-        }
+        resKVDO = null;
 
         resMovieDO.setDataStatus(DataStatus.SubjectApi.value);
         resMovieService.updateMovie(resMovieDO);
@@ -201,11 +178,6 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
             for (ResMovieDO resMovieDO : movieList) {
                 String qulifySubjectUrl = String.format(doubanSubjectApi, resMovieDO.getDid());
                 JSONObject valueObject = getData(qulifySubjectUrl);
-                if (null == valueObject) {
-                    continue;
-                }
-                valueObject = valueObject.getJSONObject("subject");
-
                 if (null == valueObject || valueObject.isEmpty()) {
                     continue;
                 }

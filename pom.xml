@@ -26,8 +26,8 @@
 	<modules>
 		<module>web</module>
 		<module>service</module>
-	        <module>spider</module>
-	        <module>deploy</module>
+        <module>spider</module>
+        <module>deploy</module>
 	</modules>
 	<dependencyManagement>
 	<dependencies>
@@ -224,27 +224,6 @@
 				</configuration>
 				<version>2.3.2</version>
 			</plugin>
-            
-            
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<port>8080</port>
-					<path>/</path>
-                    <!--
-                    <systemProperties>
-                        <appserver.base>/Users/zhiwenmizw/work/resources/deploy/deploy.web/target/deploy.web-1.0-SNAPSHOT/</appserver.base>
-                        <appserver.home>/Users/zhiwenmizw/work/resources/deploy/deploy.web/target/deploy.web-1.0-SNAPSHOT/</appserver.home>
-                        <derby.system.home>/Users/zhiwenmizw/work/resources/deploy/deploy.web/target/deploy.web-1.0-SNAPSHOT/logs</derby.system.home>
-                        <java.io.tmpdir>/Users/zhiwenmizw/work/resources/deploy/deploy.web/target/temp/</java.io.tmpdir>
-                    </systemProperties>
-                    -->
-				</configuration>
-                
-			</plugin>
-
 		</plugins>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>

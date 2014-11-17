@@ -6,7 +6,7 @@
 <mapper namespace="com.resources.dal.mapper.ResMovieMapper">
 	
 	<sql id="allColumns">
-		id,did,title,original_title,cast_ids,director_ids,genre_Ids,writer_ids,country_ids,aka,mobile_url,rating_count,rating_id,wish_count,collect_count,
+		id,did,title,original_title,cast_ids,director_ids,genre_Ids,writer_ids,country_ids,aka,cover_images_id,mobile_url,rating_count,rating_id,wish_count,collect_count,
 		subtype,website,douban_site,pubdates,mainland_pubdate,year,languages,durations,summary_id,comment_count,review_count,season_count,current_season,
 		episode_count,imdb_id,tag_ids,data_status,playable,created_time,modified_time
 	</sql>
@@ -22,6 +22,7 @@
 		<result property="writerIds" column="writer_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="countryIds" column="country_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="aka" column="aka" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="coverImagesId" column="cover_images_id"/>
 		<result property="mobileUrl" column="mobile_url"/>
 		<result property="ratingCount" column="rating_count"/>
 		<result property="ratingId" column="rating_id"/>
@@ -53,7 +54,7 @@
 		insert into res_movie
 		(<include refid="allColumns"/>)
 		values(
-		#{id},#{did},#{title},#{originalTitle},#{castIds},#{directorIds},#{genreIds},#{writerIds},#{countryIds},#{aka},#{mobileUrl},
+		#{id},#{did},#{title},#{originalTitle},#{castIds},#{directorIds},#{genreIds},#{writerIds},#{countryIds},#{aka},#{coverImagesId},#{mobileUrl},
 		#{ratingCount},#{ratingId},#{wishCount},#{collectCount},#{subType},#{website},#{doubanSite},#{pubdates},#{mainlandPubdate},
 		#{year},#{languages},#{durations},#{summaryId},#{commentCount},#{reviewCount},#{seasonCount},#{currentSeason},#{episodeCount},
 		#{imdbId},#{tagIds},#{dataStatus},#{playable},#{createdTime},#{modifiedTime}
@@ -75,6 +76,7 @@
 			<if test="writerIds != null">writer_ids=#{writerIds},</if>
 			<if test="countryIds != null">country_ids=#{countryIds},</if>
 			<if test="aka != null">aka=#{aka},</if>
+			<if test="coverImagesId != null">cover_images_id=#{coverImagesId},</if>
 			<if test="mobileUrl != null">mobile_url=#{mobileUrl},</if>
 			<if test="ratingCount != 0">rating_count=#{ratingCount},</if>
 			<if test="ratingId != 0">rating_id=#{ratingId},</if>
