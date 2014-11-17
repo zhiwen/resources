@@ -1,3 +1,4 @@
+/target/*
 service/target/*
 spider/target/*
 web/target/*
@@ -18,9 +19,11 @@ web/.classpath
 web/.project
 
 deploy/deploy.spider/.project
+deploy/deploy.spider/target/*
 
 deploy/deploy.spider/.classpath
 
 deploy/deploy.web/.project
+deploy/deploy.web/target/*
 
 deploy/deploy.web/.classpath
