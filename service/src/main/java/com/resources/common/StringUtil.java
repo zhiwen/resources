@@ -48,7 +48,7 @@ public final class StringUtil {
 
     public static List<String> toStringList(JSONArray array) {
 
-        if (null == array) {
+        if (null == array || array.isEmpty()) {
             return null;
         }
         List<String> retList = new LinkedList<String>();

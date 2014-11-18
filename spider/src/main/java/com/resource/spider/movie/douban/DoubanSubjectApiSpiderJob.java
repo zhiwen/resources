@@ -129,6 +129,13 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
             resMovieDO.setTitle(StringUtils.trim(title));
         }
 
+        // String year = StringUtils.trim(valueObject.getString("year"));
+        // if (StringUtils.isNotBlank(year)) {
+        // if (StringUtils.isNumeric(year)) {
+        // resMovieDO.setYear(year);
+        // }
+        // }
+
         List<Long> countryIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("countries"));
         if (CollectionUtils.isNotEmpty(countryIds)) {
             resMovieDO.setCountryIds(countryIds);
@@ -156,6 +163,9 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         JSONObject rating = valueObject.getJSONObject("rating");
         if (null != rating && !rating.isEmpty()) {
             long id = addResKV(resMovieDO, ResKVTypeEnum.movie_rating, rating.toJSONString());
+            if (id == 0) {
+                return;
+            }
             resMovieDO.setRatingId(id);
         }
         // summary
@@ -163,6 +173,9 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         if (StringUtils.isNotBlank(summary)) {
             long id = addResKV(resMovieDO, ResKVTypeEnum.movie_summay, StringUtils.trim(summary));
             resMovieDO.setSummaryId(id);
+            if (id == 0) {
+                return;
+            }
         }
 
         // 封面图
@@ -170,14 +183,16 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         if (null != converImages && !converImages.isEmpty()) {
             long id = addResKV(resMovieDO, ResKVTypeEnum.movie_images, converImages.toJSONString());
             resMovieDO.setCoverImagesId(id);
-
+            if (id == 0) {
+                return;
+            }
         }
 
         resMovieDO.setDataStatus(DataStatus.SubjectApi.value);
         try {
             resMovieService.updateMovie(resMovieDO);
         } catch (Exception e) {
-            log.error("updateMovie-fail movieDO:[{}]", resMovieDO);
+            log.error("updateMovie-fail movieDO:[{}]", resMovieDO, e);
         }
     }
 
@@ -199,6 +214,7 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
                 }
                 parseAndSave(resMovieDO, valueObject);
             }
+            offset += length;
         }
     }
 }

@@ -87,7 +87,7 @@
 			<if test="doubanSite != null">douban_site=#{doubanSite},</if>
 			<if test="pubdates != null">pubdates=#{pubdates},</if>
 			<if test="mainlandPubdate != null">mainland_pubdate=#{mainlandPubdate},</if>
-			<if test="year != 0">year=#{year},</if>
+			<if test="year != null">year=#{year},</if>
 			<if test="languages != null">languages=#{languages},</if>
 			<if test="durations != null">durations=#{durations},</if>
 			<if test="summaryId != 0">summary_id=#{summaryId},</if>

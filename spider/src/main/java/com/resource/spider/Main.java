@@ -18,6 +18,6 @@ public class Main {
         spiderJob.execute();
 
         spiderJob = (SpiderJob) context.getBean("doubanSubjectApiSpiderJob");
-        spiderJob.execute();
+        // spiderJob.execute();
     }
 }

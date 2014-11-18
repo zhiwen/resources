@@ -105,7 +105,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
         if (CollectionUtils.isNotEmpty(castIds)) {
             resMovieDO.setCastIds(castIds);
         } else {
-            log.warn("castIds-is-empty: did[{}]", resMovieDO.getDid());
+            log.info("castIds-is-empty: did[{}]", resMovieDO.getDid());
         }
 
         // directors
@@ -113,7 +113,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
         if (CollectionUtils.isNotEmpty(directorIds)) {
             resMovieDO.setDirectorIds(directorIds);
         } else {
-            log.warn("directors-is-empty: did[{}]", resMovieDO.getDid());
+            log.info("directors-is-empty: did[{}]", resMovieDO.getDid());
         }
 
         // types
@@ -121,7 +121,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
         if (CollectionUtils.isNotEmpty(genreIds)) {
             resMovieDO.setGenreIds(genreIds);
         } else {
-            log.warn("genres-is-empty: did[{}]", resMovieDO.getDid());
+            log.info("genres-is-empty: did[{}]", resMovieDO.getDid());
         }
 
         // duration
@@ -189,7 +189,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
 
             for (ResMovieDO resMovieDO : movieList) {
                 String qulifySubjectUrl = String.format(doubanSubjectAbs, resMovieDO.getDid());
-                log.debug("processor-url:[{}]", qulifySubjectUrl);
+                log.info("processor-url:[{}]", qulifySubjectUrl);
                 JSONObject valueObject = getData(qulifySubjectUrl);
                 if (null == valueObject) {
                     continue;
@@ -202,6 +202,6 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
                 parseAndSave(resMovieDO, valueObject);
             }
         }
-        // 因为修改了状态，所以不需要这里来改变offset
+        offset += length;
     }
 }
