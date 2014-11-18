@@ -46,7 +46,7 @@ public class SpiderRecordDO extends BaseDO {
 
     public static enum SpiderRecordTypeEnum {
 
-        douban(1);
+        douban_movie(1), douban_tv(2);
 
         private final int value;
 

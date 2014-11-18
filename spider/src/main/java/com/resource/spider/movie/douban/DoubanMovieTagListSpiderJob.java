@@ -29,21 +29,13 @@ import com.resources.dal.dataobject.SpiderRecordDO;
 import com.resources.dal.mapper.SpiderRecordMapper;
 import com.resources.service.ResMovieService;
 
+/**
+ * tag-list列表(@http://movie.douban.com/tag/)
+ * 
+ * @author zhiwenmizw
+ */
 @Service
-public class DoubanListSpiderJob implements SpiderJob {
-
-    public static enum DataStatus {
-        TagList(1), // douban搜索页获取id ("http://movie.douban.com/tag/")
-        SubjectAbs(2), // douban一网页接口（http://movie.douban.com/j/subject_abstract?subject_id=1302814）
-        SubjectApi(3), // (http://api.douban.com/v2/movie/subject/1302814)
-        SubjectDetail(4);// (http://movie.douban.com/subject/3269068/)
-
-        public final int value;
-
-        private DataStatus(int value){
-            this.value = value;
-        }
-    }
+public class DoubanMovieTagListSpiderJob implements SpiderJob {
 
     public String              doubanTagPage = "http://movie.douban.com/tag/";
     public int                 length        = 20, timeInterval = 5000;
@@ -75,7 +67,7 @@ public class DoubanListSpiderJob implements SpiderJob {
 
     public List<SpiderRecordDO> preData() {
 
-        List<SpiderRecordDO> spiderRecrods = spiderRecordMapper.getRecordByType(SpiderRecordDO.SpiderRecordTypeEnum.douban.getValue());
+        List<SpiderRecordDO> spiderRecrods = spiderRecordMapper.getRecordByType(SpiderRecordDO.SpiderRecordTypeEnum.douban_movie.getValue());
 
         if (CollectionUtils.isNotEmpty(spiderRecrods)) {
             return spiderRecrods;
@@ -110,7 +102,7 @@ public class DoubanListSpiderJob implements SpiderJob {
                     continue;
                 }
                 SpiderRecordDO recordDO = new SpiderRecordDO();
-                recordDO.setType(SpiderRecordDO.SpiderRecordTypeEnum.douban.getValue());
+                recordDO.setType(SpiderRecordDO.SpiderRecordTypeEnum.douban_movie.getValue());
                 recordDO.setTagName(tagName);
                 recordDO.setCreatedTime(new Date());
                 spiderRecordMapper.addData(recordDO);

@@ -110,7 +110,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2014-11-13 22:17:52</creation_date>
-			<updated_date>2014-11-18 10:44:46</updated_date>
+			<updated_date>2014-11-18 20:07:57</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -422,7 +422,7 @@
 		</word>
 		<word>
 			<id>21</id>
-			<length>100</length>
+			<length>150</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>

@@ -91,7 +91,7 @@
 		</triggeringPolicy>
 	</appender>
 	
-	<logger name="com.resource.spider.movie.douban.DoubanListSpiderJob" addtivity="false">
+	<logger name="com.resource.spider.movie.douban.DoubanMovieTagListSpiderJob" addtivity="false">
 		<level value="info" />
 		<appender-ref ref="doubanListSpiderJobAppender"/>
 	</logger>

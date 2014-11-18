@@ -21,7 +21,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.resource.spider.SpiderJob;
 import com.resource.spider.http.HttpURLConnectionWrapper;
-import com.resource.spider.movie.douban.DoubanListSpiderJob.DataStatus;
 import com.resources.common.BizTypeEnum;
 import com.resources.common.IOUtil;
 import com.resources.common.MovieSubTypeEnum;
@@ -30,6 +29,11 @@ import com.resources.dal.dataobject.ResTagDO;
 import com.resources.service.ResMovieService;
 import com.resources.service.ResTagService;
 
+/**
+ * 部分数据获取接口（@http://movie.douban.com/j/subject_abstract?subject_id=）
+ * 
+ * @author zhiwenmizw
+ */
 @Service
 public class DoubanSubjectAbsSpiderJob implements SpiderJob {
 
@@ -201,7 +205,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
                 }
                 parseAndSave(resMovieDO, valueObject);
             }
+            offset += length;
         }
-        offset += length;
     }
 }
