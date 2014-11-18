@@ -155,7 +155,7 @@ public class DoubanMovieTagListSpiderJob implements SpiderJob {
 
             didList = parsePageListItem(doubanTagPageByTag);
 
-            eatedCount += resMovieService.addMovieList(didList);
+            eatedCount += resMovieService.addMovieList(didList, DataStatus.SubjectAbs.value);
 
             // 4、记录总和总页条数到db
             spiderRecordDO.setPageNumber(i);

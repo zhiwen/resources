@@ -92,18 +92,6 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
     }
 
     public void parseAndSave(ResMovieDO resMovieDO, JSONObject valueObject) {
-        // actors[] 主演、演员
-        // directors[] 导演
-        // types[] 类型【喜剧、战争】
-        // duration 片长
-        // episodes_count = 集数
-        // -----is_tv 是不是电视剧 true/false
-        // playable 是否可播放 true/false
-        // -----region 国家
-        // -----star 星级
-        // release_year 发行年代
-        // subtype Movie/TV
-
         // actors
         List<Long> castIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("actors"));
         if (CollectionUtils.isNotEmpty(castIds)) {

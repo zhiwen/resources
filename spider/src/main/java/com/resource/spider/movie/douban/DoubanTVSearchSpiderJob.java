@@ -33,9 +33,9 @@ import com.resources.service.ResMovieService;
  * @author zhiwenmizw
  */
 @Service
-public class DoubanSubjectTVSearchSpiderJob implements SpiderJob {
+public class DoubanTVSearchSpiderJob implements SpiderJob {
 
-    private final static Logger log                 = LoggerFactory.getLogger(DoubanSubjectTVSearchSpiderJob.class);
+    private final static Logger log                 = LoggerFactory.getLogger(DoubanTVSearchSpiderJob.class);
 
     private final String        doubanSubjectSearch = "http://movie.douban.com/j/search_subjects?type=tv&tag=%s&sort=time&page_limit=%s&page_start=%s";
 
@@ -146,7 +146,7 @@ public class DoubanSubjectTVSearchSpiderJob implements SpiderJob {
                     }
                 }
                 try {
-                    eatCount += resMovieService.addMovieList(movieIds);
+                    eatCount += resMovieService.addMovieList(movieIds, DataStatus.SubjectAbs.value);
                     // update
                     spiderRecordDO.setPageNumber(pageNumber);
                     spiderRecordDO.setEatNumber(eatCount);
