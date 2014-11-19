@@ -30,7 +30,7 @@ public class DoubanMovieIdSearchSpiderJob extends AbstractDoubanMovieSpider {
     private final static Logger log                = LoggerFactory.getLogger(DoubanMovieIdSearchSpiderJob.class);
 
     private final String[]      movieTagSearchApis = {
-            "http://api.douban.com/v2/movie/search?tag=%s?count=%s&start=%s&apikey=049d5a53f9bfebf30dd80efbed3fc3d9",
+            "http://api.douban.com/v2/movie/search?tag=%s&apikey=049d5a53f9bfebf30dd80efbed3fc3d9&count=%s&start=%s",
             "http://movie.douban.com/j/search_subjects?type=movie&tag=%s&sort=time&page_limit=%s&page_start=%s",
             "http://movie.douban.com/j/search_subjects?type=tv&tag=%s&sort=time&page_limit=%s&page_start=%s" };
 
@@ -42,7 +42,7 @@ public class DoubanMovieIdSearchSpiderJob extends AbstractDoubanMovieSpider {
 
     @Override
     public int getTimeInterval() {
-        return 2000;
+        return 4000;
     }
 
     @Override
@@ -52,9 +52,9 @@ public class DoubanMovieIdSearchSpiderJob extends AbstractDoubanMovieSpider {
 
         for (SpiderRecordDO spiderRecordDO : spiderRecrods) {
 
-            int length = 100, offset = 0, eatCount = spiderRecordDO.getEatNumber();
-
             for (String api : movieTagSearchApis) {
+
+                int length = 100, offset = 0, eatCount = spiderRecordDO.getEatNumber();
 
                 while (true) {
                     String url = String.format(api, URLEncoder.encode(spiderRecordDO.getTagName(), "utf-8"), length,
