@@ -6,9 +6,9 @@
 <mapper namespace="com.resources.dal.mapper.ResMovieMapper">
 	
 	<sql id="allColumns">
-		id,did,title,original_title,cast_ids,director_ids,genre_Ids,writer_ids,country_ids,aka,cover_images_id,mobile_url,rating_count,rating_id,wish_count,collect_count,
-		subtype,website,douban_site,pubdates,mainland_pubdate,year,languages,durations,summary_id,comment_count,review_count,season_count,current_season,
-		episode_count,imdb_id,tag_ids,data_status,playable,created_time,modified_time
+		id,did,title,original_title,cast_ids,director_ids,genre_Ids,writer_ids,country_ids,aka,cover_images_id,mobile_url,rating_count,rating_id,
+		wish_count,collect_count,subtype,website,douban_site,pubdates,year,languages,durations,summary_id,comment_count,review_count,season_count,
+		season_id,episode_count,imdb_id,tag_ids,data_status,playable,created_time,modified_time
 	</sql>
 	
 	<resultMap type="com.resources.dal.dataobject.ResMovieDO" id="resMovieDO">
@@ -32,7 +32,6 @@
 		<result property="website" column="website"/>
 		<result property="doubanSite" column="douban_site"/>
 		<result property="pubdates" column="pubdates"/>
-		<result property="mainlandPubdate" column="mainland_pubdate"/>
 		<result property="year" column="year"/>
 		<result property="languages" column="languages" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="durations" column="durations"/>
@@ -40,7 +39,7 @@
 		<result property="commentCount" column="comment_count"/>
 		<result property="reviewCount" column="review_count"/>
 		<result property="seasonCount" column="season_count"/>
-		<result property="currentSeason" column="current_season"/>
+		<result property="seasonId" column="season_id"/>
 		<result property="episodeCount" column="episode_count"/>
 		<result property="imdbId" column="imdb_id"/>
 		<result property="tagIds" column="tag_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
@@ -55,9 +54,9 @@
 		(<include refid="allColumns"/>)
 		values(
 		#{id},#{did},#{title},#{originalTitle},#{castIds},#{directorIds},#{genreIds},#{writerIds},#{countryIds},#{aka},#{coverImagesId},#{mobileUrl},
-		#{ratingCount},#{ratingId},#{wishCount},#{collectCount},#{subType},#{website},#{doubanSite},#{pubdates},#{mainlandPubdate},
-		#{year},#{languages},#{durations},#{summaryId},#{commentCount},#{reviewCount},#{seasonCount},#{currentSeason},#{episodeCount},
-		#{imdbId},#{tagIds},#{dataStatus},#{playable},#{createdTime},#{modifiedTime}
+		#{ratingCount},#{ratingId},#{wishCount},#{collectCount},#{subType},#{website},#{doubanSite},#{pubdates},#{year},#{languages},#{durations},
+		#{summaryId},#{commentCount},#{reviewCount},#{seasonCount},#{seasonId},#{episodeCount},#{imdbId},#{tagIds},#{dataStatus},#{playable},
+		#{createdTime},#{modifiedTime}
 		)
 	</insert>
 
@@ -86,7 +85,6 @@
 			<if test="website != null">website=#{website},</if>
 			<if test="doubanSite != null">douban_site=#{doubanSite},</if>
 			<if test="pubdates != null">pubdates=#{pubdates},</if>
-			<if test="mainlandPubdate != null">mainland_pubdate=#{mainlandPubdate},</if>
 			<if test="year != null">year=#{year},</if>
 			<if test="languages != null">languages=#{languages},</if>
 			<if test="durations != null">durations=#{durations},</if>
@@ -94,7 +92,7 @@
 			<if test="commentCount != 0">comment_count=#{commentCount},</if>
 			<if test="reviewCount != 0">review_count=#{reviewCount},</if>
 			<if test="seasonCount != 0">season_count=#{seasonCount},</if>
-			<if test="currentSeason != 0">current_season=#{currentSeason},</if>
+			<if test="seasonId != 0">season_id=#{seasonId},</if>
 			<if test="episodeCount != 0">episode_count=#{episodeCount},</if>
 			<if test="imdbId != null">imdb_id=#{imdbId},</if>
 			<if test="tagIds != null">tag_ids=#{tagIds},</if>

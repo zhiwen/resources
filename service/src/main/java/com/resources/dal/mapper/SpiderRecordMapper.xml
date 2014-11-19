@@ -46,4 +46,8 @@
 		select * from spider_record where type = #{type}
 	</select>
 	
+	<select id="getRecordByTypeWithName" parameterType="java.util.Map" resultMap="spiderRecordDO">
+		select * from spider_record where type = #{type} and tag_name=#{tagName}
+	</select>
+	
 </mapper>  

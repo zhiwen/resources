@@ -92,10 +92,6 @@ public class ResMovieDO extends BaseDO {
      */
     private String           pubdates;
     /**
-     * 大陆上映日期，如果条目类型是电影则为上映日期，如果是电视剧则为首播日期
-     */
-    private String           mainlandPubdate;
-    /**
      * 年代
      */
     private String           year;
@@ -124,9 +120,9 @@ public class ResMovieDO extends BaseDO {
      */
     private int              seasonCount;
     /**
-     * 当前季数(tv only)
+     * 电影剧每季的id-存于kv表(tv only)
      */
-    private int              currentSeason;
+    private long             seasonId;
     /**
      * 当前季的集数(tv only)
      */
@@ -307,14 +303,6 @@ public class ResMovieDO extends BaseDO {
         this.pubdates = pubdates;
     }
 
-    public String getMainlandPubdate() {
-        return mainlandPubdate;
-    }
-
-    public void setMainlandPubdate(String mainlandPubdate) {
-        this.mainlandPubdate = mainlandPubdate;
-    }
-
     public String getYear() {
         return year;
     }
@@ -371,12 +359,12 @@ public class ResMovieDO extends BaseDO {
         this.seasonCount = seasonCount;
     }
 
-    public int getCurrentSeason() {
-        return currentSeason;
+    public long getSeasonId() {
+        return seasonId;
     }
 
-    public void setCurrentSeason(int currentSeason) {
-        this.currentSeason = currentSeason;
+    public void setSeasonId(long seasonId) {
+        this.seasonId = seasonId;
     }
 
     public int getEpisodeCount() {

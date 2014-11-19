@@ -1,7 +1,5 @@
 package com.resource.spider.movie.douban;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashSet;
@@ -15,16 +13,16 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.resource.spider.SpiderJob;
-import com.resource.spider.http.HttpURLConnectionWrapper;
+import com.resource.spider.movie.AbstractDoubanMovieSpider;
 import com.resources.dal.dataobject.SpiderRecordDO;
 import com.resources.dal.mapper.SpiderRecordMapper;
 import com.resources.service.ResMovieService;
@@ -35,34 +33,22 @@ import com.resources.service.ResMovieService;
  * @author zhiwenmizw
  */
 @Service
-public class DoubanMovieTagListSpiderJob implements SpiderJob {
+public class DoubanMovieTagListSpiderJob extends AbstractDoubanMovieSpider {
 
-    public String              doubanTagPage = "http://movie.douban.com/tag/";
-    public int                 length        = 20, timeInterval = 5000;
+    private final static Logger log           = LoggerFactory.getLogger(DoubanMovieTagListSpiderJob.class);
+
+    public String               doubanTagPage = "http://movie.douban.com/tag/";
+    public int                  length        = 20;
 
     @Resource
-    private SpiderRecordMapper spiderRecordMapper;
+    private SpiderRecordMapper  spiderRecordMapper;
 
     @Resource
-    private ResMovieService    resMovieService;
+    private ResMovieService     resMovieService;
 
-    public Document getDocument(String url) {
-        HttpURLConnectionWrapper con = null;
-        Document doc = null;
-        try {
-            Thread.sleep(timeInterval);
-            con = new HttpURLConnectionWrapper(new URL(url));
-            InputStream in = con.getInputStream();
-            doc = Jsoup.parse(in, "utf-8", doubanTagPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
-        return doc;
+    @Override
+    public int getTimeInterval() {
+        return 1000;
     }
 
     public List<SpiderRecordDO> preData() {
@@ -207,8 +193,7 @@ public class DoubanMovieTagListSpiderJob implements SpiderJob {
         for (SpiderRecordDO spiderRecordDO : spiderRecrods) {
             parsePageList(spiderRecordDO);
         }
-
-        // 3、保存数据
+        log.info("proccess-over-{}", this.getClass().toString());
     }
 
 }

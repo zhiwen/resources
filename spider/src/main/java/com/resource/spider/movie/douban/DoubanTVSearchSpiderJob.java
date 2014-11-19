@@ -1,8 +1,5 @@
 package com.resource.spider.movie.douban;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.Date;
@@ -17,12 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.resource.spider.SpiderJob;
-import com.resource.spider.http.HttpURLConnectionWrapper;
-import com.resources.common.IOUtil;
+import com.resource.spider.movie.AbstractDoubanMovieSpider;
 import com.resources.dal.dataobject.SpiderRecordDO;
 import com.resources.dal.mapper.SpiderRecordMapper;
 import com.resources.service.ResMovieService;
@@ -33,7 +27,7 @@ import com.resources.service.ResMovieService;
  * @author zhiwenmizw
  */
 @Service
-public class DoubanTVSearchSpiderJob implements SpiderJob {
+public class DoubanTVSearchSpiderJob extends AbstractDoubanMovieSpider {
 
     private final static Logger log                 = LoggerFactory.getLogger(DoubanTVSearchSpiderJob.class);
 
@@ -47,22 +41,9 @@ public class DoubanTVSearchSpiderJob implements SpiderJob {
     @Resource
     private SpiderRecordMapper  spiderRecordMapper;
 
-    public JSONObject getData(String url) {
-        HttpURLConnectionWrapper con = null;
-        try {
-            Thread.sleep(timeInterval);
-            con = new HttpURLConnectionWrapper(new URL(url));
-            InputStream in = con.getInputStream();
-            ByteArrayOutputStream bos = IOUtil.getByteData(in);
-            return JSON.parseObject(bos.toString("UTF-8"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
+    @Override
+    public int getTimeInterval() {
+        return 4000;
     }
 
     public List<SpiderRecordDO> preData() {
@@ -75,7 +56,7 @@ public class DoubanTVSearchSpiderJob implements SpiderJob {
 
         spiderRecrods = new LinkedList<SpiderRecordDO>();
 
-        JSONObject jsonObject = getData("http://movie.douban.com/j/search_tags?type=tv");
+        JSONObject jsonObject = getJSONData("http://movie.douban.com/j/search_tags?type=tv");
         if (null == jsonObject || jsonObject.isEmpty()) {
             return Collections.emptyList();
         }
@@ -121,7 +102,7 @@ public class DoubanTVSearchSpiderJob implements SpiderJob {
                                            URLEncoder.encode(spiderRecordDO.getTagName(), "utf-8"), length, offset);
                 log.info("process-url:[{}]", url);
                 ++pageNumber;
-                JSONObject jsonObjectValue = getData(url);
+                JSONObject jsonObjectValue = getJSONData(url);
                 if (null == jsonObjectValue) {
                     break;
                 }

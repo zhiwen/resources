@@ -1,8 +1,5 @@
 package com.resource.spider.movie.douban;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -16,13 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.resource.spider.SpiderJob;
-import com.resource.spider.http.HttpURLConnectionWrapper;
+import com.resource.spider.movie.AbstractDoubanMovieSpider;
 import com.resources.common.BizTypeEnum;
-import com.resources.common.IOUtil;
 import com.resources.common.ResKVTypeEnum;
 import com.resources.common.StringUtil;
 import com.resources.dal.dataobject.ResKVDO;
@@ -39,7 +33,7 @@ import com.resources.service.ResURLService;
  * @author zhiwenmizw
  */
 @Service
-public class DoubanSubjectApiSpiderJob implements SpiderJob {
+public class DoubanSubjectApiSpiderJob extends AbstractDoubanMovieSpider {
 
     private final static Logger log              = LoggerFactory.getLogger(DoubanSubjectApiSpiderJob.class);
 
@@ -58,22 +52,9 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
     @Resource
     private ResURLService       resURLService;
 
-    public JSONObject getData(String url) {
-        HttpURLConnectionWrapper con = null;
-        try {
-            Thread.sleep(timeInterval);
-            con = new HttpURLConnectionWrapper(new URL(url));
-            InputStream in = con.getInputStream();
-            ByteArrayOutputStream bos = IOUtil.getByteData(in);
-            return JSON.parseObject(bos.toString("UTF-8"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
+    @Override
+    public int getTimeInterval() {
+        return 1000;
     }
 
     private List<Long> getTagIdList(long did, JSONArray arrays) {
@@ -132,13 +113,6 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
         if (StringUtils.isNotBlank(title)) {
             resMovieDO.setTitle(StringUtils.trim(title));
         }
-
-        // String year = StringUtils.trim(valueObject.getString("year"));
-        // if (StringUtils.isNotBlank(year)) {
-        // if (StringUtils.isNumeric(year)) {
-        // resMovieDO.setYear(year);
-        // }
-        // }
 
         List<Long> countryIds = getTagIdList(resMovieDO.getDid(), valueObject.getJSONArray("countries"));
         if (CollectionUtils.isNotEmpty(countryIds)) {
@@ -213,13 +187,13 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
             for (ResMovieDO resMovieDO : movieList) {
                 String qulifySubjectUrl = String.format(doubanSubjectApi, resMovieDO.getDid());
                 log.info("process-url:[{}]", qulifySubjectUrl);
-                JSONObject valueObject = getData(qulifySubjectUrl);
+                JSONObject valueObject = getJSONData(qulifySubjectUrl);
                 if (null == valueObject || valueObject.isEmpty()) {
                     continue;
                 }
                 parseAndSave(resMovieDO, valueObject);
             }
-            // offset += length;
         }
+        log.info("proccess-over-{}", this.getClass().toString());
     }
 }

@@ -15,7 +15,6 @@ import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
-import com.resource.spider.movie.MovieSpider;
 import com.resources.common.BizTypeEnum;
 import com.resources.common.StringUtil;
 import com.resources.dal.module.MovieDO;
@@ -24,7 +23,7 @@ import com.resources.service.dto.ResourceInfoDTO;
 
 //@Service
 @Deprecated
-public class DoubanMovieSpider extends MovieSpider {
+public class DoubanMovieSpider {
 
     private enum MovieInfoEnum {
         country("制片国家/地区:"), language("语言:"), alias("又名:"), movieNumber("集数:"), sigleMovieLen("单集片长:");
@@ -36,7 +35,6 @@ public class DoubanMovieSpider extends MovieSpider {
         }
     }
 
-    @Override
     public ResourceInfoDTO<MovieDO> parseToMovie(Document document) {
 
         MovieDO movieDO = new MovieDO();

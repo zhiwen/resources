@@ -11,7 +11,12 @@ public class Main {
 
         context = new ClassPathXmlApplicationContext("service.xml", "spider.xml");
 
-        SpiderJob spiderJob = (SpiderJob) context.getBean("doubanMovieTagListSpiderJob");
+        SpiderJob spiderJob = null;
+
+        // spiderJob = (SpiderJob) context.getBean("doubanMovieTagsSpider");
+        // spiderJob.execute();
+
+        spiderJob = (SpiderJob) context.getBean("doubanMovieTagListSpiderJob");
         // spiderJob.execute();
 
         // spiderJob = (SpiderJob) context.getBean("doubanMovieSearchSpiderJob");
@@ -24,6 +29,6 @@ public class Main {
         // spiderJob.execute();
 
         spiderJob = (SpiderJob) context.getBean("doubanSubjectApiSpiderJob");
-        spiderJob.execute();
+        // spiderJob.execute();
     }
 }
