@@ -193,7 +193,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
                 }
                 parseAndSave(resMovieDO, valueObject);
             }
-            offset += length;
+            // offset += length;
         }
     }
 }

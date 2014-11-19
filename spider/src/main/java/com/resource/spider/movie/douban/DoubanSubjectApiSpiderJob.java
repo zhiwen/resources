@@ -44,7 +44,7 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
     private final static Logger log              = LoggerFactory.getLogger(DoubanSubjectApiSpiderJob.class);
 
     public String               doubanSubjectApi = "http://api.douban.com/v2/movie/subject/%s?apikey=049d5a53f9bfebf30dd80efbed3fc3d9";
-    public int                  timeInterval     = 3000;
+    public int                  timeInterval     = 2000;
 
     @Resource
     private ResMovieService     resMovieService;
@@ -218,7 +218,7 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
                 }
                 parseAndSave(resMovieDO, valueObject);
             }
-            offset += length;
+            // offset += length;
         }
     }
 }
