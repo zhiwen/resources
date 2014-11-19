@@ -165,7 +165,7 @@ public class DoubanSubjectAbsSpiderJob implements SpiderJob {
         try {
             resMovieService.updateMovie(resMovieDO);
         } catch (Exception e) {
-            log.error("updateMovie-fail movieDO:[{}]", resMovieDO);
+            log.error("updateMovie-fail movieDO:[{}]", resMovieDO, e);
         }
     }
 

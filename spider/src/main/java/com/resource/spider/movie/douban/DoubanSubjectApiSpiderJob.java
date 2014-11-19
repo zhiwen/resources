@@ -212,6 +212,7 @@ public class DoubanSubjectApiSpiderJob implements SpiderJob {
 
             for (ResMovieDO resMovieDO : movieList) {
                 String qulifySubjectUrl = String.format(doubanSubjectApi, resMovieDO.getDid());
+                log.info("process-url:[{}]", qulifySubjectUrl);
                 JSONObject valueObject = getData(qulifySubjectUrl);
                 if (null == valueObject || valueObject.isEmpty()) {
                     continue;
