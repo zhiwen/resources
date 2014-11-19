@@ -24,9 +24,9 @@ import com.resources.dal.mapper.SpiderRecordMapper;
  * @author zhiwenmizw
  */
 @Service
-public class DoubanMovieTagsSpider extends AbstractDoubanMovieSpider {
+public class DoubanMovieTagsSpiderJob extends AbstractDoubanMovieSpider {
 
-    private final static Logger log            = LoggerFactory.getLogger(DoubanMovieTagsSpider.class);
+    private final static Logger log            = LoggerFactory.getLogger(DoubanMovieTagsSpiderJob.class);
     @Resource
     private SpiderRecordMapper  spiderRecordMapper;
 

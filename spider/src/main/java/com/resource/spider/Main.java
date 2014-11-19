@@ -13,7 +13,7 @@ public class Main {
 
         SpiderJob spiderJob = null;
 
-        // spiderJob = (SpiderJob) context.getBean("doubanMovieTagsSpider");
+        // spiderJob = (SpiderJob) context.getBean("doubanMovieTagsSpiderJob");
         // spiderJob.execute();
 
         spiderJob = (SpiderJob) context.getBean("doubanMovieIdSearchSpiderJob");

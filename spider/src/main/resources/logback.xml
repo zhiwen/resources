@@ -37,11 +37,11 @@
 		</triggeringPolicy>
 	</appender>
 	
-	<appender name="doubanListSpiderJobAppender"
+	<appender name="doubanMovieTagsSpiderJob"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log_home}/db-list.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home}/db-movie-tags.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -55,11 +55,11 @@
 		</triggeringPolicy>
 	</appender>
 	
-	<appender name="doubanSubjectApiSpiderJobAppender"
+	<appender name="doubanMovieIdSearchSpiderJob"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log_home}/db-subject-api.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home}/db-movie-ids.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -73,11 +73,11 @@
 		</triggeringPolicy>
 	</appender>
 	
-	<appender name="doubanSubjectAbsSpiderJobAppender"
+	<appender name="doubanMovieAbstractSpiderJob"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log_home}/db-subject-abs.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home}/db-movie-abstract.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -91,22 +91,68 @@
 		</triggeringPolicy>
 	</appender>
 	
-	<logger name="com.resource.spider.movie.douban.DoubanMovieTagListSpiderJob" addtivity="false">
+	<appender name="doubanMovieApiSpiderJob"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log_home}/db-movie-api.log-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+			</pattern>
+		</layout>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<appender name="doubanMovieDetailSpiderJob"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log_home}/db-movie-detail.log-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+			</pattern>
+		</layout>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+	<logger name="com.resource.spider.movie.douban.DoubanMovieTagsSpiderJob" addtivity="false">
 		<level value="info" />
-		<appender-ref ref="doubanListSpiderJobAppender"/>
+		<appender-ref ref="doubanMovieTagsSpiderJob"/>
 	</logger>
 	
-	<logger name="com.resource.spider.movie.douban.DoubanSubjectAbsSpiderJob" addtivity="false">
+	<logger name="com.resource.spider.movie.douban.DoubanMovieIdSearchSpiderJob" addtivity="false">
 		<level value="info" />
-		<appender-ref ref="doubanSubjectAbsSpiderJobAppender"/>
+		<appender-ref ref="doubanMovieIdSearchSpiderJob"/>
 	</logger>
 	
-	<logger name="com.resource.spider.movie.douban.DoubanSubjectApiSpiderJob" addtivity="false">
+	<logger name="com.resource.spider.movie.douban.DoubanMovieAbstractSpiderJob" addtivity="false">
 		<level value="info" />
-		<appender-ref ref="doubanSubjectApiSpiderJobAppender"/>
+		<appender-ref ref="doubanMovieAbstractSpiderJob"/>
 	</logger>
 	
-	<root level="info">
+	<logger name="com.resource.spider.movie.douban.DoubanMovieApiSpiderJob" addtivity="false">
+		<level value="info" />
+		<appender-ref ref="doubanMovieApiSpiderJob"/>
+	</logger>
+	
+	<logger name="com.resource.spider.movie.douban.DoubanMovieDetailSpiderJob" addtivity="false">
+		<level value="info" />
+		<appender-ref ref="doubanMovieDetailSpiderJob"/>
+	</logger>
+	
+	<root level="error">
 		<appender-ref ref="stdoutAppender" />
 		<appender-ref ref="rootAppender" />
 	</root>
