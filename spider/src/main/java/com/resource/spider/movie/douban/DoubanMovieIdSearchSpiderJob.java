@@ -56,9 +56,10 @@ public class DoubanMovieIdSearchSpiderJob extends AbstractDoubanMovieSpider {
 
                 int length = 100, offset = 0, eatCount = spiderRecordDO.getEatNumber();
 
+                String keyword = URLEncoder.encode(spiderRecordDO.getTagName(), "utf-8");
+
                 while (true) {
-                    String url = String.format(api, URLEncoder.encode(spiderRecordDO.getTagName(), "utf-8"), length,
-                                               offset);
+                    String url = String.format(api, keyword, length, offset);
                     log.info("process-url:[{}]", url);
                     JSONObject jsonObjectValue = getJSONData(url);
                     if (null == jsonObjectValue) {
