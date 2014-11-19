@@ -146,7 +146,7 @@ public class DoubanMovieSearchSpiderJob implements SpiderJob {
                     }
                 }
                 try {
-                    eatCount += resMovieService.addMovieList(movieIds, DataStatus.SubjectAbs.value);
+                    eatCount += resMovieService.addMovieList(movieIds, DataStatus.TagList.value);
                     // update
                     spiderRecordDO.setPageNumber(pageNumber);
                     spiderRecordDO.setEatNumber(eatCount);

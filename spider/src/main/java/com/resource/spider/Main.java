@@ -15,13 +15,13 @@ public class Main {
         // spiderJob.execute();
 
         spiderJob = (SpiderJob) context.getBean("doubanMovieSearchSpiderJob");
-        spiderJob.execute();
+        // spiderJob.execute();
 
         // spiderJob = (SpiderJob) context.getBean("doubanSubjectTVSearchSpiderJob");
         // spiderJob.execute();
 
         spiderJob = (SpiderJob) context.getBean("doubanSubjectAbsSpiderJob");
-        // spiderJob.execute();
+        spiderJob.execute();
 
         spiderJob = (SpiderJob) context.getBean("doubanSubjectApiSpiderJob");
         // spiderJob.execute();
