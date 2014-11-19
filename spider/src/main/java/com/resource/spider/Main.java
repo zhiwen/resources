@@ -16,19 +16,16 @@ public class Main {
         // spiderJob = (SpiderJob) context.getBean("doubanMovieTagsSpider");
         // spiderJob.execute();
 
-        spiderJob = (SpiderJob) context.getBean("doubanMovieTagListSpiderJob");
+        spiderJob = (SpiderJob) context.getBean("doubanMovieIdSearchSpiderJob");
+        spiderJob.execute();
+
+        // spiderJob = (SpiderJob) context.getBean("doubanMovieAbstractSpiderJob");
         // spiderJob.execute();
 
-        // spiderJob = (SpiderJob) context.getBean("doubanMovieSearchSpiderJob");
+        // spiderJob = (SpiderJob) context.getBean("doubanMovieApiSpiderJob");
         // spiderJob.execute();
 
-        // spiderJob = (SpiderJob) context.getBean("doubanSubjectTVSearchSpiderJob");
-        // spiderJob.execute();
-
-        // spiderJob = (SpiderJob) context.getBean("doubanSubjectAbsSpiderJob");
-        // spiderJob.execute();
-
-        spiderJob = (SpiderJob) context.getBean("doubanSubjectApiSpiderJob");
+        // spiderJob = (SpiderJob) context.getBean("doubanMovieDetailSpiderJob");
         // spiderJob.execute();
     }
 }

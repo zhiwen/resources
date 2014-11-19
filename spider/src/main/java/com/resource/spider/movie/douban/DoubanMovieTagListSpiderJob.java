@@ -20,7 +20,6 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import com.resource.spider.movie.AbstractDoubanMovieSpider;
 import com.resources.dal.dataobject.SpiderRecordDO;
@@ -32,7 +31,8 @@ import com.resources.service.ResMovieService;
  * 
  * @author zhiwenmizw
  */
-@Service
+@Deprecated
+// @Service
 public class DoubanMovieTagListSpiderJob extends AbstractDoubanMovieSpider {
 
     private final static Logger log           = LoggerFactory.getLogger(DoubanMovieTagListSpiderJob.class);
@@ -141,7 +141,7 @@ public class DoubanMovieTagListSpiderJob extends AbstractDoubanMovieSpider {
 
             didList = parsePageListItem(doubanTagPageByTag);
 
-            eatedCount += resMovieService.addMovieList(didList, DataStatus.SubjectAbs.value);
+            eatedCount += resMovieService.addMovieList(didList, DataStatus.doubanMovieAbstract.getValue());
 
             // 4、记录总和总页条数到db
             spiderRecordDO.setPageNumber(i);

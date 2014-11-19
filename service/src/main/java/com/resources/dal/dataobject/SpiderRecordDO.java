@@ -1,5 +1,7 @@
 package com.resources.dal.dataobject;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.resources.common.BaseDO;
 
 public class SpiderRecordDO extends BaseDO {
@@ -42,6 +44,20 @@ public class SpiderRecordDO extends BaseDO {
 
     public void setEatNumber(int eatNumber) {
         this.eatNumber = eatNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return tagName.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof SpiderRecordDO)) {
+            return false;
+        }
+        SpiderRecordDO other = (SpiderRecordDO) obj;
+        return StringUtils.equals(getTagName(), other.getTagName());
     }
 
     public static enum SpiderRecordTypeEnum {

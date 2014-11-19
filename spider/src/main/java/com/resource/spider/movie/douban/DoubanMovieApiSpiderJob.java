@@ -33,12 +33,11 @@ import com.resources.service.ResURLService;
  * @author zhiwenmizw
  */
 @Service
-public class DoubanSubjectApiSpiderJob extends AbstractDoubanMovieSpider {
+public class DoubanMovieApiSpiderJob extends AbstractDoubanMovieSpider {
 
-    private final static Logger log              = LoggerFactory.getLogger(DoubanSubjectApiSpiderJob.class);
+    private final static Logger log              = LoggerFactory.getLogger(DoubanMovieApiSpiderJob.class);
 
     public String               doubanSubjectApi = "http://api.douban.com/v2/movie/subject/%s?apikey=049d5a53f9bfebf30dd80efbed3fc3d9";
-    public int                  timeInterval     = 2000;
 
     @Resource
     private ResMovieService     resMovieService;
@@ -166,7 +165,7 @@ public class DoubanSubjectApiSpiderJob extends AbstractDoubanMovieSpider {
             }
         }
 
-        resMovieDO.setDataStatus(DataStatus.SubjectApi.value);
+        resMovieDO.setDataStatus(DataStatus.doubanMovieApi.getValue());
         try {
             resMovieService.updateMovie(resMovieDO);
         } catch (Exception e) {
@@ -178,7 +177,7 @@ public class DoubanSubjectApiSpiderJob extends AbstractDoubanMovieSpider {
     public void execute() throws Exception {
         int offset = 0, length = 1000;
         while (true) {
-            List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.SubjectAbs.value,
+            List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.doubanMovieAbstract.getValue(),
                                                                                        offset, length);
             if (CollectionUtils.isEmpty(movieList)) {
                 break;// the end

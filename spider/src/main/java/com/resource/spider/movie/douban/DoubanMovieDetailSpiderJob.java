@@ -1,7 +1,5 @@
 package com.resource.spider.movie.douban;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -12,7 +10,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
@@ -22,8 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.resource.spider.SpiderJob;
-import com.resource.spider.http.HttpURLConnectionWrapper;
+import com.resource.spider.movie.AbstractDoubanMovieSpider;
 import com.resources.common.BizTypeEnum;
 import com.resources.dal.dataobject.ResMovieDO;
 import com.resources.dal.dataobject.ResTagDO;
@@ -54,9 +50,9 @@ import com.resources.service.ResURLService;
  * @author zhiwenmizw
  */
 @Service
-public class DoubanSubjectDetailSpiderJob implements SpiderJob {
+public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
 
-    private final static Logger log                 = LoggerFactory.getLogger(DoubanSubjectDetailSpiderJob.class);
+    private final static Logger log                 = LoggerFactory.getLogger(DoubanMovieDetailSpiderJob.class);
 
     @Resource
     private ResMovieService     resMovieService;
@@ -70,7 +66,7 @@ public class DoubanSubjectDetailSpiderJob implements SpiderJob {
     @Resource
     private ResTagService       resTagService;
 
-    private final String        doubanSubjectDetail = "http://movie.douban.com/subject/%s/";
+    private final String        doubanMovieDetailApi = "http://movie.douban.com/subject/%s/";
 
     private enum MovieInfoEnum {
         language("语言:"), writers("编剧");
@@ -80,6 +76,11 @@ public class DoubanSubjectDetailSpiderJob implements SpiderJob {
         private MovieInfoEnum(String name){
             this.value = name;
         }
+    }
+
+    @Override
+    public int getTimeInterval() {
+        return 1000;
     }
 
     private List<Long> getTagIdList(long did, List<String> arrays) {
@@ -138,13 +139,14 @@ public class DoubanSubjectDetailSpiderJob implements SpiderJob {
             // resMovieService.getMovieByDid(did);
         }
 
+        resMovieDO.setDataStatus(DataStatus.doubanMovieDetail.getValue());
     }
 
     @Override
     public void execute() throws Exception {
         int offset = 0, length = 1000;
         while (true) {
-            List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.SubjectAbs.value,
+            List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.doubanMovieApi.getValue(),
                                                                                        offset, length);
             if (CollectionUtils.isEmpty(movieList)) {
                 break;// the end
@@ -152,7 +154,7 @@ public class DoubanSubjectDetailSpiderJob implements SpiderJob {
 
             for (ResMovieDO resMovieDO : movieList) {
 
-                String qulifySubjectUrl = String.format(doubanSubjectDetail, resMovieDO.getDid());
+                String qulifySubjectUrl = String.format(doubanMovieDetailApi, resMovieDO.getDid());
                 log.info("process-url:[{}]", qulifySubjectUrl);
 
                 Document document = getDocument(qulifySubjectUrl);
@@ -177,57 +179,6 @@ public class DoubanSubjectDetailSpiderJob implements SpiderJob {
             // offset += length;
         }
         log.info("proccess-over-{}", this.getClass().toString());
-    }
-
-    public static Document getDocument(String url) {
-        HttpURLConnectionWrapper con = null;
-        Document doc = null;
-        try {
-            con = new HttpURLConnectionWrapper(new URL(url));
-            InputStream in = con.getInputStream();
-            doc = Jsoup.parse(in, "utf-8", url);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
-        return doc;
-    }
-
-    public static void main(String[] args) {
-        DoubanSubjectDetailSpiderJob spider = new DoubanSubjectDetailSpiderJob();
-
-        String url = "http://movie.douban.com/subject/24404677/";// 完整数据
-        url = "http://movie.douban.com/subject/11599330/"; // 无imdb
-        url = "http://movie.douban.com/subject/1507337/";// 无编剧
-        url = "http://movie.douban.com/subject/3222721/";// 无语言
-        url = "http://movie.douban.com/subject/3742360/";// 多语言
-        url = "http://movie.douban.com/subject/25846034/";// 多季，多集
-        // url = "http://movie.douban.com/subject/25940269/";// 无季，多集
-
-        Document document = getDocument(url);
-
-        Element contentEle = document.getElementById("content");
-
-        Element infoEle = contentEle.getElementById("info");
-
-        List<String> pubdates = spider.getPudates(infoEle);
-        System.out.println("pubdates:" + pubdates);
-
-        List<String> writerList = spider.getWriters(infoEle);
-        System.out.println("writerList:" + writerList);
-
-        String imdb = spider.getIMDBID(infoEle);
-        System.out.println("imdb:" + imdb);
-
-        List<String> languageList = spider.getLanguages(infoEle);
-        System.out.println("languageList:" + languageList);
-
-        List<Long> seasons = spider.getSeasons(infoEle);
-        System.out.println("seasons:" + seasons);
     }
 
     public List<String> getLanguages(Element infoEle) {

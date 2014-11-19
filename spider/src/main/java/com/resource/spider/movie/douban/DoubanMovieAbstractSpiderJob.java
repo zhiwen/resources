@@ -29,9 +29,9 @@ import com.resources.service.ResTagService;
  * @author zhiwenmizw
  */
 @Service
-public class DoubanSubjectAbsSpiderJob extends AbstractDoubanMovieSpider {
+public class DoubanMovieAbstractSpiderJob extends AbstractDoubanMovieSpider {
 
-    private final static Logger log              = LoggerFactory.getLogger(DoubanSubjectAbsSpiderJob.class);
+    private final static Logger log              = LoggerFactory.getLogger(DoubanMovieAbstractSpiderJob.class);
 
     public String               doubanSubjectAbs = "http://movie.douban.com/j/subject_abstract?subject_id=%s";
 
@@ -141,7 +141,7 @@ public class DoubanSubjectAbsSpiderJob extends AbstractDoubanMovieSpider {
             }
         }
 
-        resMovieDO.setDataStatus(DataStatus.SubjectAbs.value);
+        resMovieDO.setDataStatus(DataStatus.doubanMovieAbstract.getValue());
         try {
             resMovieService.updateMovie(resMovieDO);
         } catch (Exception e) {
@@ -153,7 +153,7 @@ public class DoubanSubjectAbsSpiderJob extends AbstractDoubanMovieSpider {
     public void execute() throws Exception {
         int offset = 0, length = 1000;
         while (true) {
-            List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.TagList.value,
+            List<ResMovieDO> movieList = resMovieService.getMovieByPaginatorWithStatus(DataStatus.doubanMovieId.getValue(),
                                                                                        offset, length);
             if (CollectionUtils.isEmpty(movieList)) {
                 break;// the end

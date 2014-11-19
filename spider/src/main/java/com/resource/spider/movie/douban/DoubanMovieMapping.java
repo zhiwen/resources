@@ -31,7 +31,7 @@ import com.resources.service.SpiderResourcesService;
 
 //@Service
 @Deprecated
-public class DoubanMovieSearch extends ResourceSpider {
+public class DoubanMovieMapping extends ResourceSpider {
 
     @Resource
     private SpiderResourcesService spiderResourcesService;
@@ -165,7 +165,7 @@ public class DoubanMovieSearch extends ResourceSpider {
 
     public static void main(String[] args) throws Exception {
         String name = "游龙戏凤";
-        new DoubanMovieSearch().idNameMappingWithSuggest(name, name);
+        new DoubanMovieMapping().idNameMappingWithSuggest(name, name);
     }
 
     public static String cleanMovieName(String name) {
