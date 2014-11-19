@@ -98,5 +98,6 @@ public class DoubanMovieIdSearchSpiderJob extends AbstractDoubanMovieSpider {
                 }
             }
         }
+        log.info("proccess-over-{}", this.getClass().toString());
     }
 }

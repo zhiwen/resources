@@ -1,11 +1,8 @@
 package com.resource.spider.movie.douban;
 
 import java.net.URLEncoder;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +12,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
@@ -49,55 +45,6 @@ public class DoubanMovieTagListSpiderJob extends AbstractDoubanMovieSpider {
     @Override
     public int getTimeInterval() {
         return 1000;
-    }
-
-    public List<SpiderRecordDO> preData() {
-
-        List<SpiderRecordDO> spiderRecrods = spiderRecordMapper.getRecordByType(SpiderRecordDO.SpiderRecordTypeEnum.douban_movie.getValue());
-
-        if (CollectionUtils.isNotEmpty(spiderRecrods)) {
-            return spiderRecrods;
-        }
-
-        Document doc = getDocument(doubanTagPage);
-
-        Set<String> tagNameSet = new HashSet<String>();
-        for (SpiderRecordDO recrod : spiderRecrods) {
-            tagNameSet.add(recrod.getTagName());
-        }
-
-        Elements classTagColEles = doc.getElementsByClass("tagCol");
-
-        for (Element tabEle : classTagColEles) {
-
-            Elements tdEles = tabEle.getElementsByTag("td");
-
-            for (Element tdEle : tdEles) {
-
-                Node childNode = tdEle.childNode(0);
-                while (!(childNode instanceof TextNode)) {
-                    childNode = childNode.childNode(0);
-                }
-                TextNode textNode = (TextNode) childNode;
-                String tagName = textNode.text();
-                tagName = StringUtils.trim(tagName);
-                if (StringUtils.isBlank(tagName)) {
-                    continue;
-                }
-                if (tagNameSet.contains(tagName)) {
-                    continue;
-                }
-                SpiderRecordDO recordDO = new SpiderRecordDO();
-                recordDO.setType(SpiderRecordDO.SpiderRecordTypeEnum.douban_movie.getValue());
-                recordDO.setTagName(tagName);
-                recordDO.setCreatedTime(new Date());
-                spiderRecordMapper.addData(recordDO);
-
-                // news
-                spiderRecrods.add(recordDO);
-            }
-        }
-        return spiderRecrods;
     }
 
     public void parsePageList(SpiderRecordDO spiderRecordDO) throws Exception {
@@ -187,7 +134,7 @@ public class DoubanMovieTagListSpiderJob extends AbstractDoubanMovieSpider {
     public void execute() throws Exception {
 
         // 1、加载处理过的url，
-        List<SpiderRecordDO> spiderRecrods = preData();
+        List<SpiderRecordDO> spiderRecrods = spiderRecordMapper.getRecordByType(SpiderRecordDO.SpiderRecordTypeEnum.douban_movie.getValue());
 
         // 2、开始抓取列表页的数据并保存入db
         for (SpiderRecordDO spiderRecordDO : spiderRecrods) {

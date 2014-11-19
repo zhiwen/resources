@@ -52,7 +52,7 @@ import com.resources.service.ResURLService;
 @Service
 public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
 
-    private final static Logger log                 = LoggerFactory.getLogger(DoubanMovieDetailSpiderJob.class);
+    private final static Logger log                  = LoggerFactory.getLogger(DoubanMovieDetailSpiderJob.class);
 
     @Resource
     private ResMovieService     resMovieService;
@@ -176,7 +176,6 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
 
                 parseAndSave(resMovieDO, infoEle);
             }
-            // offset += length;
         }
         log.info("proccess-over-{}", this.getClass().toString());
     }

@@ -106,7 +106,7 @@ public class DoubanMovieTagsSpider extends AbstractDoubanMovieSpider {
 
         hotTagsSpider();
         allHotTagsSpider();
-
+        log.info("proccess-over-{}", this.getClass().toString());
     }
 
     @Override
