@@ -57,45 +57,40 @@ public class DoubanMovieTagListSpiderJob extends AbstractDoubanMovieSpider {
         }
         List<Long> didList = null;
         // 1、 吃了的条数和页数都为0，表示没有爬过。
-        if (0 == spiderRecordDO.getPageNumber() || 0 == spiderRecordDO.getEatNumber()) {
-            // 2、获取总页数
-            int pageNumber = 1;
-            Elements pagAEles = doc.getElementsByClass("paginator");
-            if (CollectionUtils.isNotEmpty(pagAEles)) {
-                pagAEles = pagAEles.get(0).getElementsByTag("a");
-                for (Element element : pagAEles) {
-                    TextNode textNode = (TextNode) element.childNode(0);
-                    String pageNumberString = StringUtils.trim(textNode.text());
-                    if (!StringUtils.isNumeric(pageNumberString)) {
-                        continue;
-                    }
-                    int pn = Integer.valueOf(pageNumberString);
-                    if (pn > pageNumber) {
-                        pageNumber = pn;
-                    }
+        // 2、获取总页数
+        int pageNumber = 1;
+        Elements pagAEles = doc.getElementsByClass("paginator");
+        if (CollectionUtils.isNotEmpty(pagAEles)) {
+            pagAEles = pagAEles.get(0).getElementsByTag("a");
+            for (Element element : pagAEles) {
+                TextNode textNode = (TextNode) element.childNode(0);
+                String pageNumberString = StringUtils.trim(textNode.text());
+                if (!StringUtils.isNumeric(pageNumberString)) {
+                    continue;
+                }
+                int pn = Integer.valueOf(pageNumberString);
+                if (pn > pageNumber) {
+                    pageNumber = pn;
                 }
             }
-            spiderRecordDO.setPageNumber(pageNumber);
-        }
-
-        // 3、抓取每页的数据, 从最后一页开始吃起
-        int eatedCount = spiderRecordDO.getEatNumber();
-        for (int i = spiderRecordDO.getPageNumber(); i >= 1; i--) {
-
-            int offset = (i - 1) * length;
-
-            doubanTagPageByTag = String.format("%s%s?start=%s&type=T", doubanTagPage, encTagName, offset);
-
-            didList = parsePageListItem(doubanTagPageByTag);
-
-            eatedCount += resMovieService.addMovieList(didList, DataStatus.doubanMovieAbstract.getValue());
-
-            // 4、记录总和总页条数到db
-            spiderRecordDO.setPageNumber(i);
-            spiderRecordDO.setEatNumber(eatedCount);
-            spiderRecordMapper.updateData(spiderRecordDO);
         }
     }
+
+    // 3、抓取每页的数据, 从最后一页开始吃起
+    // int eatedCount = spiderRecordDO.getEatNumber();
+    // for (int i = spiderRecordDO.getPageNumber(); i >= 1; i--) {
+    //
+    // int offset = (i - 1) * length;
+    //
+    // doubanTagPageByTag = String.format("%s%s?start=%s&type=T", doubanTagPage, encTagName, offset);
+    //
+    // didList = parsePageListItem(doubanTagPageByTag);
+    //
+    // eatedCount += resMovieService.addMovieList(didList, DataStatus.doubanMovieAbstract.getValue());
+    //
+    // // 4、记录总和总页条数到db
+    // spiderRecordMapper.updateData(spiderRecordDO);
+    // }
 
     static int     idMarkLength    = "/subject/".length();
 

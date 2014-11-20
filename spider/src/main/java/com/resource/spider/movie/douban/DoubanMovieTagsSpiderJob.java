@@ -65,7 +65,7 @@ public class DoubanMovieTagsSpiderJob extends AbstractDoubanMovieSpider {
             SpiderRecordDO recordDO = new SpiderRecordDO();
             recordDO.setType(SpiderRecordDO.SpiderRecordTypeEnum.douban_movie.getValue());
             recordDO.setTagName(tagName);
-            recordDO.setCreatedTime(new Date());
+            recordDO.setSpiderDate(new Date());
             spiderRecordMapper.addData(recordDO);
         }
     }
@@ -95,7 +95,7 @@ public class DoubanMovieTagsSpiderJob extends AbstractDoubanMovieSpider {
                 SpiderRecordDO recordDO = new SpiderRecordDO();
                 recordDO.setType(SpiderRecordDO.SpiderRecordTypeEnum.douban_movie.getValue());
                 recordDO.setTagName(tagName);
-                recordDO.setCreatedTime(new Date());
+                recordDO.setSpiderDate(new Date());
                 spiderRecordMapper.addData(recordDO);
             }
         }

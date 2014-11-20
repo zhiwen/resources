@@ -14,10 +14,12 @@ public class HttpURLConnectionWrapper {
 
     private final URL url;
 
-    public HttpURLConnectionWrapper(URL u) throws IOException{
+    public HttpURLConnectionWrapper(URL url, int conTimeout, int readTimeout) throws IOException{
         // super(u);
-        url = u;
-        httpURLConnection = (HttpURLConnection) u.openConnection();
+        this.url = url;
+        httpURLConnection = (HttpURLConnection) url.openConnection();
+        httpURLConnection.setReadTimeout(readTimeout);
+        httpURLConnection.setConnectTimeout(conTimeout);
         fillRequestHeadField();
     }
 

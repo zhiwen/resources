@@ -19,7 +19,7 @@ public abstract class AbstractDoubanMovieSpider implements SpiderJob {
         HttpURLConnectionWrapper con = null;
         try {
             Thread.sleep(getTimeInterval());
-            con = new HttpURLConnectionWrapper(new URL(url));
+            con = new HttpURLConnectionWrapper(new URL(url), getConnectTimeout(), getReadTimeout());
             InputStream in = con.getInputStream();
             ByteArrayOutputStream bos = IOUtil.getByteData(in);
             return JSON.parseObject(bos.toString("UTF-8"));
@@ -38,7 +38,7 @@ public abstract class AbstractDoubanMovieSpider implements SpiderJob {
         Document doc = null;
         try {
             Thread.sleep(getTimeInterval());
-            con = new HttpURLConnectionWrapper(new URL(url));
+            con = new HttpURLConnectionWrapper(new URL(url), getConnectTimeout(), getReadTimeout());
             InputStream in = con.getInputStream();
             doc = Jsoup.parse(in, "utf-8", url);
         } catch (Exception e) {
@@ -53,5 +53,13 @@ public abstract class AbstractDoubanMovieSpider implements SpiderJob {
     }
 
     public abstract int getTimeInterval();
+
+    public int getReadTimeout() {
+        return 2000;
+    }
+
+    public int getConnectTimeout() {
+        return 1000;
+    }
 
 }

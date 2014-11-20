@@ -1,18 +1,28 @@
 package com.resources.dal.dataobject;
 
-import org.apache.commons.lang.StringUtils;
+import java.util.Date;
 
-import com.resources.common.BaseDO;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class SpiderRecordDO extends BaseDO {
+public class SpiderRecordDO {
+
+    private long   id;
 
     private int    type;
 
     private String tagName;
 
-    private int    pageNumber;
+    private String spiderInfo;
 
-    private int    eatNumber;
+    private Date   spiderDate;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public int getType() {
         return type;
@@ -30,34 +40,25 @@ public class SpiderRecordDO extends BaseDO {
         this.tagName = tagName;
     }
 
-    public int getPageNumber() {
-        return pageNumber;
+    public String getSpiderInfo() {
+        return spiderInfo;
     }
 
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
+    public void setSpiderInfo(String spiderInfo) {
+        this.spiderInfo = spiderInfo;
     }
 
-    public int getEatNumber() {
-        return eatNumber;
+    public Date getSpiderDate() {
+        return spiderDate;
     }
 
-    public void setEatNumber(int eatNumber) {
-        this.eatNumber = eatNumber;
-    }
-
-    @Override
-    public int hashCode() {
-        return tagName.hashCode();
+    public void setSpiderDate(Date spiderDate) {
+        this.spiderDate = spiderDate;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof SpiderRecordDO)) {
-            return false;
-        }
-        SpiderRecordDO other = (SpiderRecordDO) obj;
-        return StringUtils.equals(getTagName(), other.getTagName());
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     public static enum SpiderRecordTypeEnum {

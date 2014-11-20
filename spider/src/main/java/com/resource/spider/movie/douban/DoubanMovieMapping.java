@@ -214,7 +214,7 @@ public class DoubanMovieMapping extends ResourceSpider {
     public String getHttpHtml(URL url) {
         HttpURLConnectionWrapper con = null;
         try {
-            con = new HttpURLConnectionWrapper(url);
+            con = new HttpURLConnectionWrapper(url, 0, 0);
             // con.setConnectTimeout(getTimeout());
             InputStream in = con.getInputStream();
             return getHtml(in, "utf-8");
