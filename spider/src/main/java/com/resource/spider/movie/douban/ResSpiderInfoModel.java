@@ -4,7 +4,6 @@ public class ResSpiderInfoModel {
 
     private String  api;
     private int     offset;
-    private int     length;
     private boolean isEnd;
     private String  checkSum;
 
@@ -22,14 +21,6 @@ public class ResSpiderInfoModel {
 
     public void setOffset(int offset) {
         this.offset = offset;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
     }
 
     public boolean isEnd() {

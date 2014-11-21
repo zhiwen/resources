@@ -58,7 +58,6 @@ public class ResMovieTest extends TestCase {
         movie.setWebsite("www.cbs.com/shows/big_bang_theory/");
         movie.setDoubanSite(null);
         movie.setPubdates("2014-09-22");
-        movie.setMainlandPubdate(null);
         movie.setYear("2014");
 
         ImmutableList<String> languages = ImmutableList.of("英语");
@@ -69,7 +68,6 @@ public class ResMovieTest extends TestCase {
         movie.setCommentCount(498);
         movie.setReviewCount(11);
         movie.setSeasonCount(10);
-        movie.setCurrentSeason(8);
         movie.setEpisodeCount(24);
         movie.setImdbId("t3596130");
 
