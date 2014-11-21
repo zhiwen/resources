@@ -112,6 +112,13 @@
 		select <include refid="allColumns"/> from res_movie where did = #{did}
 	</select>
 	
+	<select id="getDataByDidList" resultMap="resMovieDO">
+		select <include refid="allColumns"/> from res_movie where did in
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
 	<select id="getMovieByPaginatorWithStatus" parameterType="java.util.Map" resultMap="resMovieDO">
 		select id, did, created_time from res_movie where data_status=#{dataStatus} limit #{offset}, #{length}
 	</select>

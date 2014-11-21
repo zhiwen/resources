@@ -3,8 +3,12 @@ package com.resource.spider.movie.douban;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
@@ -21,6 +25,8 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.resource.spider.movie.AbstractDoubanMovieSpider;
 import com.resources.common.BizTypeEnum;
+import com.resources.common.ResKVTypeEnum;
+import com.resources.dal.dataobject.ResKVDO;
 import com.resources.dal.dataobject.ResMovieDO;
 import com.resources.dal.dataobject.ResTagDO;
 import com.resources.service.ResKVService;
@@ -37,6 +43,7 @@ import com.resources.service.ResURLService;
  * 4、IMDb链接:
  * 5、语言：
  * 6、编剧:
+ * 6、电影标签
  *      
  * String url = "http://movie.douban.com/subject/24404677/";// 完整数据
  * url = "http://movie.douban.com/subject/11599330/"; // 无imdb
@@ -132,14 +139,45 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
         }
 
         List<Long> seasons = getSeasons(infoEle);
-        if (!CollectionUtils.isEmpty(languageList)) {
+        if (!CollectionUtils.isEmpty(seasons)) {
             resMovieDO.setSeasonCount(seasons.size());
 
+            List<ResMovieDO> seasonMovieList = resMovieService.getDataByDidList(seasons);
+            // 如果两个人的数量不等，表示其中有一季电影没有在本地有。需要添加进去
+            if (seasonMovieList.size() != seasons.size()) {
+                resMovieService.addMovieList(seasons, DataStatus.doubanMovieId.getValue());
+                seasonMovieList = resMovieService.getDataByDidList(seasons);
+            }
+            // 将查询回来的id,按seasons的id顺序合并成一个json
+            List<Long> midList = sortedIdBySeasonId(seasonMovieList, seasons);
             // 将所有季的id查询出来，合并到一个kv里面
-            // resMovieService.getMovieByDid(did);
+            ResKVDO kvDO = new ResKVDO();
+
+            // 安全起见，取最小的一个did出来
+
+            kvDO.setResKey(String.valueOf(resMovieDO.getDid()));
+            kvDO.setResValue(JSON.toJSONString(midList));
+            kvDO.setCreatedTime(resMovieDO.getCreatedTime());
+            kvDO.setType(ResKVTypeEnum.movie_seasonId);
+            resKVService.addData(kvDO);
+            resMovieDO.setSeasonId(kvDO.getId());
         }
 
+        // List<String> tagsName = getTags(document);
+
         resMovieDO.setDataStatus(DataStatus.doubanMovieDetail.getValue());
+    }
+
+    private List<Long> sortedIdBySeasonId(List<ResMovieDO> seasonMovieList, List<Long> seasons) {
+        List<Long> sortedList = new LinkedList<Long>();
+        Map<Long, ResMovieDO> dIdMapping = new HashMap<Long, ResMovieDO>();
+        for (ResMovieDO movie : seasonMovieList) {
+            dIdMapping.put(movie.getDid(), movie);
+        }
+        for (Long did : seasons) {
+            sortedList.add(dIdMapping.get(did).getId());
+        }
+        return sortedList;
     }
 
     @Override
@@ -219,7 +257,15 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
         return languageList;
     }
 
-    // <a href="http://www.imdb.com/title/tt2872732" target="_blank" rel="nofollow">tt2872732</a>
+    /**
+     * <pre>
+     * 获取 imdb_id
+     * <a href="http://www.imdb.com/title/tt2872732" target="_blank" rel="nofollow">tt2872732</a>
+     * </pre>
+     * 
+     * @param infoEle
+     * @return
+     */
     public String getIMDBID(Element infoEle) {
         if (null == infoEle) {
             return null;
@@ -235,6 +281,12 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
         return null;
     }
 
+    /**
+     * 获取作家-编剧
+     * 
+     * @param infoEle
+     * @return
+     */
     public List<String> getWriters(Element infoEle) {
         if (null == infoEle) {
             return null;
@@ -321,5 +373,64 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
             }
         }
         return pubdates;
+    }
+
+    public List<String> getTags(Document document) {
+        Elements tagsBodyEles = document.getElementsByClass("tags-body");
+        if (null == tagsBodyEles) {
+            return null;
+        }
+        Element tagsChild = tagsBodyEles.get(0);
+        Elements aEles = tagsChild.getElementsByTag("a");
+        List<String> tagsName = new LinkedList<String>();
+        for (Element element : aEles) {
+            String tagName = HtmlUtils.getTextValue(element);
+            if (StringUtils.isNotBlank(tagName)) {
+                tagsName.add(StringUtils.trim(tagName));
+            }
+        }
+        return tagsName;
+    }
+
+    static Pattern jsPattern = Pattern.compile("http://(\\S+)\\.douban.com/misc/mixed_static/(\\S+)\\.js",
+                                               Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE | Pattern.DOTALL);
+
+    /**
+     * <pre>
+     * 获取页面上是否支持播放
+     * <a id="play-btn-24867835" data-sid="24867835" href="javascript:void(0);" class="video-link">全片播放</a>
+     * </pre>
+     * 
+     * @param document
+     * @param did
+     * @return
+     */
+    public boolean isPlayable(Document document, long did) {
+        Element playBtnEle = document.getElementById(String.format("play-btn-%s", did));
+        return playBtnEle != null;
+    }
+
+    /**
+     * <pre>
+     * 获取电影播放地址js路径
+     * http://img3.douban.com/misc/mixed_static/77d93274900d16ff.js
+     * </pre>
+     * 
+     * @param document
+     * @return
+     */
+    public String playAddressJSURL(Document document) {
+        Elements scriptEles = document.getElementsByTag("script");
+        for (Element element : scriptEles) {
+            String src = element.attr("src");
+            if (StringUtils.isBlank(src)) {
+                continue;
+            }
+            Matcher matcher = jsPattern.matcher(src);
+            if (matcher.find()) {
+                return matcher.group();
+            }
+        }
+        return null;
     }
 }

@@ -42,8 +42,10 @@ public class DoubanMovieIdSearchSpiderJob extends AbstractDoubanMovieSpider {
     private final static Logger log = LoggerFactory.getLogger(DoubanMovieIdSearchSpiderJob.class);
 
     public static enum MovieIdApiEnum {
-        movieSearchAPI1(
-                        "http://api.douban.com/v2/movie/search?tag=%s&apikey=049d5a53f9bfebf30dd80efbed3fc3d9&count=%s&start=%s"),
+
+        // "http://api.douban.com/v2/movie/search?tag=%s&apikey=049d5a53f9bfebf30dd80efbed3fc3d9&count=%s&start=%s"
+
+        movieSearchAPI1("http://api.douban.com/v2/movie/search?tag=%s&count=%s&start=%s"),
         //
         movieSearchAPI2(
                         "http://movie.douban.com/j/search_subjects?type=movie&tag=%s&sort=time&page_limit=%s&page_start=%s"),
@@ -75,7 +77,12 @@ public class DoubanMovieIdSearchSpiderJob extends AbstractDoubanMovieSpider {
 
     @Override
     public int getTimeInterval() {
-        return 4000;
+        return 8000;
+    }
+
+    @Override
+    public int getReadTimeout() {
+        return 6000;
     }
 
     public void tempInit() throws IOException {
@@ -179,11 +186,6 @@ public class DoubanMovieIdSearchSpiderJob extends AbstractDoubanMovieSpider {
 
             spiderRecordMapper.updateData(spiderRecordDO);
         }
-    }
-
-    @Override
-    public int getReadTimeout() {
-        return 4000;
     }
 
     @Override

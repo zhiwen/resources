@@ -1,10 +1,14 @@
 package com.resources.service;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.ImmutableMap;
@@ -18,10 +22,16 @@ public class ResMovieService {
     private ResMovieMapper resMovieMapper;
 
     public int addMovieList(List<Long> didList, int dataStatus) {
+
+        List<ResMovieDO> resMovieList = resMovieMapper.getDataByDidList(didList);
+        Map<Long, ResMovieDO> resMovieIdMapping = new HashMap<Long, ResMovieDO>();
+        for (ResMovieDO resMovieDO : resMovieList) {
+            resMovieIdMapping.put(resMovieDO.getDid(), resMovieDO);
+        }
+
         int count = 0;
         for (Long did : didList) {
-
-            ResMovieDO movieDO = getMovieByDid(did);
+            ResMovieDO movieDO = resMovieIdMapping.get(did);
             if (null != movieDO) {
                 continue;
             }
@@ -51,6 +61,13 @@ public class ResMovieService {
 
     public ResMovieDO getMovieByDid(long did) {
         return resMovieMapper.getDataByDid(did);
+    }
+
+    public List<ResMovieDO> getDataByDidList(List<Long> dids) {
+        if (CollectionUtils.isEmpty(dids)) {
+            return Collections.emptyList();
+        }
+        return resMovieMapper.getDataByDidList(dids);
     }
 
     public ResMovieDO getMovie(long id) {
