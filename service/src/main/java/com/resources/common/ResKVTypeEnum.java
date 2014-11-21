@@ -7,7 +7,9 @@ public enum ResKVTypeEnum {
     movie_rating("1"), // 电影评分
     movie_summay("2"), // 电影描述
     movie_images("3"), // 电影封面
-    movie_seasonId("4"); // 电视剧（每季的id列表）
+    movie_seasonId("4"), // 电视剧（每季的id列表）
+
+    movie_playJSURL("5"); // 电影播放的js路径，
 
     private final String value;
 

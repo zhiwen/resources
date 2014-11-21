@@ -115,7 +115,7 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
         return tagIds;
     }
 
-    public void parseAndSave(ResMovieDO resMovieDO, Element infoEle) {
+    public void parseAndSave(ResMovieDO resMovieDO, Document document, Element infoEle) {
 
         List<String> pubdates = getPudates(infoEle);
         if (!CollectionUtils.isEmpty(pubdates)) {
@@ -154,18 +154,39 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
             ResKVDO kvDO = new ResKVDO();
 
             // 安全起见，取最小的一个did出来
+            Collections.sort(seasons);
+            long minDid = seasons.get(0);
 
-            kvDO.setResKey(String.valueOf(resMovieDO.getDid()));
+            kvDO.setResKey(String.valueOf(minDid));
             kvDO.setResValue(JSON.toJSONString(midList));
             kvDO.setCreatedTime(resMovieDO.getCreatedTime());
             kvDO.setType(ResKVTypeEnum.movie_seasonId);
             resKVService.addData(kvDO);
             resMovieDO.setSeasonId(kvDO.getId());
         }
+        List<String> tagsName = getTags(document);
+        List<Long> tagIdList = getTagIdList(resMovieDO.getDid(), tagsName);
+        resMovieDO.setTagIds(tagIdList);
 
-        // List<String> tagsName = getTags(document);
+        // 保存播放地址的js路径
+        if (isPlayable(document, resMovieDO.getDid())) {
+            String playJSURL = getPlayAddressJSURL(document);
+            if (StringUtils.isNotBlank(playJSURL)) {
+                ResKVDO kvDO = new ResKVDO();
+                kvDO.setType(ResKVTypeEnum.movie_playJSURL);
+                kvDO.setResKey(String.valueOf(resMovieDO.getDid()));
+                kvDO.setResValue(playJSURL);
+                kvDO.setCreatedTime(resMovieDO.getCreatedTime());
+                resKVService.addData(kvDO);
+            }
+        }
 
-        resMovieDO.setDataStatus(DataStatus.doubanMovieDetail.getValue());
+        try {
+            resMovieDO.setDataStatus(DataStatus.doubanMovieDetail.getValue());
+            resMovieService.updateMovie(resMovieDO);
+        } catch (Exception e) {
+            log.error("updateMovie-fail movieDO:[{}]", resMovieDO, e);
+        }
     }
 
     private List<Long> sortedIdBySeasonId(List<ResMovieDO> seasonMovieList, List<Long> seasons) {
@@ -212,7 +233,7 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
                     continue;
                 }
 
-                parseAndSave(resMovieDO, infoEle);
+                parseAndSave(resMovieDO, document, infoEle);
             }
         }
         log.info("proccess-over-{}", this.getClass().toString());
@@ -419,7 +440,7 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
      * @param document
      * @return
      */
-    public String playAddressJSURL(Document document) {
+    public String getPlayAddressJSURL(Document document) {
         Elements scriptEles = document.getElementsByTag("script");
         for (Element element : scriptEles) {
             String src = element.attr("src");
