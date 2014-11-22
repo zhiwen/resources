@@ -10,9 +10,9 @@
 	default-autowire="byName">
  
 	<context:annotation-config/>
-	
+
 	<context:property-placeholder ignore-resource-not-found="false" file-encoding="utf-8" location="/WEB-INF/config/config.properties,classpath:db-config.properties"/>
-		
+
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="message" />
@@ -24,7 +24,7 @@
 		<constructor-arg index="0" ref="messageSource" />
 		<constructor-arg index="1" value="zh_CN" />
 	</bean>
-
+ 
 	<mvc:annotation-driven />
 
 	<context:component-scan annotation-config="true"
@@ -38,9 +38,9 @@
 	<mvc:resources location="${static.path}/images/" mapping="/images/**" />
 	<mvc:resources location="${static.path}/fonts/" mapping="/fonts/**" />
 	<mvc:resources location="${static.path}/assets/" mapping="/assets/**" />
+
 	
 	<import resource="velocity.xml" />
 	<import resource="classpath:service.xml" />
-
 </beans>
 

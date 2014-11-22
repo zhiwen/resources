@@ -6,9 +6,11 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
        ">
 
+<!-- 
 	<context:property-placeholder ignore-resource-not-found="false" file-encoding="utf-8"
 		location="classpath:db-config.properties" />
-
+ -->
+ 
 	<context:component-scan base-package="com.resources.service" />
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -40,7 +42,7 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="mybatisConfig.xml" />
+		<property name="configLocation" value="classpath:mybatisConfig.xml" />
 		<!-- <property name="mapperLocations" value="classpath*:com/demo/mybatis/mapper/*.xml" 
 			/> -->
 		<property name="typeAliasesPackage" value="com.resources.dal.dataobject,com.resources.dal.module" />
