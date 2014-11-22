@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+	<substitutionProperty name="log_home_web" value="${log_home}/web" />
+	
 	<!-- 控制台输出 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- 日志输出编码 -->
@@ -17,7 +20,7 @@
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!--日志文件输出的文件名 -->
-			<FileNamePattern>${log_home}/myApp.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home_web}/resources-app.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>

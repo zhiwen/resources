@@ -2,8 +2,7 @@
 <!-- local -->
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 	
-	<substitutionProperty name="log_home"
-		value="/Users/zhiwenmizw/work/resources/output/spider" />
+	<substitutionProperty name="log_home_spider" value="${log_home}/spider" />
 		
 	<!-- 控制台输出 -->
 	<appender name="stdoutAppender" class="ch.qos.logback.core.ConsoleAppender">
@@ -21,7 +20,7 @@
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!--日志文件输出的文件名 -->
-			<FileNamePattern>${log_home}/spider.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home_spider}/spider.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -41,7 +40,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log_home}/db-movie-tags.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home_spider}/db-movie-tags.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -59,7 +58,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log_home}/db-movie-ids.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home_spider}/db-movie-ids.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -77,7 +76,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log_home}/db-movie-abstract.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home_spider}/db-movie-abstract.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -95,7 +94,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log_home}/db-movie-api.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home_spider}/db-movie-api.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -113,7 +112,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log_home}/db-movie-detail.log-%d{yyyy-MM-dd}.log
+			<FileNamePattern>${log_home_spider}/db-movie-detail.log-%d{yyyy-MM-dd}.log
 			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
@@ -153,7 +152,7 @@
 	</logger>
 	
 	<root level="error">
-		<appender-ref ref="stdoutAppender" />
+		<!-- <appender-ref ref="stdoutAppender" /> -->
 		<appender-ref ref="rootAppender" />
 	</root>
 	

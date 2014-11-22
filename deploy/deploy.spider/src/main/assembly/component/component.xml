@@ -1,7 +1,7 @@
 <component>
 	<fileSets>
 		<fileSet>
-			<directory>./src/main/scripts</directory>
+			<directory>./src/main/bin</directory>
 			<outputDirectory>bin</outputDirectory>
 			<includes>
 				<include>**/*</include>
@@ -9,12 +9,6 @@
 			<fileMode>0755</fileMode>
 		</fileSet>
 	</fileSets>
-	<files>
-		<file>
-			<source>./src/main/config/logback.xml</source>
-			<outputDirectory>conf</outputDirectory>
-		</file>
-	</files>
 	<dependencySets>
 		<dependencySet>
 			<outputDirectory>lib</outputDirectory>

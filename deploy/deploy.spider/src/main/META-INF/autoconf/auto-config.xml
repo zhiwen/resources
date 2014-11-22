@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config description="自动配置">
+	
+	<group name="log-config">
+		<property name="log.home" defaultValue="/Users/zhiwenmizw/work/movie/output" description="log-output-path" />
+	</group>
+	
+	<script>
+		<generate template="logback.xml" destfile="config/logback.xml" charset="UTF-8" />
+	</script>
+	
+</config>

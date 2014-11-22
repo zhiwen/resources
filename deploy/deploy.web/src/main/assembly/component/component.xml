@@ -25,6 +25,15 @@
 		</fileSet>
 
 		<fileSet>
+			<directory>./src/main/bin</directory>
+			<outputDirectory>bin</outputDirectory>
+			<includes>
+				<include>**/*</include>
+			</includes>
+			<fileMode>0755</fileMode>
+		</fileSet>
+
+		<fileSet>
 			<directory>./src/main/META-INF</directory>
 			<outputDirectory>META-INF</outputDirectory>
 			<includes>

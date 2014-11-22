@@ -1,3 +1,4 @@
+##auto-config
 jdbc.url=${jdbc_url}
 jdbc.username=${jdbc_username}
 jdbc.password=${jdbc_password}

@@ -41,7 +41,7 @@ echo CLASSPATH :$CLASSPATH
 
 cd $base
 
-$JAVA $JAVA_OPTS $JAVA_DEBUG_OPT -classpath .:$CLASSPATH com.resource.spider.Main 1>>$base/nohup.out 2>&1 &
+$JAVA $JAVA_OPTS $JAVA_DEBUG_OPT -classpath .:$CLASSPATH com.resource.spider.TestMain 1>>$base/nohup.out 2>&1 &
 
 echo "cd to current path"
 cd $current_path
