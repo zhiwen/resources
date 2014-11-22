@@ -8,6 +8,13 @@
 			</includes>
 			<fileMode>0755</fileMode>
 		</fileSet>
+		<fileSet>
+			<directory>./src/main/META-INF</directory>
+			<outputDirectory>META-INF</outputDirectory>
+			<includes>
+				<include>**/*</include>
+			</includes>
+		</fileSet>
 	</fileSets>
 	<dependencySets>
 		<dependencySet>
