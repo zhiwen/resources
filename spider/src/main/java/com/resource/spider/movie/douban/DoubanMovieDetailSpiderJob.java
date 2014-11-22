@@ -162,6 +162,7 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
             kvDO.setCreatedTime(resMovieDO.getCreatedTime());
             kvDO.setType(ResKVTypeEnum.movie_seasonId);
             resKVService.addData(kvDO);
+            // 关联电视剧id
             resMovieDO.setSeasonId(kvDO.getId());
         }
         List<String> tagsName = getTags(document);

@@ -16,11 +16,11 @@ public class Main {
         // spiderJob = (SpiderJob) context.getBean("doubanMovieTagsSpiderJob");
         // spiderJob.execute();
 
-        spiderJob = (SpiderJob) context.getBean("doubanMovieIdSearchSpiderJob");
-        spiderJob.execute();
-
-        // spiderJob = (SpiderJob) context.getBean("doubanMovieAbstractSpiderJob");
+        // spiderJob = (SpiderJob) context.getBean("doubanMovieIdSearchSpiderJob");
         // spiderJob.execute();
+
+        spiderJob = (SpiderJob) context.getBean("doubanMovieAbstractSpiderJob");
+        spiderJob.execute();
 
         // spiderJob = (SpiderJob) context.getBean("doubanMovieApiSpiderJob");
         // spiderJob.execute();
