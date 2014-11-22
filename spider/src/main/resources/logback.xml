@@ -2,6 +2,8 @@
 <!-- local -->
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 	
+	<substitutionProperty name="log_home_spider" value="/Users/zhiwenmizw/work/resources/output/spider" />
+		
 	<!-- 控制台输出 -->
 	<appender name="stdoutAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- 日志输出编码 -->
@@ -18,7 +20,8 @@
 		<Encoding>UTF-8</Encoding>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!--日志文件输出的文件名 -->
-			<FileNamePattern>${log_home_spider}/spider.log-%d{yyyy-MM-dd}.log</FileNamePattern>
+			<FileNamePattern>${log_home_spider}/spider.log-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">

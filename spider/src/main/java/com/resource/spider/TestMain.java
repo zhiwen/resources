@@ -28,5 +28,6 @@ public class TestMain {
         // spiderJob = (SpiderJob) context.getBean("doubanMovieDetailSpiderJob");
         // spiderJob.execute();
         System.out.println("over");
+        Thread.sleep(10000);
     }
 }

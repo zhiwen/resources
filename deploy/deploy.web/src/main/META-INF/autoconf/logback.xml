@@ -2,8 +2,6 @@
 
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
-	<substitutionProperty name="log_home_web" value="${log_home}/web" />
-	
 	<!-- 控制台输出 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- 日志输出编码 -->
