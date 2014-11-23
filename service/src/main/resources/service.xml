@@ -6,10 +6,8 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
        ">
 
-<!-- 
 	<context:property-placeholder ignore-resource-not-found="false" file-encoding="utf-8"
 		location="classpath:db-config.properties" />
- -->
  
 	<context:component-scan base-package="com.resources.service" />
 

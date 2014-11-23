@@ -171,7 +171,11 @@ public class DoubanMovieAbstractSpiderJob extends AbstractDoubanMovieSpider {
                 if (null == valueObject || valueObject.isEmpty()) {
                     continue;
                 }
-                parseAndSave(resMovieDO, valueObject);
+                try {
+                    parseAndSave(resMovieDO, valueObject);
+                } catch (Exception e) {
+                    log.error("processor-movie-fail did:[{}]", resMovieDO.getDid(), e);
+                }
             }
             // offset += length;
         }
