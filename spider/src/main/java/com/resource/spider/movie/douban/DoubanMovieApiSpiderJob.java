@@ -53,7 +53,7 @@ public class DoubanMovieApiSpiderJob extends AbstractDoubanMovieSpider {
 
     @Override
     public int getTimeInterval() {
-        return 1000;
+        return 2000;
     }
 
     private List<Long> getTagIdList(long did, JSONArray arrays) {
@@ -190,7 +190,11 @@ public class DoubanMovieApiSpiderJob extends AbstractDoubanMovieSpider {
                 if (null == valueObject || valueObject.isEmpty()) {
                     continue;
                 }
-                parseAndSave(resMovieDO, valueObject);
+                try {
+                    parseAndSave(resMovieDO, valueObject);
+                } catch (Exception e) {
+                    log.error("process-movie-fail did[{}]", resMovieDO.getDid(), e);
+                }
             }
         }
         log.info("proccess-over-{}", this.getClass().toString());
