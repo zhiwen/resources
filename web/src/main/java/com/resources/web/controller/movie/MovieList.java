@@ -2,8 +2,6 @@ package com.resources.web.controller.movie;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,11 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.resources.common.BizTypeEnum;
-import com.resources.dal.module.MovieDO;
-import com.resources.dal.module.ResourceInfoDO;
-import com.resources.service.MovieService;
-import com.resources.service.ResourceInfoService;
+import com.resources.service.ResMovieService;
 
 @Controller
 @RequestMapping("/movie")
@@ -31,10 +25,7 @@ public class MovieList {
     private final int           pageSize = 50;
 
     @Resource
-    private ResourceInfoService resourceInfoService;
-
-    @Resource
-    private MovieService        movieService;
+    private ResMovieService     resMovieService;
 
     @RequestMapping(value = "list", method = { RequestMethod.GET })
     public String list(Model model) {
@@ -48,20 +39,8 @@ public class MovieList {
 
         int offset = (Math.max(page, 1) - 1) * pageSize;
 
-        List<MovieDO> movieList = movieService.getMovieOrderByCreated(cid, country, showTime, offset, pageSize);
-
-        List<Long> resIdList = new LinkedList<Long>();
-        for (MovieDO movieDO : movieList) {
-            resIdList.add(movieDO.getResId());
-        }
-        Map<Long, ResourceInfoDO> mappingedResource = new HashMap<Long, ResourceInfoDO>();
-        List<ResourceInfoDO> resourceList = resourceInfoService.getResourceInfoByIds(resIdList);
-        for (ResourceInfoDO resourceInfoDO : resourceList) {
-            mappingedResource.put(resourceInfoDO.getId(), resourceInfoDO);
-        }
-
-        model.addAttribute("movieList", movieList);
-        model.addAttribute("mappingedResource", mappingedResource);
+        // model.addAttribute("movieList", movieList);
+        // model.addAttribute("mappingedResource", mappingedResource);
 
         model.addAllAttributes(getMovieCategorys());
 
@@ -102,5 +81,4 @@ public class MovieList {
 
     }
 
-   
 }

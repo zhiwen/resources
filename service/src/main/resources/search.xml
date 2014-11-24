@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+           http://www.springframework.org/schema/util    http://www.springframework.org/schema/util/spring-util-4.1.xsd
+       ">
+
+	<context:property-placeholder ignore-resource-not-found="false" file-encoding="utf-8"
+		location="classpath:search-config.properties,classpath:db-config.properties" />
+
+	<context:component-scan base-package="com.resources.search" />
+
+	<util:map id="searchIndexPath">
+		<entry key="index_search_movie">
+			<value>${res_search_index}/movie</value>
+		</entry>
+	</util:map>
+
+	<bean id="searchManager" class="com.resources.search.SearchManagerFactory" init-method="init">
+		<property name="searchIndexPath" ref="searchIndexPath" />
+	</bean>
+
+</beans>

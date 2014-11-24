@@ -18,7 +18,7 @@
 		<result property="originalTitle" column="original_title"/>
 		<result property="castIds" column="cast_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="directorIds" column="director_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
-		<result property="genreIds" column="genre_Ids" javaType="java.util.List" jdbcType="VARCHAR"/>
+		<result property="genreIds" column="genre_Ids" javaType="java.util.List"  jdbcType="VARCHAR"/>
 		<result property="writerIds" column="writer_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="countryIds" column="country_ids" javaType="java.util.List" jdbcType="VARCHAR"/>
 		<result property="aka" column="aka" javaType="java.util.List" jdbcType="VARCHAR"/>
@@ -120,7 +120,7 @@
 	</select>
 	
 	<select id="getMovieByPaginatorWithStatus" parameterType="java.util.Map" resultMap="resMovieDO">
-		select id, did, created_time from res_movie where data_status=#{dataStatus} limit #{offset}, #{length}
+	<!-- select id, did, created_time from res_movie where data_status=#{dataStatus} limit #{offset}, #{length} -->
+		select * from res_movie where data_status=#{dataStatus} limit #{offset}, #{length}
 	</select>
-	
 </mapper>  

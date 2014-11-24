@@ -13,4 +13,5 @@ public interface ResMovieMapper extends BaseMapper<ResMovieDO, Long> {
 
     public List<ResMovieDO> getMovieByPaginatorWithStatus(Map<String, ? extends Object> params);
 
+    // public List<ResMovieDO> getMovieListByPaginatorWithParam(Map<String, ? extends Object> params);
 }

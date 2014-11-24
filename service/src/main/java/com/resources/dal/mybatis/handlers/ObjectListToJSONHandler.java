@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,6 +12,7 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 
 public class ObjectListToJSONHandler extends BaseTypeHandler<List<Object>> {
 
@@ -39,6 +41,16 @@ public class ObjectListToJSONHandler extends BaseTypeHandler<List<Object>> {
         if (StringUtils.isBlank(columnValue)) {
             return null;
         }
-        return JSON.parseArray(columnValue);
+
+        JSONArray jarray = JSON.parseArray(columnValue);
+        List list = new ArrayList();
+        for (Object object : jarray) {
+            if (object instanceof Integer) {
+                list.add(Long.valueOf(object.toString()));
+                continue;
+            }
+            list.add(object);
+        }
+        return list;
     }
 }
