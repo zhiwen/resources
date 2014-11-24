@@ -55,11 +55,11 @@ public abstract class AbstractDoubanMovieSpider implements SpiderJob {
     public abstract int getTimeInterval();
 
     public int getReadTimeout() {
-        return 3000;
+        return 6000;
     }
 
     public int getConnectTimeout() {
-        return 2000;
+        return 3000;
     }
 
 }

@@ -53,7 +53,7 @@ public class DoubanMovieApiSpiderJob extends AbstractDoubanMovieSpider {
 
     @Override
     public int getTimeInterval() {
-        return 2000;
+        return 1500;
     }
 
     private List<Long> getTagIdList(long did, JSONArray arrays) {
