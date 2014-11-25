@@ -15,6 +15,8 @@ import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.IntField;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -24,7 +26,6 @@ import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.SearcherManager;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TermQuery;
@@ -134,13 +135,21 @@ public class ResMovieSeacrh {
 
         Sort sort = new Sort(new SortField(orderName.getValue(), orderName.getType(), true));
 
-        SearcherManager searchManager = searchManagerFactory.getSearchManager(IndexSearchNameEnum.indexSearchMovie);
+        String filePath = searchManagerFactory.getSearchIndexPath().get(IndexSearchNameEnum.indexSearchMovie.getValue());
+        // SearcherManager searchManager = searchManagerFactory.getSearchManager(IndexSearchNameEnum.indexSearchMovie);
 
-        IndexSearcher indexSearch = null;
+        IndexReader reader = null;
+        try {
+            reader = DirectoryReader.open(FSDirectory.open(new File(filePath)));
+        } catch (IOException e1) {
+        }
+        IndexSearcher indexSearch = new IndexSearcher(reader);
+
+        // IndexSearcher indexSearch = null;
 
         int needLength = offset + length;
         try {
-            indexSearch = searchManager.acquire();
+            // indexSearch = searchManager.acquire();
             TopFieldDocs topFieldDocs = indexSearch.search(query, needLength, sort);
             ScoreDoc[] scoreDocs = topFieldDocs.scoreDocs;
 
@@ -153,10 +162,10 @@ public class ResMovieSeacrh {
             e.printStackTrace();
         } finally {
             if (null != indexSearch) {
-                try {
-                    searchManager.release(indexSearch);
-                } catch (IOException e) {
-                }
+                // try {
+                // searchManager.release(indexSearch);
+                // } catch (IOException e) {
+                // }
             }
         }
         return null;

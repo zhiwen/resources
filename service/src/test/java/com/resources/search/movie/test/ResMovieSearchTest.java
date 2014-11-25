@@ -1,7 +1,5 @@
 package com.resources.search.movie.test;
 
-import java.io.IOException;
-
 import javax.annotation.Resource;
 
 import junit.framework.TestCase;
@@ -24,11 +22,11 @@ public class ResMovieSearchTest extends TestCase {
     @Test
     public void testGetMovieListByParams() {
 
-        try {
-            resMovieSeacrh.buildMovies();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // try {
+        // resMovieSeacrh.buildMovies();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
 
         // [52249], [14], 2006
         resMovieSeacrh.getMovieListByParams("52249", "14", "2006", ResMovieFieldNameEnum.createdTime, 0, 50);
