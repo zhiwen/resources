@@ -87,7 +87,7 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
 
     @Override
     public int getTimeInterval() {
-        return 1000;
+        return 1500;
     }
 
     private List<Long> getTagIdList(long did, List<String> arrays) {
@@ -234,7 +234,11 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
                     continue;
                 }
 
-                parseAndSave(resMovieDO, document, infoEle);
+                try {
+                    parseAndSave(resMovieDO, document, infoEle);
+                } catch (Exception e) {
+                    log.error("process-fail did[{}]", resMovieDO.getDid());
+                }
             }
         }
         log.info("proccess-over-{}", this.getClass().toString());
@@ -399,7 +403,7 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
 
     public List<String> getTags(Document document) {
         Elements tagsBodyEles = document.getElementsByClass("tags-body");
-        if (null == tagsBodyEles) {
+        if (null == tagsBodyEles || tagsBodyEles.isEmpty()) {
             return null;
         }
         Element tagsChild = tagsBodyEles.get(0);

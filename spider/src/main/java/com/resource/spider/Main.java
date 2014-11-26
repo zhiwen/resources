@@ -22,10 +22,10 @@ public class Main {
         // spiderJob = (SpiderJob) context.getBean("doubanMovieAbstractSpiderJob");
         // spiderJob.execute();
 
-        spiderJob = (SpiderJob) context.getBean("doubanMovieApiSpiderJob");
-        spiderJob.execute();
-
-        // spiderJob = (SpiderJob) context.getBean("doubanMovieDetailSpiderJob");
+        // spiderJob = (SpiderJob) context.getBean("doubanMovieApiSpiderJob");
         // spiderJob.execute();
+
+        spiderJob = (SpiderJob) context.getBean("doubanMovieDetailSpiderJob");
+        spiderJob.execute();
     }
 }
