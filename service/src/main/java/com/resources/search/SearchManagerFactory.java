@@ -1,6 +1,7 @@
 package com.resources.search;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,19 +30,21 @@ public class SearchManagerFactory {
 
     }
 
-    public synchronized void init() throws Exception {
-
-        for (Map.Entry<String, String> entry : getSearchIndexPath().entrySet()) {
-
-            String filePath = entry.getValue();
-
-            SearcherManager searcherManager = new SearcherManager(FSDirectory.open(new File(filePath)), null);
-            searchManagerMapping.put(entry.getKey(), searcherManager);
+    public SearcherManager getSearchManager(IndexSearchNameEnum searchName) {
+        SearcherManager searcherManager = getSearchManagerMapping().get(searchName.getValue());
+        if (null == searcherManager) {
+            String filePath = getSearchIndexPath(searchName);
+            try {
+                searcherManager = new SearcherManager(FSDirectory.open(new File(filePath)), null);
+            } catch (IOException e) {
+            }
+            searchManagerMapping.put(searchName.getValue(), searcherManager);
         }
+        return searcherManager;
     }
 
-    public SearcherManager getSearchManager(IndexSearchNameEnum searchName) {
-        return getSearchManagerMapping().get(searchName.getValue());
+    public String getSearchIndexPath(IndexSearchNameEnum searchName) {
+        return getSearchIndexPath().get(searchName.getValue());
     }
 
     public Map<String, String> getSearchIndexPath() {

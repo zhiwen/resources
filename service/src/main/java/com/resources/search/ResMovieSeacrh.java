@@ -15,23 +15,18 @@ import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.IntField;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.index.IndexableField;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.search.BooleanClause.Occur;
-import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.Sort;
-import org.apache.lucene.search.SortField;
-import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.SearcherManager;
 import org.apache.lucene.search.TopFieldDocs;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.resources.dal.dataobject.ResMovieDO;
@@ -41,25 +36,37 @@ import com.resources.service.ResMovieService;
 @Service
 public class ResMovieSeacrh {
 
+    private final static Logger  log   = LoggerFactory.getLogger(ResMovieSeacrh.class);
+
     @Resource
     private SearchManagerFactory searchManagerFactory;
 
     @Resource
     private ResMovieService      resMovieService;
 
+    private final int            limit = 1000;
+
     public void buildMovies() throws IOException {
+        for (int i = 0; i < 1000; i++) {
+            boolean ret = buildMovies(i * limit, limit);
+            if (!ret) {
+                return;
+            }
+        }
+    }
 
-        List<ResMovieDO> list = resMovieService.getMovieByPaginatorWithStatus(3, 0, 1000);
+    public boolean buildMovies(int offset, int limit) throws IOException {
 
+        List<ResMovieDO> list = resMovieService.getMovieByPaginatorWithStatus(4, offset, limit);
+        if (list.isEmpty()) {
+            return false;
+        }
         Analyzer analyzer = new StandardAnalyzer();
 
         IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_2, analyzer);
         iwc.setOpenMode(OpenMode.CREATE_OR_APPEND);
 
         String filePath = searchManagerFactory.getSearchIndexPath().get(IndexSearchNameEnum.indexSearchMovie.getValue());
-
-        Runtime rt = Runtime.getRuntime();
-        rt.exec("rm -rf " + filePath);
 
         IndexWriter writer = new IndexWriter(FSDirectory.open(new File(filePath)), iwc);
 
@@ -117,73 +124,61 @@ public class ResMovieSeacrh {
             writer.addDocument(document);
         }
         writer.close();
-
+        return true;
     }
 
-    public List<ResMovieDO> getMovieListByParams(String countryId, String genreId, String year,
-                                                 ResMovieFieldNameEnum orderName, int offset, int length) {
+    public List<ResMovieDO> getMovieListByParams(SearchQueryParam queryParam) {
 
-        BooleanQuery query = new BooleanQuery();
+        ResMovieQueryParam movieQueryParam = (ResMovieQueryParam) queryParam;
 
-        TermQuery tqCountry = new TermQuery(new Term(ResMovieFieldNameEnum.countryIds.getValue(), countryId));
-        TermQuery tqGener = new TermQuery(new Term(ResMovieFieldNameEnum.genreIds.getValue(), genreId));
-        TermQuery tqYear = new TermQuery(new Term(ResMovieFieldNameEnum.year.getValue(), genreId));
+        SearcherManager searchManager = searchManagerFactory.getSearchManager(IndexSearchNameEnum.indexSearchMovie);
 
-        query.add(tqCountry, Occur.MUST);
-        query.add(tqGener, Occur.MUST);
-        query.add(tqYear, Occur.MUST);
+        IndexSearcher indexSearch = null;
 
-        Sort sort = new Sort(new SortField(orderName.getValue(), orderName.getType(), true));
-
-        String filePath = searchManagerFactory.getSearchIndexPath().get(IndexSearchNameEnum.indexSearchMovie.getValue());
-        // SearcherManager searchManager = searchManagerFactory.getSearchManager(IndexSearchNameEnum.indexSearchMovie);
-
-        IndexReader reader = null;
+        int needLength = queryParam.getLength();
         try {
-            reader = DirectoryReader.open(FSDirectory.open(new File(filePath)));
-        } catch (IOException e1) {
-        }
-        IndexSearcher indexSearch = new IndexSearcher(reader);
+            indexSearch = searchManager.acquire();
 
-        // IndexSearcher indexSearch = null;
+            TopFieldDocs topFieldDocs = indexSearch.search(movieQueryParam.buildQuery(), needLength,
+                                                           movieQueryParam.buildSort());
 
-        int needLength = offset + length;
-        try {
-            // indexSearch = searchManager.acquire();
-            TopFieldDocs topFieldDocs = indexSearch.search(query, needLength, sort);
             ScoreDoc[] scoreDocs = topFieldDocs.scoreDocs;
-
-            for (int i = offset; i < needLength; i++) {
+            if (scoreDocs.length == 0) {
+                return null;
+            }
+            for (int i = queryParam.getOffset(); (i < needLength && i < scoreDocs.length); i++) {
                 int docID = scoreDocs[i].doc;
                 Document document = indexSearch.doc(docID);
-                p(document);
+                p(document, i);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("search error", e);
         } finally {
             if (null != indexSearch) {
-                // try {
-                // searchManager.release(indexSearch);
-                // } catch (IOException e) {
-                // }
+                try {
+                    searchManager.release(indexSearch);
+                } catch (IOException e) {
+                    log.error("release indexSearch error", e);
+                }
             }
         }
         return null;
     }
 
-    public static void p(Document document) throws IOException {
+    public static void p(Document document, int num) throws IOException {
+        System.out.println("===================================" + num);
 
-        String title = document.get("title");
-        String rating = document.get("rating");
-        String year = document.get("year");
-        String canPlay = document.get("canPlay");
+        String title = document.get(ResMovieFieldNameEnum.title.getValue());
+        String rating = document.get(ResMovieFieldNameEnum.ratingCount.getValue());
+        String year = document.get(ResMovieFieldNameEnum.year.getValue());
+        String canPlay = document.get(ResMovieFieldNameEnum.playable.getValue());
 
-        IndexableField[] akas = document.getFields("akas");
+        IndexableField[] akas = document.getFields(ResMovieFieldNameEnum.aka.getValue());
         for (IndexableField indexableField : akas) {
             System.out.println("akas:" + indexableField.stringValue());
         }
 
-        IndexableField[] countries = document.getFields("countries");
+        IndexableField[] countries = document.getFields(ResMovieFieldNameEnum.countryIds.getValue());
         for (IndexableField indexableField : countries) {
             System.out.println("countries:" + indexableField.stringValue());
         }

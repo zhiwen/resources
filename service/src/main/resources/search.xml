@@ -18,7 +18,7 @@
 		</entry>
 	</util:map>
 
-	<bean id="searchManager" class="com.resources.search.SearchManagerFactory" init-method="init">
+	<bean id="searchManager" class="com.resources.search.SearchManagerFactory">
 		<property name="searchIndexPath" ref="searchIndexPath" />
 	</bean>
 

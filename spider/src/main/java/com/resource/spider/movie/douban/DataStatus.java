@@ -1,6 +1,7 @@
 package com.resource.spider.movie.douban;
 
 public enum DataStatus {
+    doubanMovieNotFoud(-1), // 资源找不到
     doubanMovieId(1), // 获取所有的电影id
     doubanMovieAbstract(2), // douban一网页接口（http://movie.douban.com/j/subject_abstract?subject_id=1302814）
     doubanMovieApi(3), // (http://api.douban.com/v2/movie/subject/1302814)

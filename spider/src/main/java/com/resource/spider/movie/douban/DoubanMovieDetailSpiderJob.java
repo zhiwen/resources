@@ -1,5 +1,8 @@
 package com.resource.spider.movie.douban;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -14,6 +17,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
@@ -23,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.resource.spider.http.HttpURLConnectionWrapper;
 import com.resource.spider.movie.AbstractDoubanMovieSpider;
 import com.resources.common.BizTypeEnum;
 import com.resources.common.ResKVTypeEnum;
@@ -88,6 +93,11 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
     @Override
     public int getTimeInterval() {
         return 1500;
+    }
+
+    @Override
+    public int getReadTimeout() {
+        return 10000;
     }
 
     private List<Long> getTagIdList(long did, List<String> arrays) {
@@ -202,6 +212,24 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
         return sortedList;
     }
 
+    public Document getDocument2(String url) throws Exception {
+        HttpURLConnectionWrapper con = null;
+        Document doc = null;
+        try {
+            Thread.sleep(getTimeInterval());
+            con = new HttpURLConnectionWrapper(new URL(url), getConnectTimeout(), getReadTimeout());
+            InputStream in = con.getInputStream();
+            doc = Jsoup.parse(in, "utf-8", url);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (con != null) {
+                con.disconnect();
+            }
+        }
+        return doc;
+    }
+
     @Override
     public void execute() throws Exception {
         int offset = 0, length = 1000;
@@ -215,9 +243,18 @@ public class DoubanMovieDetailSpiderJob extends AbstractDoubanMovieSpider {
             for (ResMovieDO resMovieDO : movieList) {
 
                 String qulifySubjectUrl = String.format(doubanMovieDetailApi, resMovieDO.getDid());
+                Document document = null;
+                try {
+                    document = getDocument2(qulifySubjectUrl);
+                } catch (FileNotFoundException fe) {
+                    resMovieDO.setDataStatus(DataStatus.doubanMovieNotFoud.getValue());
+                    resMovieService.updateMovie(resMovieDO);
+                    log.info("process-url-not-found:[{}]", qulifySubjectUrl);
+                    continue;
+                } catch (Exception e) {
+                    log.error("error-process-url[{}]", qulifySubjectUrl, e);
+                }
                 log.info("process-url:[{}]", qulifySubjectUrl);
-
-                Document document = getDocument(qulifySubjectUrl);
                 if (null == document) {
                     log.error("getDocument-fail did:[{}]", resMovieDO.getDid());
                     continue;
