@@ -66,7 +66,7 @@ public class ResMovieSeacrh {
         IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_2, analyzer);
         iwc.setOpenMode(OpenMode.CREATE_OR_APPEND);
 
-        String filePath = searchManagerFactory.getSearchIndexPath().get(IndexSearchNameEnum.indexSearchMovie.getValue());
+        String filePath = searchManagerFactory.getSearchIndexPath(IndexSearchNameEnum.indexSearchMovie);
 
         IndexWriter writer = new IndexWriter(FSDirectory.open(new File(filePath)), iwc);
 
