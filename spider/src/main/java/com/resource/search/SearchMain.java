@@ -2,6 +2,9 @@ package com.resource.search;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -37,7 +40,6 @@ import org.apache.lucene.util.BytesRefBuilder;
 import org.apache.lucene.util.NumericUtils;
 import org.apache.lucene.util.Version;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.resources.dal.dataobject.ResMovieDO;
 import com.resources.service.ResMovieService;
@@ -52,14 +54,34 @@ public class SearchMain {
 
     private static ApplicationContext context;
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws Exception, ParseException {
 
-        context = new ClassPathXmlApplicationContext("service.xml", "service.xml");
-        resMovieService = (ResMovieService) context.getBean("resMovieService");
+        // context = new ClassPathXmlApplicationContext("service.xml", "service.xml");
+        // resMovieService = (ResMovieService) context.getBean("resMovieService");
 
-        SearchMain main = new SearchMain();
+        // SearchMain main = new SearchMain();
         // main.buildIndex();
-        main.indexSearch();
+        // main.indexSearch();
+
+        String end = "20141203", start = "20141102";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Date endDate = sdf.parse(end);
+        Date startDate = sdf.parse(start);
+
+        Calendar cd = Calendar.getInstance();
+        cd.setTime(endDate);
+        int days1 = cd.get(Calendar.DAY_OF_YEAR);
+        System.out.println(days1);
+
+        cd.setTime(startDate);
+        int days2 = cd.get(Calendar.DAY_OF_YEAR);
+        System.out.println(days2);
+
+        System.out.println(days1 - days2);
+
+        long r = (endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24;
+        System.out.println(r);
+
     }
 
     public void indexSearch() throws IOException, ParseException {

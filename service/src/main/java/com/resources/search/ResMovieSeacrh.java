@@ -74,19 +74,38 @@ public class ResMovieSeacrh {
 
             Document document = new Document();
 
+            Field id = new LongField(ResMovieFieldNameEnum.id.getValue(), movieInfo.getId(), Field.Store.YES);
+            Field did = new LongField(ResMovieFieldNameEnum.did.getValue(), movieInfo.getDid(), Field.Store.YES);
             Field title = new StringField(ResMovieFieldNameEnum.title.getValue(),
                                           StringUtils.defaultIfBlank(movieInfo.getTitle(), ""), Field.Store.YES);
-
-            if (null != movieInfo.getAka()) {
-                for (String item : movieInfo.getAka()) {
-                    Field field = new StringField(ResMovieFieldNameEnum.aka.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
+            Field originalTitle = new StringField(ResMovieFieldNameEnum.originalTitle.getValue(),
+                                                  StringUtils.defaultIfBlank(movieInfo.getOriginalTitle(), ""),
+                                                  Field.Store.YES);
 
             if (null != movieInfo.getCastIds()) {
                 for (Long item : movieInfo.getCastIds()) {
                     Field field = new LongField(ResMovieFieldNameEnum.castIds.getValue(), item, Field.Store.YES);
+                    document.add(field);
+                }
+            }
+
+            if (null != movieInfo.getDirectorIds()) {
+                for (Long item : movieInfo.getDirectorIds()) {
+                    Field field = new LongField(ResMovieFieldNameEnum.directorIds.getValue(), item, Field.Store.YES);
+                    document.add(field);
+                }
+            }
+
+            if (null != movieInfo.getGenreIds()) {
+                for (Long item : movieInfo.getGenreIds()) {
+                    Field field = new LongField(ResMovieFieldNameEnum.genreIds.getValue(), item, Field.Store.YES);
+                    document.add(field);
+                }
+            }
+
+            if (null != movieInfo.getWriterIds()) {
+                for (Long item : movieInfo.getWriterIds()) {
+                    Field field = new LongField(ResMovieFieldNameEnum.writerIds.getValue(), item, Field.Store.YES);
                     document.add(field);
                 }
             }
@@ -97,15 +116,63 @@ public class ResMovieSeacrh {
                     document.add(field);
                 }
             }
-            if (null != movieInfo.getGenreIds()) {
-                for (Long item : movieInfo.getGenreIds()) {
-                    Field field = new LongField(ResMovieFieldNameEnum.genreIds.getValue(), item, Field.Store.YES);
+
+            if (null != movieInfo.getAka()) {
+                for (String item : movieInfo.getAka()) {
+                    Field field = new StringField(ResMovieFieldNameEnum.aka.getValue(), item, Field.Store.YES);
                     document.add(field);
                 }
             }
 
-            Field rating = new IntField(ResMovieFieldNameEnum.ratingCount.getValue(), movieInfo.getRatingCount(),
-                                        Store.YES);
+            Field coverImagesId = new LongField(ResMovieFieldNameEnum.coverImagesId.getValue(),
+                                                movieInfo.getCoverImagesId(), Field.Store.NO);
+
+            Field mobileUrl = new StringField(ResMovieFieldNameEnum.mobileUrl.getValue(),
+                                              StringUtils.defaultIfBlank(movieInfo.getMobileUrl(), ""), Field.Store.NO);
+
+            Field subType = new LongField(ResMovieFieldNameEnum.subType.getValue(), movieInfo.getSubType().getValue(),
+                                          Field.Store.YES);
+
+            Field ratingCount = new IntField(ResMovieFieldNameEnum.ratingCount.getValue(), movieInfo.getRatingCount(),
+                                             Store.YES);
+
+            Field website = new StringField(ResMovieFieldNameEnum.website.getValue(),
+                                            StringUtils.defaultIfBlank(movieInfo.getWebsite(), ""), Field.Store.NO);
+            Field doubanSite = new StringField(ResMovieFieldNameEnum.doubanSite.getValue(),
+                                               StringUtils.defaultIfBlank(movieInfo.getDoubanSite(), ""),
+                                               Field.Store.NO);
+
+            Field pubdates = new StringField(ResMovieFieldNameEnum.pubdates.getValue(),
+                                             StringUtils.defaultIfBlank(movieInfo.getPubdates(), ""), Field.Store.NO);
+
+            if (null != movieInfo.getLanguages()) {
+                for (String item : movieInfo.getLanguages()) {
+                    Field field = new StringField(ResMovieFieldNameEnum.languages.getValue(), item, Field.Store.YES);
+                    document.add(field);
+                }
+            }
+
+            Field durations = new StringField(ResMovieFieldNameEnum.durations.getValue(),
+                                              StringUtils.defaultIfBlank(movieInfo.getDurations(), ""), Field.Store.NO);
+
+            Field summaryId = new LongField(ResMovieFieldNameEnum.summaryId.getValue(), movieInfo.getSummaryId(),
+                                            Field.Store.NO);
+
+            Field seasonCount = new IntField(ResMovieFieldNameEnum.seasonCount.getValue(), movieInfo.getSeasonCount(),
+                                             Field.Store.NO);
+
+            Field seasonId = new LongField(ResMovieFieldNameEnum.seasonId.getValue(), movieInfo.getSeasonId(),
+                                           Field.Store.NO);
+
+            Field episodeCount = new IntField(ResMovieFieldNameEnum.episodeCount.getValue(),
+                                              movieInfo.getEpisodeCount(), Field.Store.NO);
+
+            if (null != movieInfo.getTagIds()) {
+                for (Long item : movieInfo.getTagIds()) {
+                    Field field = new LongField(ResMovieFieldNameEnum.tagIds.getValue(), item, Field.Store.YES);
+                    document.add(field);
+                }
+            }
 
             Field canPlay = new IntField(ResMovieFieldNameEnum.playable.getValue(), movieInfo.getPlayable(),
                                          Field.Store.YES);
@@ -114,12 +181,29 @@ public class ResMovieSeacrh {
 
             Field createTime = new LongField(ResMovieFieldNameEnum.createdTime.getValue(),
                                              movieInfo.getCreatedTime().getTime(), Field.Store.YES);
+            Field modifiedTime = new LongField(ResMovieFieldNameEnum.modifiedTime.getValue(),
+                                               movieInfo.getModifiedTime().getTime(), Field.Store.YES);
 
+            document.add(id);
+            document.add(did);
             document.add(title);
-            document.add(rating);
+            document.add(originalTitle);
+            document.add(coverImagesId);
+            document.add(mobileUrl);
+            document.add(subType);
+            document.add(website);
+            document.add(doubanSite);
+            document.add(pubdates);
+            document.add(durations);
+            document.add(summaryId);
+            document.add(seasonCount);
+            document.add(seasonId);
+            document.add(episodeCount);
+            document.add(ratingCount);
             document.add(canPlay);
             document.add(year);
             document.add(createTime);
+            document.add(modifiedTime);
 
             writer.addDocument(document);
         }
