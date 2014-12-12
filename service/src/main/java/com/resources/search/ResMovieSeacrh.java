@@ -11,7 +11,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.IntField;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
@@ -74,141 +73,91 @@ public class ResMovieSeacrh {
 
             Document document = new Document();
 
-            Field id = new LongField(ResMovieFieldNameEnum.id.getValue(), movieInfo.getId(), Field.Store.YES);
-            Field did = new LongField(ResMovieFieldNameEnum.did.getValue(), movieInfo.getDid(), Field.Store.YES);
-            Field title = new StringField(ResMovieFieldNameEnum.title.getValue(),
-                                          StringUtils.defaultIfBlank(movieInfo.getTitle(), ""), Field.Store.YES);
-            Field originalTitle = new StringField(ResMovieFieldNameEnum.originalTitle.getValue(),
-                                                  StringUtils.defaultIfBlank(movieInfo.getOriginalTitle(), ""),
-                                                  Field.Store.YES);
+            addField(document, ResMovieFieldNameEnum.id.getValue(), movieInfo.getId(), true);
+            addField(document, ResMovieFieldNameEnum.did.getValue(), movieInfo.getDid(), true);
+            addField(document, ResMovieFieldNameEnum.title.getValue(), movieInfo.getTitle(), true);
+            addField(document, ResMovieFieldNameEnum.originalTitle.getValue(), movieInfo.getOriginalTitle(), true);
 
-            if (null != movieInfo.getCastIds()) {
-                for (Long item : movieInfo.getCastIds()) {
-                    Field field = new LongField(ResMovieFieldNameEnum.castIds.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
+            addLongFields(document, ResMovieFieldNameEnum.castIds.getValue(), movieInfo.getCastIds(), true);
+            addLongFields(document, ResMovieFieldNameEnum.directorIds.getValue(), movieInfo.getDirectorIds(), true);
+            addLongFields(document, ResMovieFieldNameEnum.genreIds.getValue(), movieInfo.getGenreIds(), true);
+            addLongFields(document, ResMovieFieldNameEnum.writerIds.getValue(), movieInfo.getWriterIds(), true);
+            addLongFields(document, ResMovieFieldNameEnum.countryIds.getValue(), movieInfo.getCountryIds(), true);
+            addStringFields(document, ResMovieFieldNameEnum.aka.getValue(), movieInfo.getAka(), true);
 
-            if (null != movieInfo.getDirectorIds()) {
-                for (Long item : movieInfo.getDirectorIds()) {
-                    Field field = new LongField(ResMovieFieldNameEnum.directorIds.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
+            addField(document, ResMovieFieldNameEnum.coverImagesId.getValue(), movieInfo.getCoverImagesId(), false);
+            addField(document, ResMovieFieldNameEnum.mobileUrl.getValue(), movieInfo.getMobileUrl(), false);
+            addField(document, ResMovieFieldNameEnum.subType.getValue(), movieInfo.getSubType().getValue(), true);
+            addField(document, ResMovieFieldNameEnum.ratingCount.getValue(), movieInfo.getRatingCount(), true);
 
-            if (null != movieInfo.getGenreIds()) {
-                for (Long item : movieInfo.getGenreIds()) {
-                    Field field = new LongField(ResMovieFieldNameEnum.genreIds.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
+            addField(document, ResMovieFieldNameEnum.website.getValue(), movieInfo.getWebsite(), false);
+            addField(document, ResMovieFieldNameEnum.doubanSite.getValue(), movieInfo.getDoubanSite(), false);
+            addField(document, ResMovieFieldNameEnum.pubdates.getValue(), movieInfo.getPubdates(), false);
 
-            if (null != movieInfo.getWriterIds()) {
-                for (Long item : movieInfo.getWriterIds()) {
-                    Field field = new LongField(ResMovieFieldNameEnum.writerIds.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
+            addStringFields(document, ResMovieFieldNameEnum.languages.getValue(), movieInfo.getLanguages(), true);
 
-            if (null != movieInfo.getCountryIds()) {
-                for (Long item : movieInfo.getCountryIds()) {
-                    Field field = new LongField(ResMovieFieldNameEnum.countryIds.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
+            addField(document, ResMovieFieldNameEnum.durations.getValue(), movieInfo.getDurations(), false);
+            addField(document, ResMovieFieldNameEnum.summaryId.getValue(), movieInfo.getSummaryId(), false);
+            addField(document, ResMovieFieldNameEnum.seasonCount.getValue(), movieInfo.getSeasonCount(), false);
+            addField(document, ResMovieFieldNameEnum.seasonId.getValue(), movieInfo.getSeasonId(), false);
+            addField(document, ResMovieFieldNameEnum.episodeCount.getValue(), movieInfo.getEpisodeCount(), false);
 
-            if (null != movieInfo.getAka()) {
-                for (String item : movieInfo.getAka()) {
-                    Field field = new StringField(ResMovieFieldNameEnum.aka.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
+            addLongFields(document, ResMovieFieldNameEnum.tagIds.getValue(), movieInfo.getTagIds(), true);
 
-            Field coverImagesId = new LongField(ResMovieFieldNameEnum.coverImagesId.getValue(),
-                                                movieInfo.getCoverImagesId(), Field.Store.NO);
-
-            Field mobileUrl = new StringField(ResMovieFieldNameEnum.mobileUrl.getValue(),
-                                              StringUtils.defaultIfBlank(movieInfo.getMobileUrl(), ""), Field.Store.NO);
-
-            Field subType = new LongField(ResMovieFieldNameEnum.subType.getValue(), movieInfo.getSubType().getValue(),
-                                          Field.Store.YES);
-
-            Field ratingCount = new IntField(ResMovieFieldNameEnum.ratingCount.getValue(), movieInfo.getRatingCount(),
-                                             Store.YES);
-
-            Field website = new StringField(ResMovieFieldNameEnum.website.getValue(),
-                                            StringUtils.defaultIfBlank(movieInfo.getWebsite(), ""), Field.Store.NO);
-            Field doubanSite = new StringField(ResMovieFieldNameEnum.doubanSite.getValue(),
-                                               StringUtils.defaultIfBlank(movieInfo.getDoubanSite(), ""),
-                                               Field.Store.NO);
-
-            Field pubdates = new StringField(ResMovieFieldNameEnum.pubdates.getValue(),
-                                             StringUtils.defaultIfBlank(movieInfo.getPubdates(), ""), Field.Store.NO);
-
-            if (null != movieInfo.getLanguages()) {
-                for (String item : movieInfo.getLanguages()) {
-                    Field field = new StringField(ResMovieFieldNameEnum.languages.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
-
-            Field durations = new StringField(ResMovieFieldNameEnum.durations.getValue(),
-                                              StringUtils.defaultIfBlank(movieInfo.getDurations(), ""), Field.Store.NO);
-
-            Field summaryId = new LongField(ResMovieFieldNameEnum.summaryId.getValue(), movieInfo.getSummaryId(),
-                                            Field.Store.NO);
-
-            Field seasonCount = new IntField(ResMovieFieldNameEnum.seasonCount.getValue(), movieInfo.getSeasonCount(),
-                                             Field.Store.NO);
-
-            Field seasonId = new LongField(ResMovieFieldNameEnum.seasonId.getValue(), movieInfo.getSeasonId(),
-                                           Field.Store.NO);
-
-            Field episodeCount = new IntField(ResMovieFieldNameEnum.episodeCount.getValue(),
-                                              movieInfo.getEpisodeCount(), Field.Store.NO);
-
-            if (null != movieInfo.getTagIds()) {
-                for (Long item : movieInfo.getTagIds()) {
-                    Field field = new LongField(ResMovieFieldNameEnum.tagIds.getValue(), item, Field.Store.YES);
-                    document.add(field);
-                }
-            }
-
-            Field canPlay = new IntField(ResMovieFieldNameEnum.playable.getValue(), movieInfo.getPlayable(),
-                                         Field.Store.YES);
-            Field year = new StringField(ResMovieFieldNameEnum.year.getValue(),
-                                         StringUtils.defaultIfBlank(movieInfo.getYear(), "2014"), Field.Store.YES);
-
-            Field createTime = new LongField(ResMovieFieldNameEnum.createdTime.getValue(),
-                                             movieInfo.getCreatedTime().getTime(), Field.Store.YES);
-            Field modifiedTime = new LongField(ResMovieFieldNameEnum.modifiedTime.getValue(),
-                                               movieInfo.getModifiedTime().getTime(), Field.Store.YES);
-
-            document.add(id);
-            document.add(did);
-            document.add(title);
-            document.add(originalTitle);
-            document.add(coverImagesId);
-            document.add(mobileUrl);
-            document.add(subType);
-            document.add(website);
-            document.add(doubanSite);
-            document.add(pubdates);
-            document.add(durations);
-            document.add(summaryId);
-            document.add(seasonCount);
-            document.add(seasonId);
-            document.add(episodeCount);
-            document.add(ratingCount);
-            document.add(canPlay);
-            document.add(year);
-            document.add(createTime);
-            document.add(modifiedTime);
+            addField(document, ResMovieFieldNameEnum.playable.getValue(), movieInfo.getPlayable(), true);
+            addField(document, ResMovieFieldNameEnum.year.getValue(),
+                     StringUtils.defaultIfBlank(movieInfo.getYear(), "1987"), true);
+            addField(document, ResMovieFieldNameEnum.createdTime.getValue(), movieInfo.getCreatedTime().getTime(), true);
+            addField(document, ResMovieFieldNameEnum.modifiedTime.getValue(), movieInfo.getModifiedTime().getTime(),
+                     true);
 
             writer.addDocument(document);
         }
         writer.close();
         return true;
+    }
+
+    private void addStringFields(Document document, String name, List<String> values, boolean store) {
+        if (null == values || values.isEmpty()) {
+            return;
+        }
+        for (String value : values) {
+            addField(document, name, value, store);
+        }
+    }
+
+    private void addLongFields(Document document, String name, List<Long> values, boolean store) {
+        if (null == values || values.isEmpty()) {
+            return;
+        }
+        for (Long value : values) {
+            addField(document, name, value, store);
+        }
+    }
+
+    private void addField(Document document, String name, String value, boolean store) {
+        if (StringUtils.isBlank(name) || StringUtils.isBlank(value)) {
+            return;
+        }
+        Field field = new StringField(name, StringUtils.defaultIfBlank(value, ""),
+                                      store ? Field.Store.YES : Field.Store.NO);
+        document.add(field);
+    }
+
+    private void addField(Document document, String name, int value, boolean store) {
+        if (StringUtils.isBlank(name)) {
+            return;
+        }
+        Field field = new IntField(name, value, store ? Field.Store.YES : Field.Store.NO);
+        document.add(field);
+    }
+
+    private void addField(Document document, String name, long value, boolean store) {
+        if (StringUtils.isBlank(name)) {
+            return;
+        }
+        Field field = new LongField(name, value, store ? Field.Store.YES : Field.Store.NO);
+        document.add(field);
     }
 
     public List<ResMovieDO> getMovieListByParams(SearchQueryParam queryParam) {
